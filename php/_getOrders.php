@@ -35,7 +35,7 @@ try{
             left join branches on  branches.id = orders.to_branch
             ";
   $where = "where";
-  $filter = "client_id =".$_SESSION['userid']." ";
+  $filter = "client_id ='".$_SESSION['userid']."'  and orders.confirm=1 ";
   if(!empty($search)){
    $filter .= " and (order_no like '%".$search."%'
                     or customer_name like '%".$search."%'

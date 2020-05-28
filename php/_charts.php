@@ -28,7 +28,7 @@ $sql = "SELECT
           SUM(IF (order_status = '6',1,0)) as  returnd,
           SUM(IF (order_status = '7',1,0)) as  posponded
           FROM orders
-          where date between '".$start."' and '".$end."' and client_id=?";
+          where date between '".$start."' and '".$end."' and client_id=?  and orders.confirm=1";
 
 $result = getData($con,$sql,[$_SESSION['userid']]);
 echo json_encode(['data'=>$result]);
