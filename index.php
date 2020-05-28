@@ -310,6 +310,11 @@ static();
   <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
   <script>
     // Your web app's Firebase configuration
+  if ('serviceWorker' in navigator) {
+     window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+    });
+  }    
     var firebaseConfig = {
       apiKey: "AIzaSyCmIr87Ihp8nXtHrKWZyeH1GcvFrHxmtJw",
       authDomain: "alnahr-3a32e.firebaseapp.com",

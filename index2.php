@@ -258,6 +258,13 @@ require_once("config.php");
     <script type="text/javascript" src="scripts/toast.js"></script>
     <script type="text/javascript">
 
+  // Check that service workers are supported
+  if ('serviceWorker' in navigator) {
+     window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+    });
+  }
+
 function static(){
   $.ajax({
   url:"php/_static.php",
