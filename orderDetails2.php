@@ -33,24 +33,9 @@
     <div id="page">
 
         <!-- load main header and footer -->
-        <div id="page-preloader">
-            <div class="loader-main">
-                <div class="preload-spinner border-highlight"></div>
-            </div>
-        </div>
-
-        <div class="header header-fixed header-logo-center">
-            <a href="index.php" class="header-title"> شركة النهر</a>
-            <a href="index.php" aria-label="back" class="back-button header-icon header-icon-1"><i class="fas fa-arrow-left"></i></a>
-            <a href="logout.php" data-toggle-theme-switch class="header-icon header-icon-4">خروج</a>
-        </div>
-
-        <div id="footer-menu" class="footer-menu-3-icons footer-menu-style-2">
-            <a href="index.php" class="active-nav" aria-label="home"><i class="fa fa-home "></i></a>
-            <a href="notfcation.php"><i class="fa fa-bell"></i><span class="color-black">الاشعارات</span></a>
-            <a href="profile.php"><i class="fa fa-user"></i><span class="color-black">الصفحة الشخصية</span></a>
-            <div class="clear"></div>
-        </div>
+        <?php include_once("pre.php");  ?>
+        <?php include_once("top-menu.php");  ?>
+        <?php include_once("bottom-menu.php");  ?>
 
         <div class="page-content header-clear-medium">
             <input type="hidden" id="order_id" value="<?php echo $_GET['o']?>">

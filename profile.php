@@ -47,10 +47,10 @@
     <div class="page-content header-clear-medium">
         <div data-height="200" class="caption shadow-large caption-margins top-30 round-medium shadow-huge">
             <div class="caption-top top-30">
-                <h1 id="head-name" class="center-text color-white bolder fa-4x">الاسم</h1>
+                <h1 id="head-name" class="center-text color-white bolder fa-2x">الاسم</h1>
             </div>
             <div class="caption-overlay bg-black opacity-80"></div>
-            <div class="caption-bg bg-14"></div>
+            <div class="caption-bg"></div>
         </div>
 
         <div class="content-boxed" >
@@ -59,22 +59,22 @@
                 <h1 class="color-highlight bold text text-center">معلومات العميل</h1>
                 <div class="content-box">
                   <span class="text-right">الاسم</span>
-                  <input id="name" name="name" class="form-control" type="name"/>
+                  <input autocomplete="new-password" id="name" name="name" class="form-control" type="name"/>
                   <span class="text-right text-danger" id="name_err"></span>
                  </div>
                 <div class="content-box">
                   <span class="text-right">رقم الهاتف</span>
-                  <input id="phone" name="phone" class="form-control"  type="phone"/>
+                  <input autocomplete="new-password" id="phone" name="phone" class="form-control"  type="phone"/>
                   <span class="text-right text-danger" id="phone_err"></span>
                 </div>
                 <div class="content-box">
                   <span class="text-right">البريد الالكتروني</span>
-                  <input id="email" name="email" class="form-control"  type="email"/>
+                  <input autocomplete="new-password" id="email" name="email" class="form-control"  type="text"/>
                   <span class="text-right text-danger" id="email_err"></span>
                 </div>
                 <div class="content-box">
                     <span class="text-right">كلمة السر</span>
-                    <input id="password" name="password" class="form-control"  type="password" />
+                    <input autocomplete="new-password" id="password" name="password" class="form-control"  type="password" />
                     <span class="text-right text-danger" id="password_err"></span>
                 </div>
                 <div class="content-box">

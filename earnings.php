@@ -51,22 +51,9 @@ require_once("config.php");
 <div id="page">
 
     <!-- load main header and footer -->
-    <div id="page-preloader">
-        <div class="loader-main"><div class="preload-spinner border-highlight"></div></div>
-    </div>
-
-	<div class="header header-fixed header-logo-center">
-        <a href="index.php" class="header-title"> شركة النهر</a>
-		<a href="index.php" class="back-button header-icon header-icon-1"><i class="fas fa-arrow-left"></i></a>
-		<a href="logout.php" class="header-icon header-icon-4">خروج</a>
-	</div>
-
-    <div id="footer-menu" class="footer-menu-3-icons footer-menu-style-3">
-        <a href="index.php"><i class="fa fa-home"></i><span>الرئسية</span></a>
-        <a href="notfcation.php"><i class="fa fa-bell"></i><span>الاشعارات</span></a>
-        <a href="profile.php"><i class="fa fa-user"></i><span>الصفحة الشخصية</span></a>
-        <div class="clear"></div>
-    </div>
+        <?php include_once("pre.php");  ?>
+        <?php include_once("top-menu.php");  ?>
+        <?php include_once("bottom-menu.php");  ?>
 
     <div class="page-content header-clear-medium">
 

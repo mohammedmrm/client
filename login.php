@@ -1,3 +1,4 @@
+<?php require_once("config.php")?>
 <!DOCTYPE HTML>
 <html lang="en">
 
@@ -36,7 +37,7 @@ load header -->
         </div>
 
         <div class="header header-fixed header-logo-center">
-            <a href="login.php" class="header-title"> شركة النهر</a>
+            <a href="login.php" class="header-title"><?php echo $config['Company_name'];?></a>
         </div>
 
 
