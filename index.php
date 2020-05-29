@@ -33,7 +33,7 @@ require_once("config.php");
 <body class="theme-light" data-background="none" data-highlight="orange">
     <style type="text/css">
         .bg-div1 {
-            background-color:#f96332; 
+            background-color:#f96332;
             color: #000000;
         }
 
@@ -101,7 +101,6 @@ require_once("config.php");
                         </div>
                     </a>
                 </div>
-
                 <div class="one-third ">
                     <a href="#">
                         <div data-height="80" class="bg-div9  caption shadow-huge  bottom-20 ">
@@ -151,7 +150,7 @@ require_once("config.php");
                         </div>
                     </a>
                 </div>
-                <div class="one-half">
+<!--                <div class="one-half">
                     <a href="receipt.php">
                         <div data-instant-id="instant-2" data-height="120" class="bg-div1 caption caption-margins round-tiny shadow-huge">
                             <div class="caption-center">
@@ -166,8 +165,8 @@ require_once("config.php");
                             <div class="caption-overlay "></div>
                         </div>
                     </a>
-                </div>
-                <div class="one-half last-column">
+                </div>-->
+<!--                <div class="one-half last-column">
                     <a href="addorders.php">
                         <div data-instant-id="instant-2" data-height="120" class="bg-div1 caption caption-margins round-tiny shadow-huge">
                             <div class="caption-center">
@@ -182,8 +181,8 @@ require_once("config.php");
                             <div class="caption-overlay "></div>
                         </div>
                     </a>
-                </div>
-                <div class="clear">
+                </div>-->
+<!--                <div class="clear">
                     <a href="print.php">
                         <div data-instant-id="instant-4" data-height="120" class="bg-div1 caption caption-margins round-tiny shadow-huge  ">
                             <div class="caption-center">
@@ -198,7 +197,7 @@ require_once("config.php");
                             <div class="caption-overlay  "></div>
                         </div>
                     </a>
-                </div>
+                </div>-->
                 <div class="one-half">
                     <a href="returned.php">
                         <div data-instant-id="instant-2" data-height="120" class="bg-div1 caption caption-margins round-tiny shadow-huge">
@@ -259,6 +258,13 @@ require_once("config.php");
     <script type="text/javascript" src="scripts/toast.js"></script>
     <script type="text/javascript">
 
+  // Check that service workers are supported
+  if ('serviceWorker' in navigator) {
+     window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+    });
+  }
+
 function static(){
   $.ajax({
   url:"php/_static.php",
@@ -310,11 +316,6 @@ static();
   <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-firestore.js"></script>
   <script>
     // Your web app's Firebase configuration
-  if ('serviceWorker' in navigator) {
-     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js')
-    });
-  }    
     var firebaseConfig = {
       apiKey: "AIzaSyCmIr87Ihp8nXtHrKWZyeH1GcvFrHxmtJw",
       authDomain: "alnahr-3a32e.firebaseapp.com",
@@ -356,13 +357,7 @@ static();
         console.log(Notification.getToken());
       });
     }
-
-
-
-
-
-
-     function updateUserToken(token){
+    function updateUserToken(token){
      $.ajax({
            url:"php/_updateToken.php",
            data:{token : token},
