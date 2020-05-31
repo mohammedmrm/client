@@ -1,10 +1,5 @@
 <?php
-session_start();
-$access_roles = [1];
-if(!in_array($_SESSION['login'],$access_roles)){
-    header("location: login.php");
-    die();
-}
+require_once("php/_access.php");
 require_once("config.php");
 ?>
 <!DOCTYPE HTML>
