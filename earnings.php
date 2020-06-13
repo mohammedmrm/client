@@ -142,8 +142,6 @@ function earnings(){
               '<div  class="content-boxed bottom-20">'+
                   '<div class="content bottom-15">'+
                       '<div class="col-sm-12"><span class="tit col-sm-6">عدد الطلبات :   </span><span class="val col-6">'+res.data.orders+'</span></div>'+
-                      '<div class="col-sm-12"><span class="tit col-sm-6">المبلغ الكلي:   </span><span class="val col-6">'+formatMoney(res.data.income)+'</span></div>'+
-                      '<div class="col-sm-12"><span class="tit col-sm-6">المبلغ التوصيل: </span><span class="val col-6">'+formatMoney(res.data.dev)+'</span></div>'+
                       '<div class="col-sm-12"><span class="tit col-sm-6">المبلغ الصافي:  </span><span class="val col-6">'+formatMoney(res.data.client_price)+'</span></div>'+
                   '</div>'+
               '</div>'+
