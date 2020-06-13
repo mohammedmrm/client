@@ -43,7 +43,7 @@ load header -->
 
 
         <div class="page-content header-clear-medium">
-            <div class="content-boxed left-40 right-40">
+            <div class="content-boxed left-40 right-40" id="loginDiv">
                 <div class="content top-10 bottom-30">
                     <h1 class="center-text bottom-30 ultrabold fa-1x">تسجيل الدخول</h1>
                     <label id="msg" class="text-danger text-right"></label>
@@ -75,9 +75,10 @@ load header -->
                         password: $("#password").val()
                     },
                     beforeSend: function() {
-
+                     $("#loginDiv").addClass("loading");
                     },
                     success: function(res) {
+                      $("#loginDiv").removeClass("loading");
                         console.log(res);
                         if (res.msg == 1) {
                             window.location.href = "index.php";
@@ -86,6 +87,7 @@ load header -->
                         }
                     },
                     error: function(e) {
+                       $("#loginDiv").removeClass("loading");
                         console.log(e.responseText);
                     }
                 });
