@@ -1,11 +1,9 @@
 <?php
-if(!isset($_SESSION)){
-  session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
 }
-$access_roles = [1];
-if(! in_array($_SESSION['login'],$access_roles)){
-    header("location: login.php");
-    die();
+if($_SESSION['login'] != 1){
+    header('location: login.php');
 }
 require_once("config.php");
 ?>
