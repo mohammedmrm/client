@@ -1,7 +1,3 @@
-<?php
-
-require_once("config.php");
-?>
 <!DOCTYPE HTML>
 <html lang="en">
 <head>

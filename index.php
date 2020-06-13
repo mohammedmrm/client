@@ -1,11 +1,6 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-if($_SESSION['login'] != 1){
-    header('location: login.php');
-}
 require_once("php/_access.php");
+access();
 require_once("config.php");
 ?>
 <!DOCTYPE HTML>
