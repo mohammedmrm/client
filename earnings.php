@@ -60,7 +60,7 @@ require_once("config.php");
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">الى</span>
                 </div>
-               <input type="text" name="end" id="enddate"  value="<?php echo date('Y-m-d',strtotime(' + 1 day'));?>" class="datepicker form-control"  placeholder="الى">
+               <input type="text" name="end" id="enddate"  value="<?php echo date('Y-m-d');?>" class="datepicker form-control"  placeholder="الى">
               </div>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
