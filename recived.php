@@ -1,4 +1,4 @@
-<?php
+                                                        <?php
 if(!isset($_SESSION)){
   session_start();
 }
@@ -63,13 +63,13 @@ require_once("config.php");
 
          <div class="content">
          <form id="searchForm">
-            <div class="search-box search-color bg-green1-dark shadow-tiny round-tiny bottom-10">
+            <div class="search-box search-color bg-red1-dark shadow-tiny round-tiny bottom-10">
                 <i class="fa fa-search"></i>
                 <input type="text" name="search-text" placeholder="رقم الوصل، رقم او اسم الزبون">
             </div>
             <input type="text" name="start" id="start" class="datepicker" placeholder="من">
             <input type="text" name="end" id="end" class="datepicker"  placeholder="الى">
-            <button id="search" onclick="getorders('reload')" class="btn btn-success" type="button" value="">
+            <button id="search" onclick="getorders('reload')" class="btn btn-danger" type="button" value="">
                  بحث
             </button>
             <input type="hidden" name="currentPage" id="currentPage" value="1">
@@ -79,7 +79,7 @@ require_once("config.php");
 
         <div class="content-boxed">
             <div class="content bottom-0">
-                <h3 class="bolder text-right">الطلبيات الواصلة</h3>
+                <h3 class="bolder text-right">الطلبيات الراجعة</h3>
             </div>
 
 
@@ -106,7 +106,7 @@ if(action == "reload"){
     $("#currentPage").val(1);
 }
 $.ajax({
-  url:"php/_getReturnedOrders.php",
+  url:"php/_getRecivedOrders.php",
   type:"POST",
   data:$("#searchForm").serialize(),
   success:function(res){

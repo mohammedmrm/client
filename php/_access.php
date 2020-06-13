@@ -1,7 +1,7 @@
 <?php
 if(!isset($_SESSION)){
 session_start();
-}
+}                         
 function access(){
   if(!isset($_SESSION['userid'])){
     header("location:login.php");
