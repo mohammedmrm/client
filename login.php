@@ -81,7 +81,7 @@ load header -->
                       $("#loginDiv").removeClass("loading");
                         console.log(res);
                         if (res.msg == 1) {
-                            window.location.href = "index.php";
+                            window.location.href = "index2.php";
                         } else {
                             $("#msg").text(res.msg);
                         }
