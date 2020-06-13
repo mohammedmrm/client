@@ -1,8 +1,8 @@
 <?php
 require_once("php/_access.php");
 access();
-require_once("config.php");
-?><!DOCTYPE HTML>
+?>
+<!DOCTYPE HTML>
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
