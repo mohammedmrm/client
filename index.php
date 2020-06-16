@@ -161,7 +161,7 @@ require_once("config.php");
                         </div>
                     </a>
                 </div>
-                <div class="one-half">
+                <div class="one-half last-column">
                     <a href="recived.php">
                         <div data-instant-id="instant-2" data-height="120" class="bg-div1 caption caption-margins round-tiny shadow-huge">
                             <div class="caption-center">
