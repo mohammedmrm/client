@@ -275,7 +275,6 @@ function OrderChat(id,last){
              "<div class='msg "+clas+"' msq-id='"+this.id+"'>"+
                 "<span class='name'>"+name+ " ( "+role+" ) "+"</span><br />"+
                 "<span class='content'>"+this.message+"</span><br />"+
-                "<span class='note'>"+this.note+"</span><br />"+
                 "<span class='time'>"+this.date+"</span><br />"+
              "</div>"+
            "</div>"
@@ -377,7 +376,7 @@ function OrderTracking(id){
 				'<i class="fa '+icon+' bg-'+color+' shadow-large timeline-icon"></i>'+
 				'<div class="padding-none  timeline-item-content shadow-large round-small">'+
 					'<p class="font-14 top-10 thin color-'+color+' center-text">'+this.status+'<br />'+this.date+'<br />'+this.hour+'</p>'+
-                    //'<p class=" center-text color-theme  bottom-0 font-12">'+note+'</p>'+
+                    '<p class=" center-text color-theme  bottom-0 font-12">'+note+'</p>'+
                     //'<p class="color-'+color+' center-text color-theme top-5 bottom-0 font-14">عدد القطع: '+this.items_no+'</p>'+
                     ''+address+
 				'</div>'+
