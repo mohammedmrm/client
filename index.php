@@ -165,7 +165,7 @@ require_once("config.php");
                     <a href="recived.php">
                         <div data-instant-id="instant-2" data-height="120" class="bg-div1 caption caption-margins round-tiny shadow-huge">
                             <div class="caption-center">
-                                <h1 class="center-text   bolder font-18"><i class="fas fa-times-circle  fa-1x  top-0 bottom-0   "></i> الواصل</h1>
+                                <h1 class="center-text   bolder font-18"><i class="fas fa-check fa-1x  top-0 bottom-0 "></i> الواصل</h1>
                                 <p class="center-text color-black  under-heading"> الطلبيات الواصلة </p>
                             </div>
                             <div class="caption-bottom">
