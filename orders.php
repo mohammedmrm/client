@@ -212,9 +212,9 @@ require_once("config.php");
 
                     console.log(res);
                     $.each(res.data, function() {
-                        if (this.order_status_id == 9) { //rejected
+                        if (this.order_status_id == '9') { //rejected
                             color = 'bg-red_';
-                        }if (this.order_status_id == 6) { //rejected
+                        }if (this.order_status_id == 6) { //half rejected
                             color = 'bg-brown1-light';
                         } else if (this.order_status_id == 4) { //recieved
                             color = 'bg-green_';
@@ -225,7 +225,7 @@ require_once("config.php");
                         } else if (this.order_status_id == 1) { //not recieved yes
                             color = 'bg-gray_';
                         } else {
-                            color = 'bg-blue_'; //any thing ealse
+                            color = 'bg-blue_'; //any thing else
                         }
                         $("#orders").append(
                          '<div class="content-boxed '+color+'">'+
