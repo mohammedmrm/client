@@ -275,6 +275,7 @@ function OrderChat(id,last){
              "<div class='msg "+clas+"' msq-id='"+this.id+"'>"+
                 "<span class='name'>"+name+ " ( "+role+" ) "+"</span><br />"+
                 "<span class='content'>"+this.message+"</span><br />"+
+                "<span class='note'>"+this.note+"</span><br />"+
                 "<span class='time'>"+this.date+"</span><br />"+
              "</div>"+
            "</div>"
