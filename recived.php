@@ -1,6 +1,7 @@
 <?php
 require_once("php/_access.php");
 access();
+require_once("config.php");
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -44,7 +45,7 @@ access();
    border-left: 2px  #CC0000;
    background-color: #FFFFFF;
    border-radius: 100px;
- } 
+ }
 </style>
 </head>
 

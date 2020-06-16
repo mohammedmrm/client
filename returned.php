@@ -1,3 +1,7 @@
+<?php
+require_once("php/_access.php");
+access();
+?>
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
