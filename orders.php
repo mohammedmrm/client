@@ -112,10 +112,10 @@ require_once("config.php");
                         </button>
                       </a>
                     </div>
+                    <input type="hidden" name="currentPage" id="currentPage" value="1">
                 </form>
 
-                <!--<div class="content bottom-0 top-5 left-20 right-20">--> 
-<input type="hidden" name="currentPage" id="currentPage" value="1">
+                <!--<div class="content bottom-0 top-5 left-20 right-20">-->
 <!--
 <ul class="gallery-filter-controls">
 <li class="gallery-filter-active color-highlight gallery-filter-all" data-filter="all">الكل </li>
