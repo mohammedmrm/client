@@ -75,11 +75,14 @@ require_once("config.php");
         .bg-carrot_ {
             background-color: #ED5E21 !important;
         }
- .call {
-   border-left: 2px  #CC0000;
-   background-color: #FFFFFF;
-   border-radius: 100px;
- }
+       .call {
+         border-left: 2px  #CC0000;
+         background-color: #FFFFFF;
+         border-radius: 100px;
+       }
+       a:hover {
+        text-underline: none;
+       }
     </style>
 </head>
 
