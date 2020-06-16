@@ -69,6 +69,9 @@ require_once("config.php");
             background-color: #F4B400;
             color: #2E2E2E;
         }
+       a:hover {
+         text-underline: none;
+       }
     </style>
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <div id="page">
