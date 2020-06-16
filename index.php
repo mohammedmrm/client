@@ -146,6 +146,38 @@ require_once("config.php");
                     </a>
                 </div>
                 <div class="one-half">
+                    <a href="returned.php">
+                        <div data-instant-id="instant-2" data-height="120" class="bg-div1 caption caption-margins round-tiny shadow-huge">
+                            <div class="caption-center">
+                                <h1 class="center-text   bolder font-18"><i class="fas fa-times-circle  fa-1x  top-0 bottom-0   "></i> الرواجع</h1>
+                                <p class="center-text color-black  under-heading"> كشوفات بالطلبيات الراجعه </p>
+                            </div>
+                            <div class="caption-bottom">
+                                <p class="center-text  color-black">انقر للعرض</p>
+                                <p class="center-text color-black   "></p>
+                            </div>
+
+                            <div class="caption-overlay "></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="one-half">
+                    <a href="recived.php">
+                        <div data-instant-id="instant-2" data-height="120" class="bg-div1 caption caption-margins round-tiny shadow-huge">
+                            <div class="caption-center">
+                                <h1 class="center-text   bolder font-18"><i class="fas fa-times-circle  fa-1x  top-0 bottom-0   "></i> الواصل</h1>
+                                <p class="center-text color-black  under-heading"> الطلبيات الواصلة </p>
+                            </div>
+                            <div class="caption-bottom">
+                                <p class="center-text  color-black">انقر للعرض</p>
+                                <p class="center-text color-black   "></p>
+                            </div>
+
+                            <div class="caption-overlay "></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="one-half">
                     <a href="receipt.php">
                         <div data-instant-id="instant-2" data-height="120" class="bg-div1 caption caption-margins round-tiny shadow-huge">
                             <div class="caption-center">
@@ -193,24 +225,7 @@ require_once("config.php");
                         </div>
                     </a>
                 </div>
-                <div class="one-half">
-                    <a href="returned.php">
-                        <div data-instant-id="instant-2" data-height="120" class="bg-div1 caption caption-margins round-tiny shadow-huge">
-                            <div class="caption-center">
-                                <h1 class="center-text   bolder font-18"><i class="fas fa-times-circle  fa-1x  top-0 bottom-0   "></i> الرواجع</h1>
-                                <p class="center-text color-black  under-heading"> كشوفات بالطلبيات الراجعه </p>
-                            </div>
-                            <div class="caption-bottom">
-                                <p class="center-text  color-black">انقر للعرض</p>
-                                <p class="center-text color-black   "></p>
-                            </div>
-
-                            <div class="caption-overlay "></div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="one-half last-column">
+                <div class="clear">
                     <a href="earnings.php">
                         <div data-instant-id="instant-4" data-height="120" class="bg-div1 caption caption-margins round-tiny shadow-huge  ">
                             <div class="caption-center">
