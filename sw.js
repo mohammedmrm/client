@@ -1887,7 +1887,7 @@ self.__precacheManifest = [
     "url": "images/splash/Thumbs.db",
     "revision": "05749e40221c54dca2e97c37469c1235"
   },*/
-  {
+/*  {
     "url": "index.php",
     "revision": "612bef9e508383a2330ed5eaa97ef885"
   },
@@ -1926,7 +1926,7 @@ self.__precacheManifest = [
   {
     "url": "profile.php",
     "revision": "cb5f67367dfd278820997c430bdc642c"
-  },
+  },*/
   {
     "url": "pwa/android-chrome-192x192.png",
     "revision": "ee857abf4d5ec20d77205067e9f4ca55"
