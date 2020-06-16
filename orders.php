@@ -72,6 +72,11 @@ require_once("config.php");
         .bg-carrot_ {
             background-color: #ED5E21 !important;
         }
+ .call {
+   border-left: 2px  #CC0000;
+   background-color: #FFFFFF;
+   border-radius: 100px;
+ }
     </style>
 </head>
 
@@ -83,7 +88,6 @@ require_once("config.php");
      <?php include_once("pre.php");?>
      <?php include_once("top-menu.php");?>
      <?php include_once("footer-menu.php");  ?>
-
 
         <div class="page-content header-clear-medium">
 
@@ -222,17 +226,18 @@ require_once("config.php");
                             color = 'bg-blue_'; //any thing ealse
                         }
                         $("#orders").append(
-                            '<a href="orderDetails.php?o=' + this.id + '" >' +
-                            '<div data-accordion="accordion-content-10" data-height="100" class="caption caption-margins round-tiny bottom-5" style="height: 120px;">' +
-                            '<div class="caption-center">' +
-                            '<h4 class="color-black center-text bottom-0 uppercase bolder">' + this.order_no + '</h4>' +
-                            '<p class="color-black right-text right-10 bottom-0">' + this.customer_name + ' | ' + this.customer_phone + '</p>' +
-                            '<p class="color-black right-text right-10 bottom-0">' + this.city + ' | ' + this.town + '</p>' +
-                            '</div>' +
-                            '<div class="filtr-item caption-overlay ' + color + ' opacity-80" data-category=' + this.order_status_id + '></div>' +
-                            '<div class="caption-background "></div>' +
-                            '</div>' +
-                            '</a>'
+                         '<div class="content-boxed '+color+'">'+
+                            '<div class="content  list-columns-right">'+
+                                '<div>'+
+                                    '<a style="z-index:100;" class="call" href="tel:'+this.driver_phone+'"><i class="fa fa-phone color-green1-light call fa-2x"></i></a>'+
+                                    '<a href="orderDetails.php?o='+this.id+'">'+
+                                      '<h1 class="bolder text-center text-white">'+this.order_no+'</h1>'+
+                                      '<p class=" text-center text-white">'+this.customer_phone+'<br />'+
+                                      ''+this.city+' | '+this.town+' | '+this.address+'</p>'+
+                                    '</a>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'
                         );
                     });
                     if (res.pages > res.nextPage) {

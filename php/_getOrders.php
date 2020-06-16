@@ -27,10 +27,12 @@ try{
   $count = "select count(*) as count from orders";
   $query = "select orders.*,
             clients.name as client_name,clients.phone as client_phone,
-            cites.name as city,towns.name as town,branches.name as branch_name
+            cites.name as city,towns.name as town,branches.name as branch_name,
+            if(staff.phone is null,'07721397505',staff.phone) as driver_phone
             from orders left join
             clients on clients.id = orders.client_id
             left join cites on  cites.id = orders.to_city
+            left join staff on  orders.driver_id = staff.id
             left join towns on  towns.id = orders.to_town
             left join branches on  branches.id = orders.to_branch
             ";
