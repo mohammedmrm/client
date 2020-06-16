@@ -114,9 +114,9 @@ require_once("config.php");
                     </div>
                 </form>
 
-                <!--<div class="content bottom-0 top-5 left-20 right-20">
+                <!--<div class="content bottom-0 top-5 left-20 right-20">--> 
 <input type="hidden" name="currentPage" id="currentPage" value="1">
-
+<!--
 <ul class="gallery-filter-controls">
 <li class="gallery-filter-active color-highlight gallery-filter-all" data-filter="all">الكل </li>
 <li data-filter="1">بطريق</li>
