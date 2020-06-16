@@ -212,8 +212,10 @@ require_once("config.php");
 
                     console.log(res);
                     $.each(res.data, function() {
-                        if (this.order_status_id == 6) { //rejected
+                        if (this.order_status_id == 9) { //rejected
                             color = 'bg-red_';
+                        }if (this.order_status_id == 6) { //rejected
+                            color = 'bg-brown1-light';
                         } else if (this.order_status_id == 4) { //recieved
                             color = 'bg-green_';
                         } else if (this.order_status_id == 5) { // postponed
