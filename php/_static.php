@@ -37,12 +37,15 @@ $sql7 = "select
            sum(
                  new_price -
                  (
-                     if(to_city = 1,
-                       if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
-                       if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
+                   if(order_status_id = 9,
+                       0,
+                       if(to_city = 1,
+                             if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
+                             if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
+                       )
+                   )
                  )
-                )
-             ) as client_price,
+                ) as client_price,
              count(*) as orders
              from orders
              left JOIN client_dev_price
