@@ -1,4 +1,6 @@
 <?
+require_once("php/_access.php");
+access();
 include("config.php");
 ?>
 <!DOCTYPE HTML>
