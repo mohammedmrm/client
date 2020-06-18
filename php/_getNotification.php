@@ -12,10 +12,10 @@ $error = [];
 $user_id = $_SESSION['userid'];
 
 
-$sql = 'select count(*) as unseen from notification where for_client = 1 and staff_id = ? and client_seen=0';
+$sql = 'select count(*) as unseen from notification where for_client = 1 and client_id = ? and client_seen=0';
 $res = getData($con,$sql,[$user_id]);
 $unseen = $res[0]['unseen'];
-$sql = 'select * from notification where for_client = 1 and staff_id = ? order by date DESC limit 20';
+$sql = 'select * from notification where for_client = 1 and client_id = ? order by date DESC limit 50';
 $result = getData($con,$sql,[$user_id]);
 $success = 1;
 echo json_encode([$user_id,'success'=>$success,"data"=>$result,'unseen'=>$unseen]);

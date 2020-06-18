@@ -36,7 +36,7 @@
  background-color: #CC4455;
 }
 .unseen{
-  background-color: #F8F8FF;
+  background-color: #E6E6FA;
 }
 .active-nav label {
     color: #FFFFFF!important;
