@@ -226,7 +226,7 @@ require_once("config.php");
                             color = 'bg-green_';
                         } else if (this.order_status_id == 5) { // postponed
                             color = 'bg-carrot_';
-                        } else if (this.order_status_id == 7) { // changed address
+                        } else if (this.order_status_id == 13) { // changed address
                             color = 'bg-yallow_';
                         } else if (this.order_status_id == 1) { //not recieved yes
                             color = 'bg-gray_';

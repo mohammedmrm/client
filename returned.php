@@ -45,6 +45,12 @@ access();
    background-color: #FFFFFF;
    border-radius: 100px;
  }
+ .resend {
+   border-left: 2px  #CC0000;
+   background-color: #FFFFFF;
+   border-radius: 100px;
+ }
+
 </style>
 </head>
 
@@ -89,8 +95,18 @@ access();
          <div id="footer-loader"></div>
     </div>
 </div>
-
-
+<div class="toast rounded-pill toast-bottom" id="toast-success">
+    <p class="color-white" id="toast-msg"><i class='fa fa-sync fa-spin right-10'></i>
+      تم التحديث
+    </p>
+    <div class="toast-bg opacity-90 bg-green2-dark"></div>
+</div>
+<div class="toast rounded-pill toast-bottom" id="toast-error">
+    <p class="color-white" id="toast-msg-err"><i class='fa fa-sync fa-spin right-10'></i>
+      خطا
+    </p>
+    <div class="toast-bg opacity-90 bg-red2-dark"></div>
+</div>
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
@@ -143,6 +159,7 @@ $.ajax({
                           ''+this.city+' | '+this.town+' | '+this.address+'</p>'+
                         '</a>'+
                     '</div>'+
+                    '<button style="z-index:100; width:100%;" onclick="resend('+this.id+')" class="btn btn-warning">اعادة ارسال</button>'+
                 '</div>'+
             '</div>'
        );
@@ -161,6 +178,35 @@ $.ajax({
 });
 }
 getorders('reload');
+function resend(id){
+  if(confirm("هل انت متاكد من اعادة ارسال الطلب")){
+      $.ajax({
+        url:"php/_resendOrder.php",
+        type:"POST",
+        data:{id:id},
+        success:function(res){
+         if(res.success == 1){
+            $('#toast-msg').text('تم طلب اعادة ارسال الطلب');
+            $('#toast-success').addClass('toast-active');
+            setTimeout(function(){
+            $('#toast-success').removeClass('toast-active');
+            },3000);
+            getorders('reload');
+         }else{
+            $('#toast-msg-err').text(res.error);
+            $('#toast-error').addClass('toast-active');
+            setTimeout(function(){
+            $('#toast-error').removeClass('toast-active');
+            },5000);
+         }
+         console.log(res)
+        } ,
+        error:function(e){
+          console.log(e);
+        }
+      });
+  }
+}
 </script>
 </body>
 </html>
