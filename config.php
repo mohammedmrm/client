@@ -1,7 +1,7 @@
 <?php
 $config = [
    "Company_name"=>"شركة البرق",
-   "Company_phone"=>"1234567890",
+   "Company_phone"=>"0782222222",
    "wellcome_message"=>"تتقدم شركة النهر  للبرامجيات بممثلها <b>الدكتور حيدر الغانمي</b> و شركة البرق بممثلها<b> السيد محمد</b>  بالشكر لاستخدام تطبيق العميل وتمنياتنا لكم بالرزق الوفير",
    "Company_email"=>"nahar@nahar.com",
    "Company_logo"=>"img/logos/logo.png",
