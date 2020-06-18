@@ -1,7 +1,3 @@
-<?php
-require("php/_access.php");
-access([1,2]);
-?>
 <?
 include("config.php");
 ?>
