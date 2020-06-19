@@ -1967,10 +1967,10 @@ self.__precacheManifest = [
     "url": "pwa/site.webmanifest",
     "revision": "0f30bc0572bad1506b5efd773b9491a9"
   },
-  {
+  /*{
     "url": "returned.php",
     "revision": "80851c594bd8f1cbadbc8f8158ffc588"
-  },
+  },*/
   {
     "url": "scripts/charts.js",
     "revision": "217cb5d4ea048de6bd91dbce1b3bc12e"
