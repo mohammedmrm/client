@@ -1,7 +1,7 @@
 function formatMoney(amount, decimalCount = 0, decimal = ".", thousands = ",") {
   try {
     decimalCount = Math.abs(decimalCount);
-    decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+    decimalCount = isNaN(decimalCount) ? 0 : decimalCount;
 
     const negativeSign = amount < 0 ? "-" : "";
 
