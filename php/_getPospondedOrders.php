@@ -10,7 +10,7 @@ $start = trim($_REQUEST['start']);
 $end = trim($_REQUEST['end']);
 $limit = trim($_REQUEST['limit']);
 $page = trim($_REQUEST['currentPage']);
-
+$orders = 0;
 if(empty($limit)){
  $limit = 10;
 }
@@ -63,6 +63,7 @@ try{
   $query .= " limit ".($page * $limit).",".$limit;
   $data = getData($con,$query);
   $ps = getData($con,$count);
+  $orders = $ps[0]['count'];
   $pages= ceil($ps[0]['count']/$limit);
   $success="1";
 } catch(PDOException $ex) {
@@ -83,5 +84,5 @@ if($success == '1'){
     }
   }
 }
-print_r(json_encode(array($_POST,"success"=>$success,"data"=>$data,'pages'=>$pages,'nextPage'=>$page+2)));
+print_r(json_encode(array('orders'=>$orders,"success"=>$success,"data"=>$data,'pages'=>$pages,'nextPage'=>$page+2)));
 ?>

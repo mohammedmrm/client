@@ -137,7 +137,7 @@ require_once("config.php");
 
             <div class="content-boxed">
                 <div class="content bottom-0">
-                    <h3 class="bolder text-right">الطلبيات</h3>
+                    <h3 class="bolder text-right">الطلبيات<span id="orders_count"></span></h3>
                 </div>
 
 
@@ -215,7 +215,7 @@ require_once("config.php");
                     $("#loader").remove();
                     $("#loading-items").remove();
                     $("#currentPage").val(res.nextPage);
-
+                    $("#orders_count").text(" ( "+res.orders+" ) ");
                     console.log(res);
                     $.each(res.data, function() {
                          if (this.order_status_id == 13) { // changed address
