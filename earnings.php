@@ -84,13 +84,13 @@ require_once("config.php");
 
         <div class="content-boxed">
             <div class="content bottom-0">
-                <h3 class="bolder text-right">الطلبات التي لم يتم التحاسب عليها</h3>
+                <h6 class="bolder text-right">الطلبات التي لم يتم التحاسب عليها</h6>
             </div>
             <div id="inprocess">
 
             </div>
             <div class="content bottom-0">
-                <h3 class="bolder text-right">الكشوفات</h3>
+                <h6 class="bolder text-right">الكشوفات</h6>
             </div>
             <div id="earnings">
                   <h4 class="text-danger">لايوجد كشف للفتره الزمنيه المحدده</h4>
