@@ -84,7 +84,7 @@ require_once("config.php");
 
         <div class="content-boxed">
             <div class="content bottom-0">
-                <h3 class="bolder text-right">المعلقه</h3>
+                <h3 class="bolder text-right">الطلبات التي لم يتم التحاسب عليها</h3>
             </div>
             <div id="inprocess">
 
@@ -149,10 +149,15 @@ function earnings(){
        '</div>'
     );
     $.each(res.invoice,function(){
+      if(this.order_status_id == 9){
+        bg = "bg-green1-light";
+      }else{
+        bg = "bg-red1-light";
+      }
        $("#earnings").append(
        '<a href="invoiceVeiwer.php?invoice='+this.path+'">'+
          '<div class="clear text-right" >'+
-              '<div  class="content-boxed  bg-green1-light bottom-20">'+
+              '<div  class="content-boxed  '+bg+' bottom-20">'+
                   '<div class=" content bottom-15">'+
                       '<h5 class="color-black text-center">كشف يوم ('+this.in_date+')</h5>'+
                       '<h6 class="text-center top-5 bottom-0">'+this.store_name+'</h6>'+
