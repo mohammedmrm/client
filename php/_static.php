@@ -78,6 +78,10 @@ $sql1 = "select
             date between '".$start1."' and '".$end1."'";
 $last1 =  getData($con,$sql1);
 $last1[0]['client_price'] = number_format($last1[0]['client_price']);
-
+if($_SESSION['user_details']['show_earnings'] != 1){
+$last1[0]['client_price'] = "HIDDEN";
+$last7[0]['client_price'] = "HIDDEN";
+$last30[0]['client_price'] = "HIDDEN";
+}
 print_r(json_encode(array("last1"=>$last1,"last7"=>$last7,"last30"=>$last30)));
 ?>
