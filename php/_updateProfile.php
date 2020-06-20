@@ -35,16 +35,16 @@ $v->addRuleMessages([
     'int'      => 'فقط الارقام مسموع بها',
     'regex'      => 'فقط الارقام مسموح بها',
     'min'      => 'قصير جداً',
-    'max'      => 'مسموح ب {value} رمز كحد اعلى ',
+    'max'      => 'قيمة كبيرة جداً',
     'email'      => 'البريد الالكتروني غيز صحيح',
 ]);
 
 $v->validate([
-    'id'             => [$id,      'required|int'],
-    'name'    => [$name,    'required|min(4)|max(20)'],
+    'id'      => [$id,      'required|int'],
+    'name'    => [$name,    'required|min(3)|max(200)'],
     'email'   => [$email,   'email'],
     'phone'   => [$phone,   "required|unique|isPhoneNumber"],
-    'password'=> [$password,"min(6)|max(18)"],
+    'password'=> [$password,"min(6)|max(20)"],
 ]);
 
 if($v->passes()) {
