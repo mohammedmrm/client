@@ -1,6 +1,8 @@
 <?php
+session_start();
 require_once("config.php");
 ?>
+
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -109,6 +111,7 @@ require_once("config.php");
 <script type="text/javascript" src="scripts/moneyformat.js"></script>
 <script type="text/javascript" src="scripts/datapicker.js"></script>
 <script type="text/javascript" src="scripts/getStores.js"></script>
+<?php if($_SESSION['user_details']['show_earnings'] != 1){ die("<h1>لايمكن عرض الصفحة</h1>");}?> 
 <script>
 $('#startdate').datepicker({ format: 'yyyy-mm-dd'});
 $('#enddate').datepicker({ format: 'yyyy-mm-dd'});

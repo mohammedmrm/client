@@ -231,6 +231,7 @@ require_once("config.php");
                         </div>
                     </a>
                 </div>
+                <?php if($_SESSION['user_details']['show_earnings'] == 1){ ?>
                 <div class="clear">
                     <a href="earnings.php">
                         <div data-instant-id="instant-4" data-height="120" class="bg-div1 caption caption-margins round-tiny shadow-huge  ">
@@ -247,6 +248,7 @@ require_once("config.php");
                         </div>
                     </a>
                 </div>
+                <?php } ?>
                 <div class="clear last-column">
                     <a href="charts.php">
                         <div data-instant-id="instant-5" data-height="120" class="bg-div1 caption caption-margins round-tiny shadow-huge bottom-10">

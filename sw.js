@@ -69,10 +69,10 @@ self.__precacheManifest = [
     "url": "config.php",
     "revision": "99381d9d6a50068c6ba488f0b2137294"
   },
-  {
+/*  {
     "url": "earnings.php",
     "revision": "e23e890fc397f79c0ff717e459e62e55"
-  },
+  },*/
   {
     "url": "fonts/css/all.css",
     "revision": "a207426366c2b281571ec581ca8acc62"

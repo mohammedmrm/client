@@ -18,6 +18,7 @@ if(!empty($start)) {
 }
 $data = [];
 $success =0;
+if($_SESSION['user_details']['show_earnings'] == 1){
 $sql = "select
           sum(new_price) as income,
 
@@ -72,5 +73,6 @@ $sql2 = "select invoice.*,count(orders.id) as orders,date_format(invoice.date,'%
           }
            $sql2 .= " group by invoice.id";
 $res2 = getData($con,$sql2,[$id]);
+}
 echo json_encode(array($sql2,"success"=>$success,"data"=>$res4,"invoice"=>$res2));
 ?>
