@@ -14,8 +14,8 @@ $sql30 = "select
                  new_price -
                  (
                       if(to_city = 1,
-                             if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
-                             if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
+                             if(client_dev_price.new_price is null,(".$config['dev_b']." - discount),(client_dev_price.new_price - discount)),
+                             if(client_dev_price.new_price is null,(".$config['dev_o']." - discount),(client_dev_price.new_price - discount))
                        )
 
                  )
@@ -36,8 +36,8 @@ $sql7 = "select
                  new_price -
                  (
                    if(to_city = 1,
-                             if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
-                             if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
+                             if(client_dev_price.new_price is null,(".$config['dev_b']." - discount),(client_dev_price.new_price - discount)),
+                             if(client_dev_price.new_price is null,(".$config['dev_o']." - discount),(client_dev_price.new_price - discount))
                    )
                  )
                 ) as client_price,
@@ -57,8 +57,8 @@ $sql1 = "select
                  new_price -
                  (
                     if(to_city = 1,
-                               if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
-                               if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
+                               if(client_dev_price.new_price is null,(".$config['dev_b']." - discount),(client_dev_price.new_price - discount)),
+                               if(client_dev_price.new_price is null,(".$config['dev_o']." - discount),(client_dev_price.new_price - discount))
                      )
 
                 )
