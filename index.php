@@ -82,7 +82,7 @@ require_once("config.php");
 
         <div class="page-content header-clear-medium">
             <div class="content-boxed">
-             <h6 class="text-center"><?php echo $config['wellcome_message'];?></h6>
+             <h6 class="text-center" style="line-height: 2;"><?php echo $config['wellcome_message'];?></h6>
             </div>
             <div class="content-boxed">
                 <a href="#" class="footer-title bottom-10"><span class=" text-center color-black">خلاصة للطلبيات والمبالغ &#128512;</span></a>
