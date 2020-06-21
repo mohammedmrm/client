@@ -29,7 +29,7 @@ if($v->passes()) {
    $sql = "select count(*) as times from tracking where order_id=? and order_status_id=?";
    $res =getData($con,$sql,[$order_id,13]);
    if($res[0]['times'] < 2){
-   $sql = 'update orders set order_status_id =?
+   $sql = 'update orders set order_status_id =?, new_price = price
            where id=? and client_id=?';
    $result = setData($con,$sql,['13',$order_id,$id]);
    if($result > 0){
