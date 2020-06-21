@@ -11,11 +11,11 @@ $start30 = date('Y-m-d 00:00:00',strtotime(' - 30 day'));
 $end30 = date('Y-m-d 00:00:00',strtotime(' + 1 day'));
 $sql30 = "select
            sum(
-                 new_price -
+                 price -
                  (
                       if(to_city = 1,
-                             if(client_dev_price.new_price is null,(".$config['dev_b']." - discount),(client_dev_price.new_price - discount)),
-                             if(client_dev_price.new_price is null,(".$config['dev_o']." - discount),(client_dev_price.new_price - discount))
+                             if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
+                             if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
                        )
 
                  )
@@ -33,11 +33,11 @@ $start7 = date('Y-m-d 00:00:00',strtotime(' - 7 day'));
 $end7 = date('Y-m-d 00:00:00',strtotime(' + 1 day'));
 $sql7 = "select
            sum(
-                 new_price -
+                 price -
                  (
                    if(to_city = 1,
-                             if(client_dev_price.new_price is null,(".$config['dev_b']." - discount),(client_dev_price.new_price - discount)),
-                             if(client_dev_price.new_price is null,(".$config['dev_o']." - discount),(client_dev_price.new_price - discount))
+                             if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
+                             if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
                    )
                  )
                 ) as client_price,
@@ -54,11 +54,11 @@ $start1 = date('Y-m-d 00:00:00');
 $end1 = date('Y-m-d 00:00:00',strtotime(' + 1 day'));
 $sql1 = "select
             sum(
-                 new_price -
+                 price -
                  (
                     if(to_city = 1,
-                               if(client_dev_price.new_price is null,(".$config['dev_b']." - discount),(client_dev_price.new_price - discount)),
-                               if(client_dev_price.new_price is null,(".$config['dev_o']." - discount),(client_dev_price.new_price - discount))
+                               if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
+                               if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
                      )
 
                 )
