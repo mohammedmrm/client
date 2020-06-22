@@ -60,8 +60,9 @@ include("config.php");
 <div id="page">
 
     <!-- load main header and footer -->
-     <?php include_once("pre.php");?>
-     <?php include_once("top-menu.php");?>
+    <div id="page-preloader">
+        <div class="loader-main"><div class="preload-spinner border-highlight"></div></div>
+    </div><?php include_once("top-menu.php");?>
      <?php include_once("footer-menu.php");  ?>
 
     <div class="page-content header-clear-medium">
@@ -157,7 +158,7 @@ $.ajax({
                         '<a href="orderDetails.php?o='+this.id+'">'+
                           '<h1 class="bolder text-center text-white">'+this.order_no+'</h1>'+
                           '<p class=" text-center text-white">'+this.customer_phone+'<br />'+
-                          ''+this.city+' | '+this.town+' | '+this.address+'</p>'+
+                          ''+this.city+' | '+this.town+' | '+this.address+'<br />( '+this.t_note+' )</p>'+
                         '</a>'+
                     '</div>'+
                     '<button style="z-index:100; width:100%;" onclick="resend('+this.id+')" class="btn btn-warning">اعادة ارسال</button>'+

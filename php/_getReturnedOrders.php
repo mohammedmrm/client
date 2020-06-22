@@ -74,6 +74,9 @@ try{
 }
 if($success == '1'){
   foreach($data as $k=>$v){
+     $sql = "select * from tracking where order_id =? order by id DESC limit 1";
+     $res= getData($con,$sql,[$v['id']]);
+     $data[$k]['t_note'] = $res[0]['note'];
     if($v['with_dev'] == 1){
       $data[$k]['with_dev'] = "نعم";
     }else{
