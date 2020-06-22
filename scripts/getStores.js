@@ -5,7 +5,7 @@ function getStores(elem){
      success:function(res){
        elem.html("");
        elem.append(
-           '<option value="">... اختر ...</option>'
+           '<option value="">... البيج ...</option>'
        );
        $.each(res.data,function(){
          elem.append("<option value='"+this.id+"'>"+this.name+"-"+this.client_name+"-"+this.client_phone+"</option>");

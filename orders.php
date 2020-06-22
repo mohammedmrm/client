@@ -104,13 +104,20 @@ require_once("config.php");
                         <input type="text" name="search-text" placeholder="ابحث بواسطة الوصل، موبايل اواسم الزبون" aria-label="search">
                     </div>
                     <div class="clear">
+                        <select type="text" name="city" style="width: 48%"  id="city" class="">
+                             <option value="" >-- المحافظة --</option>
+                        </select>
+                        <select type="text" name="store" style="width: 48%" id="store" class="">
+                              <option value="">-- store --</option>
+                        </select>
+                    </div>
+                    <div class="clear">
                         <input type="text" name="start" aria-label="date start" id="start" class="datepicker" placeholder="من">
                         <input type="text" name="end" aria-label="date to" id="end" class="datepicker" placeholder="الى">
                         <button id="search" onclick="getorders('reload')" aria-label="search" class="shadow-large btn bg-blue_" type="button" value="">
                             بحث
                         </button>
-
-                    </div>
+                   </div>
                     <div class="top-5 bottom-5">
                       <a href="#" data-menu="sacnModal" id="qrlink">
                         <button id="searchbyQR" onclick="scanQR()" aria-label="search" class="btn" type="button" value="">
@@ -137,7 +144,7 @@ require_once("config.php");
 
             <div class="content-boxed">
                 <div class="content bottom-0">
-                    <h3 class="bolder text-right">الطلبيات<span id="orders_count"></span></h3>
+                    <h3 class="bolder text-right">الطلبات<span id="orders_count"></span></h3>
                 </div>
 
 
@@ -164,6 +171,8 @@ require_once("config.php");
 
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/plugins.js"></script>
+    <script type="text/javascript" src="scripts/getCities.js"></script>
+    <script type="text/javascript" src="scripts/getStores.js"></script>
     <script type="text/javascript" src="scripts/instascan.min.js"></script>
     <script>
             var selectedCam;
@@ -208,7 +217,11 @@ require_once("config.php");
                 url: "php/_getOrders.php",
                 type: "POST",
                 data: $("#searchForm").serialize(),
+                beforeSend:function(){
+                  $("#orders").addClass("loading");
+                },
                 success: function(res) {
+                  $("#orders").removeClass("loading");
                     if (action == "reload") {
                         $("#orders").html('');
                     }
@@ -244,6 +257,7 @@ require_once("config.php");
                     }
                 },
                 error: function(e) {
+                   $("#orders").removeClass("loading");
                     console.log(e);
                 }
             });
@@ -256,11 +270,12 @@ require_once("config.php");
                 format: 'yyyy-mm-dd'
             });
             getorders('reload');
+            getCities($("#city"));
+            getStores($("#store"));
         });
     </script>
     <script type="text/javascript" src="scripts/custom.js"></script>
     <script type="text/javascript" src="scripts/datapicker.js"></script>
-
     <script type="text/javascript" src="scripts/plugins.js"></script>
 </body>
 

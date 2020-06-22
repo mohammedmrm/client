@@ -66,6 +66,14 @@ require_once("config.php");
                 <i class="fa fa-search"></i>
                 <input type="text" name="search-text" placeholder="رقم الوصل، رقم او اسم الزبون">
             </div>
+            <div class="clear">
+                <select type="text" name="city" style="width: 48%"  id="city" class="">
+                     <option value="" >-- المحافظة --</option>
+                </select>
+                <select type="text" name="store" style="width: 48%" id="store" class="">
+                      <option value="">-- store --</option>
+                </select>
+            </div>
             <input type="text" name="start" id="start" class="datepicker" placeholder="من">
             <input type="text" name="end" id="end" class="datepicker"  placeholder="الى">
             <button id="search" onclick="getorders('reload')" class="btn btn-success" type="button" value="">
@@ -96,6 +104,8 @@ require_once("config.php");
 <script type="text/javascript" src="scripts/plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
 <script type="text/javascript" src="scripts/datapicker.js"></script>
+    <script type="text/javascript" src="scripts/getCities.js"></script>
+    <script type="text/javascript" src="scripts/getStores.js"></script>
 <script>
 $('#start').datepicker({ format: 'yyyy-mm-dd'});
 $('#end').datepicker({ format: 'yyyy-mm-dd'});
@@ -108,7 +118,11 @@ $.ajax({
   url:"php/_getRecivedOrders.php",
   type:"POST",
   data:$("#searchForm").serialize(),
+  beforeSend:function(){
+    $("#orders").addClass("loading");
+  },
   success:function(res){
+    $("#orders").removeClass("loading");
     if(action == "reload"){
      $("#orders").html('');
     }
@@ -157,11 +171,14 @@ $.ajax({
      }
     },
    error:function(e){
+     $("#orders").removeClass("loading");
     console.log(e);
   }
 });
 }
 getorders('reload');
+getCities($("#city"));
+getStores($("#store"));
 </script>
 </body>
 </html>

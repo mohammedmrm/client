@@ -8,6 +8,8 @@ require("dbconnection.php");
 $search = $_REQUEST['search-text'];
 $start = trim($_REQUEST['start']);
 $end = trim($_REQUEST['end']);
+$city = trim($_REQUEST['city']);
+$store = trim($_REQUEST['store']);
 $limit = trim($_REQUEST['limit']);
 $page = trim($_REQUEST['currentPage']);
 $orders = 0;
@@ -53,6 +55,12 @@ try{
   if(validateDate($start) && validateDate($end)){
       $filter .= " and date between '".$start."' AND '".$end."'";
      }
+  if($city > 0){
+   $filter .= " and to_city =".$city;
+  }
+  if($store > 0){
+   $filter .= " and store_id =".$store;
+  }
   if($filter != ""){
     $filter = preg_replace('/^ and/', '', $filter);
     $filter = $where." ".$filter;

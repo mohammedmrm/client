@@ -8,6 +8,8 @@ require("dbconnection.php");
 $search = $_REQUEST['search-text'];
 $start = trim($_REQUEST['start']);
 $end = trim($_REQUEST['end']);
+$city = trim($_REQUEST['city']);
+$store = trim($_REQUEST['store']);
 $limit = trim($_REQUEST['limit']);
 $page = trim($_REQUEST['currentPage']);
 $orders = 0;
@@ -20,7 +22,7 @@ if(empty($page)){
 if(empty($end)) {
   $end = date('Y-m-d h:i:s', strtotime($end. ' + 1 day'));
 }else{
-   $end .=" 23:59:59";
+  $end .=" 23:59:59";
 }
 $start .=" 00:00:00";
 try{
@@ -44,7 +46,12 @@ try{
                     or customer_phone like '%".$search."%')
                     ";
   }
-
+  if($city > 0){
+   $filter .= " and to_city =".$city;
+  }
+  if($store > 0){
+   $filter .= " and store_id =".$store;
+  }
   function validateDate($date, $format = 'Y-m-d H:i:s')
     {
         $d = DateTime::createFromFormat($format, $date);

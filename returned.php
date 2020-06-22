@@ -73,6 +73,14 @@ include("config.php");
                 <i class="fa fa-search"></i>
                 <input type="text" name="search-text" placeholder="رقم الوصل، رقم او اسم الزبون">
             </div>
+            <div class="clear">
+                <select type="text" name="city" style="width: 48%"  id="city" class="">
+                     <option value="" >-- المحافظة --</option>
+                </select>
+                <select type="text" name="store" style="width: 48%" id="store" class="">
+                      <option value="">-- store --</option>
+                </select>
+            </div>
             <input type="text" name="start" id="start" class="datepicker" placeholder="من">
             <input type="text" name="end" id="end" class="datepicker"  placeholder="الى">
             <button id="search" onclick="getorders('reload')" class="btn btn-danger" type="button" value="">
@@ -113,6 +121,8 @@ include("config.php");
 <script type="text/javascript" src="scripts/plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
 <script type="text/javascript" src="scripts/datapicker.js"></script>
+    <script type="text/javascript" src="scripts/getCities.js"></script>
+    <script type="text/javascript" src="scripts/getStores.js"></script>
 <script>
 $('#start').datepicker({ format: 'yyyy-mm-dd'});
 $('#end').datepicker({ format: 'yyyy-mm-dd'});
@@ -136,7 +146,7 @@ $.ajax({
    console.log(res);
    $.each(res.data,function(){
      if(this.order_status_id == 9){
-       color = 'bg-gradient-red1';
+       color = 'bg-red1-dark';
      }else if(this.order_status_id == 6){
         color = 'bg-red1-light';
      }else if(this.order_status_id == 4){
@@ -186,7 +196,11 @@ function resend(id){
         url:"php/_resendOrder.php",
         type:"POST",
         data:{id:id},
+        beforeSend:function(){
+          $("#orders").addClass("loading");
+        },
         success:function(res){
+          $("#orders").removeClass("loading");
          if(res.success == 1){
             $('#toast-msg').text('تم طلب اعادة ارسال الطلب');
             $('#toast-success').addClass('toast-active');
@@ -204,11 +218,14 @@ function resend(id){
          console.log(res)
         } ,
         error:function(e){
+          $("#orders").removeClass("loading");
           console.log(e);
         }
       });
   }
 }
+getCities($("#city"));
+getStores($("#store"));
 </script>
 </body>
 </html>
