@@ -65,7 +65,7 @@ require_once("config.php");
         }
 
         .bg-gray_ {
-            background-color: #D3D3D3;
+            background-color: #444444;
         }
 
         .bg-red_ {
