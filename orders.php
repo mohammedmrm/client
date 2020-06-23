@@ -251,7 +251,7 @@ require_once("config.php");
                         '</div>'
                         );
                     });
-                    if (res.pages > res.nextPage) {
+                    if (res.pages >= res.nextPage) {
                         $("#orders").append('<div id="loader" onclick="getorders(\'append\')" class="btn btn-link form-control color-black center-text top-10">تحميل المزيد</div>');
                         $("#orders").append('<div id="loading-items"></div>');
                     }
