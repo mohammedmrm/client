@@ -42,8 +42,8 @@ try{
   $filter = "client_id =".$_SESSION['userid']." and (order_status_id=9 or order_status_id=6)  and (orders.confirm=1 or orders.confirm=4)";
   if(!empty($search)){
    $filter .= " and (order_no like '%".$search."%'
-                    or customer_name like '%".$search."%'
-                    or customer_phone like '%".$search."%')
+                     or customer_name like '%".$search."%'
+                     or customer_phone like '%".$search."%')
                     ";
   }
 
