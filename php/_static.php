@@ -13,7 +13,7 @@ $sql30 = "select
            sum(
                  orders.price -
                  (
-                   if(orders.order_status_id = 4,
+                   if(orders.order_status_id = 4 or orders.order_status_id = 6 or orders.order_status_id = 5,
                       if(to_city = 1,
                              if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
                              if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
@@ -37,7 +37,7 @@ $sql7 = "select
            sum(
                  orders.price -
                  (
-                   if(orders.order_status_id = 4,
+                   if(orders.order_status_id = 4 or orders.order_status_id = 6 or orders.order_status_id = 5,
                       if(to_city = 1,
                              if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
                              if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
@@ -61,7 +61,7 @@ $sql1 = "select
             sum(
                  orders.price -
                  (
-                   if(orders.order_status_id = 4,
+                   if(orders.order_status_id = 4 or orders.order_status_id = 6 or orders.order_status_id = 5,
                       if(to_city = 1,
                              if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
                              if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
