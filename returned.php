@@ -167,8 +167,12 @@ $.ajax({
                         '<a style="z-index:100;" class="call" href="tel:'+this.driver_phone+'"><i class="fa fa-phone color-green1-light call fa-2x"></i></a>'+
                         '<a href="orderDetails.php?o='+this.id+'">'+
                           '<h1 class="bolder text-center text-white">'+this.order_no+'</h1>'+
-                          '<p class=" text-center text-white">'+this.customer_phone+'<br />'+
-                          ''+this.city+' | '+this.town+' | '+this.address+'<br />( '+this.t_note+' )</p>'+
+                          '<p class=" text-center text-white">'
+                            +this.customer_phone+
+                            '<br />'+this.city+' | '+this.town+' | '+this.address+
+                            '<br />'+this.store_name+
+                            '<br />( '+this.t_note+
+                          ' )</p>'+
                         '</a>'+
                     '</div>'+
                     '<button style="z-index:100; width:100%;" onclick="resend('+this.id+')" class="btn btn-warning">اعادة ارسال</button>'+

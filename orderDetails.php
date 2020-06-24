@@ -142,7 +142,7 @@ background-color:#666666;
 
     <div class="page-content header-clear-medium">
          <input type="hidden" id="order_id" value="<?php echo $_GET['o']?>">
-         <a href="#" class="chat-btn left-5 right-5 top-5 bottom-5" data-menu="chat" onclick="OrderChat(<?php echo $_GET['o']?>)" class="btn btn-waring btn-full ">
+         <a href="#" class="btn btn-waring btn-full  chat-btn left-5 right-5 top-5 bottom-5" data-menu="chat" onclick="OrderChat(<?php echo $_GET['o']?>)">
                 <span class="left-5 right-5 top-5 bottom-5">محادثه</span>
          </a>
          <div id="order-details" class="text-right"></div>
@@ -202,6 +202,7 @@ $.ajax({
      $.each(res.data,function(){
        $("#order-details").append(
         '<h2 class="text-center right-10">'+this.order_status+'</h2>'+
+        '<h3 class="text-center">'+this.store_name+'</h3>'+
         '<h4 class="text-center">'+this.order_no+'</h4>'+
         '<table style="width:100%;" class="table-striped">'+
          '</thead><tr><th class="text-right right-10">النص</th><th>القيمة</th></th></thead>'+

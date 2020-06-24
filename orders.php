@@ -167,6 +167,34 @@ require_once("config.php");
      </div>
     </div>
     </div>
+<div id="order_details"
+     class="menu  menu-box-bottom menu-box-detached round-medium"
+     data-menu-height="600"
+     data-menu-effect="menu-over">
+        <div class="col-12">
+        <div class="col-12">
+        <div class="row">
+            <div class="col-12 chatbody" id="chatbody">
+
+            </div>
+        </div>
+        <div class="row"><hr /></div>
+          <div class="row">
+            <div class="col-12 padding-none">
+              <div class="input-group">
+                <div class="input-group-append">
+                  <button onclick="sendMessage()" class="btn btn-info btn-chat-send" type="button">ارسال</button>
+                </div>
+                <textarea type="text" id="message" class="form-control input-chat-send" placeholder="اكتب...." aria-label="" aria-describedby="basic-addon2"></textarea>
+
+              </div>
+               <input type="hidden"  id="chat_order_id"/>
+               <input type="hidden" value="0" id="last_msg"/>
+            </div>
+          </div>
+        </div>
+        </div>
+</div>
     <div class="menu-hider"></div>
 
     <script type="text/javascript" src="scripts/jquery.js"></script>
@@ -243,8 +271,11 @@ require_once("config.php");
                                     '<a style="z-index:100;" class="call" href="tel:'+this.driver_phone+'"><i class="fa fa-phone color-green1-light call fa-2x"></i></a>'+
                                     '<a href="orderDetails.php?o='+this.id+'">'+
                                       '<h1 class="bolder text-center text-white">'+this.order_no+'</h1>'+
-                                      '<p class=" text-center text-white">'+this.customer_phone+'<br />'+
-                                      ''+this.city+' | '+this.town+' | '+this.address+'</p>'+
+                                      '<p class=" text-center text-white">'
+                                          +this.customer_phone+
+                                        '<br />'+this.city+' | '+this.town+' | '+this.address+
+                                        '<br />'+this.store_name+
+                                      '</p>'+
                                     '</a>'+
                                 '</div>'+
                             '</div>'+
