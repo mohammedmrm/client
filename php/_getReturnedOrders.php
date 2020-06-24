@@ -31,7 +31,7 @@ try{
             clients.name as client_name,clients.phone as client_phone,
             cites.name as city,towns.name as town,branches.name as branch_name,
             if(staff.phone is null,'07721397505',staff.phone) as driver_phone,
-            stores.name as store_name  
+            stores.name as store_name
             from orders left join
             clients on clients.id = orders.client_id
             left join cites on  cites.id = orders.to_city
@@ -41,7 +41,7 @@ try{
             left join branches on  branches.id = orders.to_branch
             ";
   $where = "where";
-  $filter = "client_id =".$_SESSION['userid']." and (order_status_id=9 or order_status_id=6)  and (orders.confirm=1 or orders.confirm=4)";
+  $filter = "orders.client_id =".$_SESSION['userid']." and (order_status_id=9 or order_status_id=6)  and (orders.confirm=1 or orders.confirm=4)";
   if(!empty($search)){
    $filter .= " and (order_no like '%".$search."%'
                      or customer_name like '%".$search."%'
