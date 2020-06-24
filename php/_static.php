@@ -11,7 +11,7 @@ $start30 = date('Y-m-d 00:00:00',strtotime(' - 30 day'));
 $end30 = date('Y-m-d 00:00:00',strtotime(' + 1 day'));
 $sql30 = "select
            sum(
-                 orders.price -
+                 orders.new_price -
                  (
                    if(orders.order_status_id = 4 or orders.order_status_id = 6 or orders.order_status_id = 5,
                       if(to_city = 1,
@@ -35,7 +35,7 @@ $start7 = date('Y-m-d 00:00:00',strtotime(' - 7 day'));
 $end7 = date('Y-m-d 00:00:00',strtotime(' + 1 day'));
 $sql7 = "select
            sum(
-                 orders.price -
+                 orders.new_price -
                  (
                    if(orders.order_status_id = 4 or orders.order_status_id = 6 or orders.order_status_id = 5,
                       if(to_city = 1,
@@ -59,7 +59,7 @@ $start1 = date('Y-m-d 00:00:00');
 $end1 = date('Y-m-d 00:00:00',strtotime(' + 1 day'));
 $sql1 = "select
             sum(
-                 orders.price -
+                 orders.new_price -
                  (
                    if(orders.order_status_id = 4 or orders.order_status_id = 6 or orders.order_status_id = 5,
                       if(to_city = 1,
