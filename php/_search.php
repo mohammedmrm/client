@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 require("_access.php");
 access();
 require("dbconnection.php");
-$search = $_REQUEST['search-text'];
+$search = $_REQUEST['search'];
 $start = trim($_REQUEST['start']);
 $end = trim($_REQUEST['end']);
 $city = trim($_REQUEST['city']);
@@ -22,46 +22,57 @@ if(empty($page)){
 if(empty($end)) {
   $end = date('Y-m-d h:i:s', strtotime($end. ' + 1 day'));
 }else{
-  $end .=" 23:59:59";
+   $end .=" 23:59:59";
 }
 $start .=" 00:00:00";
 try{
-  $count = "select count(*) as count from orders";
-  $query = "select orders.*,DATEDIFF('".date('Y-m-d')."', date_format(orders.date,'%Y-%m-%d')) as days,
+  $count = "select count(*) as count from orders
+            left join (
+              select max(id) as last_id,order_id from tracking group by order_id
+            ) a on a.order_id = orders.id
+            left join tracking on a.last_id = tracking.id";
+  $query = "select orders.*,
             clients.name as client_name,clients.phone as client_phone,
             cites.name as city,towns.name as town,branches.name as branch_name,
             if(staff.phone is null,'07721397505',staff.phone) as driver_phone,
-            stores.name as store_name
+            stores.name as store_name,tracking.note as t_note
             from orders left join
             clients on clients.id = orders.client_id
             left join cites on  cites.id = orders.to_city
-            left join staff on  orders.driver_id = staff.id
             left join towns on  towns.id = orders.to_town
+            left join staff on  orders.driver_id = staff.id
             left join stores on  stores.id = orders.store_id
             left join branches on  branches.id = orders.to_branch
+            left join (
+              select max(id) as last_id,order_id from tracking group by order_id
+            ) a on a.order_id = orders.id
+            left join tracking on a.last_id = tracking.id
             ";
   $where = "where";
-  $filter = "orders.client_id ='".$_SESSION['userid']."'  and (orders.confirm=1 or orders.confirm=4) and (order_status_id <> 4 and order_status_id <> 9)";
+  $filter = "orders.client_id =".$_SESSION['userid']." and (orders.confirm=1) ";
   if(!empty($search)){
    $filter .= " and (order_no like '%".$search."%'
-                    or customer_name like '%".$search."%'
-                    or customer_phone like '%".$search."%')
+                     or customer_name like  '%".$search."%'
+                     or customer_phone like '%".$search."%'
+                     or tracking.note like  '%".$search."%'
+                     )
                     ";
   }
-  if($city > 0){
-   $filter .= " and to_city =".$city;
-  }
-  if($store > 0){
-   $filter .= " and store_id =".$store;
-  }
+  $filter .= " and invoice_id=0";
   function validateDate($date, $format = 'Y-m-d H:i:s')
     {
         $d = DateTime::createFromFormat($format, $date);
         return $d && $d->format($format) == $date;
     }
   if(validateDate($start) && validateDate($end)){
-      $filter .= " and orders.date between '".$start."' AND '".$end."'";
+      $filter .= " and date between '".$start."' AND '".$end."'";
      }
+  if($city > 0){
+   $filter .= " and to_city =".$city;
+  }
+  if($store > 0){
+   $filter .= " and store_id =".$store;
+  }
   if($filter != ""){
     $filter = preg_replace('/^ and/', '', $filter);
     $filter = $where." ".$filter;
@@ -81,19 +92,6 @@ try{
    $data=["error"=>$ex];
    $success="0";
 }
-if($success == '1'){
-  foreach($data as $k=>$v){
-    if($v['with_dev'] == 1){
-      $data[$k]['with_dev'] = "نعم";
-    }else{
-      $data[$k]['with_dev'] = "لا";
-    }
-    if($v['money_status'] == 1){
-      $data[$k]['money_status'] = "مدفوع";
-    }else{
-      $data[$k]['money_status'] = "غير مدفوع";
-    }
-  }
-}
-print_r(json_encode(array('orders'=>$orders,"success"=>$success,"data"=>$data,'pages'=>$pages,'nextPage'=>$page+2)));
+
+echo (json_encode(array($query,'orders'=>$orders,"success"=>$success,"data"=>$data,'pages'=>$pages,'nextPage'=>$page+2)));
 ?>

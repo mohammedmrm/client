@@ -27,7 +27,7 @@ if(empty($end)) {
 $start .=" 00:00:00";
 try{
   $count = "select count(*) as count from orders";
-  $query = "select orders.*,
+  $query = "select orders.*,DATEDIFF('".date('Y-m-d')."', date_format(orders.date,'%Y-%m-%d')) as days,
             clients.name as client_name,clients.phone as client_phone,
             cites.name as city,towns.name as town,branches.name as branch_name
             from orders left join
@@ -37,7 +37,7 @@ try{
             left join branches on  branches.id = orders.to_branch
             ";
   $where = "where";
-  $filter = "client_id =".$_SESSION['userid']." and order_status_id=7  and (orders.confirm=1 or orders.confirm=4)";
+  $filter = "client_id =".$_SESSION['userid']." and order_status_id=7  and (orders.confirm=1)";
   if(!empty($search)){
    $filter .= " and (order_no like '%".$search."%'
                     or customer_name like '%".$search."%'
@@ -68,7 +68,7 @@ try{
   if($page != 0){
     $page = $page - 1;
   }
-  $query .= " limit ".($page * $limit).",".$limit;
+  $query .= "  limit ".($page * $limit).",".$limit;
   $data = getData($con,$query);
   $ps = getData($con,$count);
   $orders = $ps[0]['count'];
@@ -92,5 +92,5 @@ if($success == '1'){
     }
   }
 }
-print_r(json_encode(array('orders'=>$orders,"success"=>$success,"data"=>$data,'pages'=>$pages,'nextPage'=>$page+2)));
+echo (json_encode(array('orders'=>$orders,"success"=>$success,"data"=>$data,'pages'=>$pages,'nextPage'=>$page+2)));
 ?>

@@ -82,7 +82,7 @@ require_once("config.php");
 
         <div class="content-boxed">
             <div class="content bottom-0">
-                <h3 class="bolder text-right">الطلبيات المؤجلة<span id="orders_count"></span></h3>
+                <h3 class="bolder text-right">طلبات بالمخزن <span id="orders_count"></span></h3>
             </div>
 
 
@@ -132,7 +132,7 @@ if(action == "reload"){
     $("#currentPage").val(1);
 }
 $.ajax({
-  url:"php/_getPospondedOrders.php",
+  url:"php/_getinstorageOrders.php",
   type:"POST",
   data:$("#searchForm").serialize(),
   beforeSend:function(){
@@ -149,19 +149,7 @@ $.ajax({
    $("#orders_count").text(" ( "+res.orders+" ) ");
    console.log(res);
    $.each(res.data,function(){
-     if(this.order_status_id == 6){
-       color = 'bg-red1-dark';
-     }else if(this.order_status_id == 4){
-        color = 'bg-green1-dark';
-     }else if(this.order_status_id == 5){
-        color = 'bg-yellow1-dark';
-     }else if(this.order_status_id ==7){
-        color = 'bg-gradient-orange';
-     }else if(this.order_status_id ==1){
-        color = 'bg-dark1-dark';
-     }else{
-       color = 'bg-magenta1-light';
-     }
+      color = 'bg-magenta1-dark';
      $("#orders").append(
           '<a onclick="getOrderDetails('+this.id+')" data-toggle="modal" data-target="#orderdetailsModal" >'+
              '<div data-accordion="accordion-content-10" data-height="100" class="caption caption-margins round-small bottom-5" style="height: 90px;">'+

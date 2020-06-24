@@ -22,46 +22,43 @@ if(empty($page)){
 if(empty($end)) {
   $end = date('Y-m-d h:i:s', strtotime($end. ' + 1 day'));
 }else{
-  $end .=" 23:59:59";
+   $end .=" 23:59:59";
 }
 $start .=" 00:00:00";
 try{
   $count = "select count(*) as count from orders";
-  $query = "select orders.*,DATEDIFF('".date('Y-m-d')."', date_format(orders.date,'%Y-%m-%d')) as days,
+  $query = "select orders.*, DATEDIFF('".date('Y-m-d')."', date_format(orders.date,'%Y-%m-%d')) as days,
             clients.name as client_name,clients.phone as client_phone,
-            cites.name as city,towns.name as town,branches.name as branch_name,
-            if(staff.phone is null,'07721397505',staff.phone) as driver_phone,
-            stores.name as store_name
+            cites.name as city,towns.name as town,branches.name as branch_name
             from orders left join
             clients on clients.id = orders.client_id
             left join cites on  cites.id = orders.to_city
-            left join staff on  orders.driver_id = staff.id
             left join towns on  towns.id = orders.to_town
-            left join stores on  stores.id = orders.store_id
             left join branches on  branches.id = orders.to_branch
             ";
   $where = "where";
-  $filter = "orders.client_id ='".$_SESSION['userid']."'  and (orders.confirm=1 or orders.confirm=4) and (order_status_id <> 4 and order_status_id <> 9)";
+  $filter = "client_id =".$_SESSION['userid']." and orders.confirm=1 and storage_id = 1 and invoice_id=0";
   if(!empty($search)){
    $filter .= " and (order_no like '%".$search."%'
                     or customer_name like '%".$search."%'
                     or customer_phone like '%".$search."%')
                     ";
   }
-  if($city > 0){
-   $filter .= " and to_city =".$city;
-  }
-  if($store > 0){
-   $filter .= " and store_id =".$store;
-  }
+
   function validateDate($date, $format = 'Y-m-d H:i:s')
     {
         $d = DateTime::createFromFormat($format, $date);
         return $d && $d->format($format) == $date;
     }
   if(validateDate($start) && validateDate($end)){
-      $filter .= " and orders.date between '".$start."' AND '".$end."'";
+      $filter .= " and date between '".$start."' AND '".$end."'";
      }
+  if($city > 0){
+   $filter .= " and to_city =".$city;
+  }
+  if($store > 0){
+   $filter .= " and store_id =".$store;
+  }
   if($filter != ""){
     $filter = preg_replace('/^ and/', '', $filter);
     $filter = $where." ".$filter;

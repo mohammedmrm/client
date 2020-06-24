@@ -10,6 +10,7 @@ $start = trim($_REQUEST['start']);
 $end = trim($_REQUEST['end']);
 $city = trim($_REQUEST['city']);
 $store = trim($_REQUEST['store']);
+$reason = trim($_REQUEST['reason']);
 $limit = trim($_REQUEST['limit']);
 $page = trim($_REQUEST['currentPage']);
 $orders = 0;
@@ -26,12 +27,16 @@ if(empty($end)) {
 }
 $start .=" 00:00:00";
 try{
-  $count = "select count(*) as count from orders";
-  $query = "select orders.*,
+  $count = "select count(*) as count from orders
+            left join (
+              select max(id) as last_id,order_id from tracking group by order_id
+            ) a on a.order_id = orders.id
+            left join tracking on a.last_id = tracking.id";
+  $query = "select orders.*,DATEDIFF('".date('Y-m-d')."', date_format(orders.date,'%Y-%m-%d')) as days,
             clients.name as client_name,clients.phone as client_phone,
             cites.name as city,towns.name as town,branches.name as branch_name,
             if(staff.phone is null,'07721397505',staff.phone) as driver_phone,
-            stores.name as store_name
+            stores.name as store_name,tracking.note as t_note
             from orders left join
             clients on clients.id = orders.client_id
             left join cites on  cites.id = orders.to_city
@@ -39,16 +44,24 @@ try{
             left join staff on  orders.driver_id = staff.id
             left join stores on  stores.id = orders.store_id
             left join branches on  branches.id = orders.to_branch
+            left join (
+              select max(id) as last_id,order_id from tracking group by order_id
+            ) a on a.order_id = orders.id
+            left join tracking on a.last_id = tracking.id
             ";
   $where = "where";
-  $filter = "orders.client_id =".$_SESSION['userid']." and (order_status_id=9 or order_status_id=6)  and (orders.confirm=1 or orders.confirm=4)";
+  $filter = "orders.client_id =".$_SESSION['userid']." and (orders.order_status_id=9 or orders.order_status_id=6)  and (orders.confirm=1 or orders.confirm=4) ";
   if(!empty($search)){
    $filter .= " and (order_no like '%".$search."%'
-                     or customer_name like '%".$search."%'
-                     or customer_phone like '%".$search."%')
+                     or customer_name like  '%".$search."%'
+                     or customer_phone like '%".$search."%'
+                      )
                     ";
   }
-
+  if(!empty($reason)){
+   $filter .= " and (tracking.note like '%".$reason."%')";
+  }
+  $filter .= " and invoice_id=0";
   function validateDate($date, $format = 'Y-m-d H:i:s')
     {
         $d = DateTime::createFromFormat($format, $date);
@@ -82,22 +95,6 @@ try{
    $data=["error"=>$ex];
    $success="0";
 }
-if($success == '1'){
-  foreach($data as $k=>$v){
-     $sql = "select * from tracking where order_id =? order by id DESC limit 1";
-     $res= getData($con,$sql,[$v['id']]);
-     $data[$k]['t_note'] = $res[0]['note'];
-    if($v['with_dev'] == 1){
-      $data[$k]['with_dev'] = "نعم";
-    }else{
-      $data[$k]['with_dev'] = "لا";
-    }
-    if($v['money_status'] == 1){
-      $data[$k]['money_status'] = "مدفوع";
-    }else{
-      $data[$k]['money_status'] = "غير مدفوع";
-    }
-  }
-}
-print_r(json_encode(array('orders'=>$orders,"success"=>$success,"data"=>$data,'pages'=>$pages,'nextPage'=>$page+2)));
+
+echo (json_encode(array($query,'orders'=>$orders,"success"=>$success,"data"=>$data,'pages'=>$pages,'nextPage'=>$page+2)));
 ?>
