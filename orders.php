@@ -176,7 +176,6 @@ require_once("config.php");
             <span aria-hidden="true">&times;</span>
           </button>
           <h5 class="modal-title text-left" id="exampleModalLongTitle">تفاصيل الطلب <span id="orders_count"></span></h5>
-
         </div>
         <div class="modal-body">
          <div id="order-details"></div>
@@ -304,11 +303,12 @@ $.ajax({
   url:"php/_getOrder.php",
   type:"POST",
   beforeSend:function(){
-
+   $("#order-details").addClass("loading");
   },
   data:{id : id},
   success:function(res){
-    $("#order-details").html("");
+   $("#order-details").removeClass("loading");
+   $("#order-details").html("");
    console.log(res);
    if(res.success == 1){
      $.each(res.data,function(){
@@ -342,6 +342,7 @@ $.ajax({
    }
   },
   error:function(e){
+   $("#order-details").removeClass("loading"); 
    console.log(e);
   }
 });

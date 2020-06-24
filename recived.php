@@ -203,10 +203,11 @@ $.ajax({
   url:"php/_getOrder.php",
   type:"POST",
   beforeSend:function(){
-
+   $("#order-details").addClass("loading"); 
   },
   data:{id : id},
   success:function(res){
+    $("#order-details").removeClass("loading");
     $("#order-details").html("");
    console.log(res);
    if(res.success == 1){
@@ -241,6 +242,7 @@ $.ajax({
    }
   },
   error:function(e){
+    $("#order-details").removeClass("loading");
    console.log(e);
   }
 });

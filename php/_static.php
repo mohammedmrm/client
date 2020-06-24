@@ -13,11 +13,13 @@ $sql30 = "select
            sum(
                  orders.price -
                  (
+                   if(orders.order_status_id = 4,
                       if(to_city = 1,
                              if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
                              if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
-                       )
-
+                       ),
+                       0
+                    )
                  )
                 ) as client_price,
              count(*) as orders
@@ -35,10 +37,13 @@ $sql7 = "select
            sum(
                  orders.price -
                  (
-                   if(to_city = 1,
+                   if(orders.order_status_id = 4,
+                      if(to_city = 1,
                              if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
                              if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
-                   )
+                       ),
+                       0
+                    )
                  )
                 ) as client_price,
              count(*) as orders
@@ -56,10 +61,13 @@ $sql1 = "select
             sum(
                  orders.price -
                  (
-                    if(to_city = 1,
-                               if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
-                               if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
-                     )
+                   if(orders.order_status_id = 4,
+                      if(to_city = 1,
+                             if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
+                             if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
+                       ),
+                       0
+                    )
 
                 )
              ) as client_price,
