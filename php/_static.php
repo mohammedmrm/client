@@ -11,15 +11,16 @@ $start30 = date('Y-m-d 00:00:00',strtotime(' - 30 day'));
 $end30 = date('Y-m-d 00:00:00',strtotime(' + 1 day'));
 $sql30 = "select
            sum(
-                 orders.new_price -
-                 (
-                   if(orders.order_status_id = 4 or orders.order_status_id = 6 or orders.order_status_id = 5,
-                      if(to_city = 1,
-                             if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
-                             if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
-                       ),
-                       0
-                    )
+                 if(orders.order_status_id = 4 or orders.order_status_id = 6 or orders.order_status_id = 5,
+
+                  (orders.new_price -
+                       (
+                       if(to_city = 1,
+                                 if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
+                                 if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
+                           )
+                        )
+                    ),0)
                  )
                 ) as client_price,
              count(*) as orders
@@ -35,16 +36,15 @@ $start7 = date('Y-m-d 00:00:00',strtotime(' - 7 day'));
 $end7 = date('Y-m-d 00:00:00',strtotime(' + 1 day'));
 $sql7 = "select
            sum(
-                 orders.new_price -
-                 (
-                   if(orders.order_status_id = 4 or orders.order_status_id = 6 or orders.order_status_id = 5,
-                      if(to_city = 1,
-                             if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
-                             if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
-                       ),
-                       0
-                    )
-                 )
+                 if(orders.order_status_id = 4 or orders.order_status_id = 6 or orders.order_status_id = 5,
+                  (orders.new_price -
+                       (
+                       if(to_city = 1,
+                                 if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
+                                 if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
+                           )
+                        )
+                    ),0)
                 ) as client_price,
              count(*) as orders
              from orders
@@ -59,17 +59,15 @@ $start1 = date('Y-m-d 00:00:00');
 $end1 = date('Y-m-d 00:00:00',strtotime(' + 1 day'));
 $sql1 = "select
             sum(
-                 orders.new_price -
-                 (
-                   if(orders.order_status_id = 4 or orders.order_status_id = 6 or orders.order_status_id = 5,
-                      if(to_city = 1,
-                             if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
-                             if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
-                       ),
-                       0
-                    )
-
-                )
+                 if(orders.order_status_id = 4 or orders.order_status_id = 6 or orders.order_status_id = 5,
+                 (orders.new_price -
+                       (
+                       if(to_city = 1,
+                                 if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
+                                 if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
+                           )
+                        )
+                  ),0)
              ) as client_price,
              count(*) as orders
              from orders
