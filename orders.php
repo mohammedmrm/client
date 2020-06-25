@@ -239,10 +239,10 @@ require_once("config.php");
                 type: "POST",
                 data: $("#searchForm").serialize(),
                 beforeSend:function(){
-                  $("#orders").addClass("loading");
+                  //$("#orders").addClass("loading");
                 },
                 success: function(res) {
-                  $("#orders").removeClass("loading");
+                  //$("#orders").removeClass("loading");
                     if (action == "reload") {
                         $("#orders").html('');
                     }
@@ -282,7 +282,7 @@ require_once("config.php");
                     }
                 },
                 error: function(e) {
-                   $("#orders").removeClass("loading");
+                   //$("#orders").removeClass("loading");
                     console.log(e);
                 }
             });
@@ -304,7 +304,7 @@ $.ajax({
   url:"php/_getOrder.php",
   type:"POST",
   beforeSend:function(){
-    $("#order-details").addClass("loading"); 
+    $("#order-details").addClass("loading");
   },
   data:{id : id},
   success:function(res){
