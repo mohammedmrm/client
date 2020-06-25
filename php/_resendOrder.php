@@ -30,7 +30,7 @@ if($v->passes()) {
    $res =getData($con,$sql,[$order_id,13]);
    if($res[0]['times'] < 2){
    $sql = 'update orders set order_status_id =?, new_price = price
-           where id=? and client_id=?';
+           where id=? and client_id=? and storage_id <> 1 and storage_id <> -1';
    $result = setData($con,$sql,['13',$order_id,$id]);
    if($result > 0){
     $success = 1;
