@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting(0);
+//error_reporting(0);
 header('Content-Type: application/json');
 require("_access.php");
 access();
@@ -21,7 +21,6 @@ $sql30 = "select
                            )
                         )
                     ),0)
-                 )
                 ) as client_price,
              count(*) as orders
              from orders
