@@ -203,7 +203,7 @@ $.ajax({
   url:"php/_getOrder.php",
   type:"POST",
   beforeSend:function(){
-   $("#order-details").addClass("loading"); 
+   $("#order-details").addClass("loading");
   },
   data:{id : id},
   success:function(res){
