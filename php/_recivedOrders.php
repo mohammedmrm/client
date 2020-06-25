@@ -47,7 +47,7 @@ $sql = "select
           count(orders.id) as orders
           from orders
           left JOIN client_dev_price on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
-          where orders.client_id = ?  and invoice_id = 0 and (order_status_id = 4 or order_status_id = 6)  and orders.confirm=1
+          where orders.client_id = ?  and invoice_id = 0 and (order_status_id = 4 or order_status_id = 5 or order_status_id = 6)  and orders.confirm=1
           ";
           if(!empty($end) && !empty($start)){
             $sql .=' and orders.date between "'.$start.'" and "'.$end.'" ';
@@ -64,7 +64,7 @@ $sql2 = "select invoice.*,count(orders.id) as orders,date_format(invoice.date,'%
            inner join stores on stores.id = invoice.store_id
            inner join orders on orders.invoice_id = invoice.id
            inner join clients on stores.client_id = clients.id
-           where clients.id=? and orders_status = 4 ";
+           where clients.id=?";
           if(!empty($end) && !empty($start)){
             $sql2 .=' and invoice.date between "'.$start.'" and "'.$end.'" ';
           }
