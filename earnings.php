@@ -152,7 +152,7 @@ function earnings(){
        '</div>'
     );
     $.each(res.invoice,function(){
-      if(this.order_status_id == 9){
+      if(this.order_status_id == 4){
         bg = "bg-green1-light";
       }else{
         bg = "bg-red1-light";
