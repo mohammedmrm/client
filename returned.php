@@ -201,16 +201,14 @@ $.ajax({
    $.each(res.data,function(){
      if(this.order_status_id == 9){
        color = 'bg-red1-dark';
+       btn = '<button style="z-index:100; width:100%;" onclick="resend('+this.id+')" class="btn btn-warning">اعادة ارسال</button>';
      }else if(this.order_status_id == 6){
+        btn = "";
         color = 'bg-red1-light';
      }else if(this.order_status_id == 4){
         color = 'bg-green1-dark';
      }else if(this.order_status_id == 5){
-        color = 'bg-yellow1-dark';
-     }else if(this.order_status_id ==7){
-        color = 'bg-orange-light';
-     }else if(this.order_status_id ==1){
-        color = 'bg-dark1-dark';
+        color = 'bg-orange1-dark';
      }else{
        color = 'bg-magenta1-light';
      }
@@ -223,6 +221,7 @@ $.ajax({
                           '<h1 class="bolder text-center text-white">'+this.order_no+'</h1>'+
                           '<p class=" text-center text-white">'
                             +this.customer_phone+
+                            '<br /><b>'+this.status_name+'</b>'+
                             '<br />'+this.city+' | '+this.town+' | '+this.address+
                             '<br /> مضى '+this.days+" يوم على تسجيل الطلب "+
                             '<br />'+this.store_name+
@@ -230,7 +229,7 @@ $.ajax({
                           ' )</p>'+
                         '</a>'+
                     '</div>'+
-                    '<button style="z-index:100; width:100%;" onclick="resend('+this.id+')" class="btn btn-warning">اعادة ارسال</button>'+
+                    btn+
                 '</div>'+
             '</div>'
        );
