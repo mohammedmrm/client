@@ -189,10 +189,16 @@ $.ajax({
   url:"php/_getReturnedOrders.php",
   type:"POST",
   data:$("#searchForm").serialize(),
+  beforeSend:function(){
+    if (action == "reload") {
+        $("#orders").addClass("loading");
+    }
+  },
   success:function(res){
     if(action == "reload"){
      $("#orders").html('');
     }
+   $("#orders").removeClass("loading");
    $("#loader").remove();
    $("#loading-items").remove();
    $("#currentPage").val(res.nextPage);
@@ -243,6 +249,7 @@ $.ajax({
      }
     },
    error:function(e){
+    $("#orders").removeClass("loading");  
     console.log(e);
   }
 });

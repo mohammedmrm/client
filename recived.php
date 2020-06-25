@@ -140,10 +140,12 @@ $.ajax({
   type:"POST",
   data:$("#searchForm").serialize(),
   beforeSend:function(){
-    //$("#orders").addClass("loading");
+    if(action == "reload"){
+     $("#orders").addClass("loading");
+    }
   },
   success:function(res){
-    //$("#orders").removeClass("loading");
+    $("#orders").removeClass("loading");
     if(action == "reload"){
      $("#orders").html('');
     }
@@ -192,7 +194,7 @@ $.ajax({
      }
     },
    error:function(e){
-    //$("#orders").removeClass("loading");
+    $("#orders").removeClass("loading");
     console.log(e);
   }
 });

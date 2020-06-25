@@ -239,12 +239,14 @@ require_once("config.php");
                 type: "POST",
                 data: $("#searchForm").serialize(),
                 beforeSend:function(){
-                  //$("#orders").addClass("loading");
+                    if (action == "reload") {
+                        $("#orders").addClass("loading");
+                    }
                 },
                 success: function(res) {
-                  //$("#orders").removeClass("loading");
                     if (action == "reload") {
                         $("#orders").html('');
+                        $("#orders").removeClass("loading");
                     }
                     $("#loader").remove();
                     $("#loading-items").remove();
@@ -282,7 +284,7 @@ require_once("config.php");
                     }
                 },
                 error: function(e) {
-                   //$("#orders").removeClass("loading");
+                    $("#orders").removeClass("loading");
                     console.log(e);
                 }
             });
