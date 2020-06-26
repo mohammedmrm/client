@@ -207,7 +207,8 @@ $.ajax({
    $.each(res.data,function(){
      if(this.order_status_id == 9){
        color = 'bg-red1-dark';
-       btn = '<button style="z-index:100; width:100%;" onclick="resend('+this.id+')" class="btn btn-warning">اعادة ارسال</button>';
+       btn = "";
+       //btn = '<button style="z-index:100; width:100%;" onclick="resend('+this.id+')" class="btn btn-warning">اعادة ارسال</button>';
      }else if(this.order_status_id == 6){
         btn = "";
         color = 'bg-red1-light';
@@ -249,7 +250,7 @@ $.ajax({
      }
     },
    error:function(e){
-    $("#orders").removeClass("loading");  
+    $("#orders").removeClass("loading");
     console.log(e);
   }
 });
