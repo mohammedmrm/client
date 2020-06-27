@@ -229,7 +229,7 @@ require_once("config.php");
                         </div>
                     </a>
                 </div>
-                <div class="one-half">
+<!--                <div class="one-half">
                     <a href="receipt.php">
                         <div data-instant-id="instant-2" data-height="120" class="bg-div1 caption caption-margins round-tiny shadow-huge">
                             <div class="caption-center">
@@ -276,7 +276,7 @@ require_once("config.php");
                             <div class="caption-overlay  "></div>
                         </div>
                     </a>
-                </div>
+                </div>-->
                 <?php if($_SESSION['user_details']['show_earnings'] == 1){ ?>
                 <div class="clear">
                     <a href="earnings.php">
