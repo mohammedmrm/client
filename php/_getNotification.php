@@ -1,11 +1,11 @@
 <?php
 session_start();
-//error_reporting(0);
+error_reporting(0);
 header('Content-Type: application/json');
-require("_access.php");
+require_once("_access.php");
 access();
-require("dbconnection.php");
-require("_crpt.php");
+require_once("dbconnection.php");
+require_once("_crpt.php");
 
 $success = 0;
 $error = [];
