@@ -1,5 +1,7 @@
-<?php
-require_once("config.php");
+<?
+include_once("php/_access.php");
+access();
+include("config.php");
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -196,9 +198,7 @@ $.ajax({
   url:"php/_getOrder.php",
   type:"POST",
   beforeSend:function(){
-    if (action == "reload") {
-        $("#orders").addClass("loading");
-    }
+   $("#order-details").addClass("loading");
   },
   data:{id : id},
   success:function(res){

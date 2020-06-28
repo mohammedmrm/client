@@ -1,10 +1,10 @@
 <?php
 session_start();
-//error_reporting(0);
+error_reporting(0);
 header('Content-Type: application/json');
-require("_access.php");
+require_once("_access.php");
 access();
-require("dbconnection.php");
+require_once("dbconnection.php");
 require_once("../config.php");
 
 $start30 = date('Y-m-d 00:00:00',strtotime(' - 30 day'));
