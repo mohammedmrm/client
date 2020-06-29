@@ -4,9 +4,9 @@ session_start();
 }
 require_once("dbconnection.php");
 function access(){
-  if(!empty($_COOKIE['username']) && !empty($_COOKIE['password'])){
+  if(!empty($_COOKIE['username_c']) && !empty($_COOKIE['password_c'])){
     $sql = "select clients.* from clients  where phone = ? and password =?";
-    $result = getData($GLOBALS['con'],$sql,[$_COOKIE['username'],$_COOKIE['password']]);
+    $result = getData($GLOBALS['con'],$sql,[$_COOKIE['username_c'],$_COOKIE['password_c']]);
   }
   if(count($result)> 0){
     $_SESSION['login']=1;
