@@ -61,7 +61,7 @@ try{
   }
   if($filter != ""){
     $filter = preg_replace('/^ and/', '', $filter);
-    $filter = $where." ".$filter;
+    $filter = $where." ".$filter." order by id DESC";
     $count .= " ".$filter;
     $query .= " ".$filter;
   }

@@ -39,7 +39,7 @@ try{
             left join branches on  branches.id = orders.to_branch
             ";
   $where = "where";
-  $filter = "orders.client_id =".$_SESSION['userid']." and (order_status_id=4)  and (orders.confirm=1 or orders.confirm=4)";
+  $filter = "orders.invoice_id = 0 and orders.client_id =".$_SESSION['userid']." and (order_status_id=4)  and (orders.confirm=1 or orders.confirm=4)";
   if(!empty($search)){
    $filter .= " and (order_no like '%".$search."%'
                     or customer_name like '%".$search."%'
@@ -63,7 +63,7 @@ try{
   }
   if($filter != ""){
     $filter = preg_replace('/^ and/', '', $filter);
-    $filter = $where." ".$filter;
+    $filter = $where." ".$filter." order by id DESC";
     $count .= " ".$filter;
     $query .= " ".$filter;
   }

@@ -51,7 +51,7 @@ try{
             left join tracking on a.last_id = tracking.id
             ";
   $where = "where";
-  $filter = "orders.client_id =".$_SESSION['userid']." and (orders.order_status_id=9 or orders.order_status_id=6 or orders.order_status_id=5)  and (orders.confirm=1 or orders.confirm=4) and orders.storage_id <> 1 and orders.storage_id <> -1";
+  $filter = "orders.invoice_id= 0 and orders.client_id =".$_SESSION['userid']." and (orders.order_status_id=9 or orders.order_status_id=6 or orders.order_status_id=5)  and (orders.confirm=1 or orders.confirm=4) and orders.storage_id <> 1 and orders.storage_id <> -1";
   if(!empty($search)){
    $filter .= " and (order_no like '%".$search."%'
                      or customer_name like  '%".$search."%'
@@ -79,7 +79,7 @@ try{
   }
   if($filter != ""){
     $filter = preg_replace('/^ and/', '', $filter);
-    $filter = $where." ".$filter;
+    $filter = $where." ".$filter ."  order by id DESC";
     $count .= " ".$filter;
     $query .= " ".$filter;
   }
