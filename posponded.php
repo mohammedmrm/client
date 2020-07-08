@@ -165,7 +165,7 @@ $.ajax({
        color = 'bg-magenta1-light';
      }
      $("#orders").append(
-          '<a onclick="getOrderDetails('+this.id+')" data-toggle="modal" data-target="#orderdetailsModal" >'+
+          '<a href="javascript:;" onclick="getOrderDetails('+this.id+')" data-toggle="modal" data-target="#orderdetailsModal" >'+
              '<div data-accordion="accordion-content-10" data-height="100" class="caption caption-margins round-small bottom-5" style="height: 90px;">'+
                 '<div class="caption-center">'+
                     '<h4 class="color-white center-text bottom-0 uppercase bolder">'+this.order_no+'</h4>'+
