@@ -27,7 +27,7 @@ $sql30 = "select
              left JOIN client_dev_price
             on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
             where (orders.confirm=1 or orders.confirm=4) and invoice_id=0 and orders.client_id=".$_SESSION['userid']." and
-            update_date between '".$start30."' and '".$end30."'";
+            date between '".$start30."' and '".$end30."'";
 $last30 =  getData($con,$sql30);
 $last30[0]['client_price'] = number_format($last30[0]['client_price']);
 
@@ -50,7 +50,7 @@ $sql7 = "select
              left JOIN client_dev_price
             on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
             where (orders.confirm=1 or orders.confirm=4) and invoice_id=0 and orders.client_id=".$_SESSION['userid']." and
-            update_date between '".$start7."' and '".$end7."'";
+            date between '".$start7."' and '".$end7."'";
 $last7 =  getData($con,$sql7);
 $last7[0]['client_price'] = number_format( $last7[0]['client_price']);
 
@@ -73,7 +73,7 @@ $sql1 = "select
              left JOIN client_dev_price
             on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
             where (orders.confirm=1 or orders.confirm=4) and invoice_id=0 and orders.client_id=".$_SESSION['userid']." and
-            update_date between '".$start1."' and '".$end1."'";
+            date between '".$start1."' and '".$end1."'";
 $last1 =  getData($con,$sql1);
 $last1[0]['client_price'] = number_format($last1[0]['client_price']);
 if($_SESSION['user_details']['show_earnings'] != 1){
