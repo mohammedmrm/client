@@ -220,7 +220,7 @@ $.ajax({
      }else if(this.order_status_id == 4){
         color = 'bg-green1-dark';
      }else if(this.order_status_id == 5){
-        color = 'bg-orange1-dark';
+        color = 'bg-yellow1-dark';
      }else{
        color = 'bg-magenta1-light';
      }
