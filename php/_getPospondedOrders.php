@@ -20,11 +20,11 @@ if(empty($page)){
  $page = 1;
 }
 if(empty($end)) {
-  $end = date('Y-m-d h:i:s', strtotime($end. ' + 1 day'));
+   $end = date('Y-m-d h:i:s', strtotime($end. ' + 1 day'));
 }else{
    $end .=" 23:59:59";
 }
-$start .=" 00:00:00";
+   $start .=" 00:00:00";
 try{
   $count = "select count(*) as count from orders";
   $query = "select orders.*,DATEDIFF('".date('Y-m-d')."', date_format(orders.date,'%Y-%m-%d')) as days,
@@ -51,7 +51,7 @@ try{
         return $d && $d->format($format) == $date;
     }
   if(validateDate($start) && validateDate($end)){
-      $filter .= " and date between '".$start."' AND '".$end."'";
+      $filter .= " and orders.date between '".$start."' AND '".$end."'";
      }
   if($city > 0){
    $filter .= " and to_city =".$city;

@@ -69,7 +69,7 @@ try{
         return $d && $d->format($format) == $date;
     }
   if(validateDate($start) && validateDate($end)){
-      $filter .= " and date between '".$start."' AND '".$end."'";
+      $filter .= " and orders.date between '".$start."' AND '".$end."'";
      }
   if($city > 0){
    $filter .= " and to_city =".$city;
