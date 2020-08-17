@@ -1,7 +1,7 @@
 <?
 include_once("php/_access.php");
 access();
-include("config.php");
+include_once("config.php");
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
