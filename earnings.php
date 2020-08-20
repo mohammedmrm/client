@@ -59,7 +59,7 @@ require_once("config.php");
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">من</span>
                 </div>
-               <input type="text" name="start" id="startdate" value="<?php echo date('Y-m-d',strtotime(' - 31 day'));?>" class="datepicker form-control" placeholder="من">
+               <input type="text" name="start" id="startdate" value="<?php echo date('Y-m-d',strtotime(' - 61 day'));?>" class="datepicker form-control" placeholder="من">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">الى</span>
                 </div>
