@@ -13,8 +13,13 @@
 
 body * :not(.fa):not(.fab):not(.fas) {
   font-family: 'Cairo' !important;
-  direction: rtl !important;
+  direction: rtl ;
 
+}
+.owl-stage-outer {
+  font-family: 'Cairo' !important;
+  direction: ltr !important;
+  text-align: -webkit-auto;
 }
 
 input[type=email],.form_datetime {

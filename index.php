@@ -96,7 +96,13 @@ require_once("config.php");
             </div>
             </div>
             <div class="content-boxed">
-             <h6 class="text-center" style="line-height: 2;"><?php echo $config['wellcome_message'];?></h6>
+            <div class="slider-wrapper">
+                <div class="single-slider owl-carousel owl-no-dots">
+                    <div class="item" style="padding: 0 .5rem;"><?php echo $config['c_ad1'];?></div>
+                    <div class="item" style="padding: 0 .5rem;"><?php echo $config['c_ad2'];?></div>
+                </div>
+                <!--Controls go here-->
+            </div>
             </div>
             <div class="content-boxed">
                 <a href="#" class="footer-title bottom-10"><span class=" text-center color-black">خلاصة للطلبيات والمبالغ &#128512;</span></a>

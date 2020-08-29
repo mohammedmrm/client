@@ -1,24 +1,17 @@
 <?php
 $config = [
-   "Company_name"=>"شركة البرق",
+   "Company_name"=>"شركة النهر",
    "Company_phone"=>"0782222222",
-   "wellcome_message"=>"
-<ul>
-  <li>الى كافة عملاء شركة البرق للتوصيل السريع الكرام.</li>
-  <li>السلام عليكم..</li>
-  <li>نعتذر عن استلام البريد لأيام الخميس والجمعه والسبت المصادف(2020/8/27)&(2020/8/28)&(2020/8/29)</li>
-  <li></li>
-  <li>لاحياء ذكرى العاشر من محرم الحرام</li>
-  <li>وعظم الله اجورنا واجوركم بهذا المصاب الجلل</li>
-  <li></li>
-  <li>شاكرين تعاملكم معنا.</li>
-  <li>ادارة البرق..</li>
-</ul>
-   ",
+   "wellcome_message"=>"اعلان",
    "Company_email"=>"nahar@nahar.com",
    "Company_logo"=>"img/logos/logo.png",
    "dev_b"=>5000,               //??? ??????? ?????
    "dev_o"=>10000                //??? ??????? ????? ?????????
-]
-
+];
+require_once("php/dbconnection.php");
+$sql = "select * from setting";
+$setting = getData($con,$sql);
+foreach($setting as $val){
+  $config[$val['control']] =  $val['value'];
+}
 ?>
