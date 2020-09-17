@@ -7,78 +7,86 @@ access();
 error_reporting(0);
 require_once("../php/dbconnection.php");
 require_once("../config.php");
-$start = trim($_REQUEST['start']);
-$end = trim($_REQUEST['end']);
-$limit = trim($_REQUEST['limit']);
-$page = trim($_REQUEST['currentPage']);
-
-if(empty($limit)){
- $limit = 10;
-}
-if(empty($page)){
- $page = 1;
-}
-
 $msg="";
-if(empty($end)) {
-  $end = date('Y-m-d 00:00:00', strtotime($end. ' + 1 day'));
-}else{
-   $end =date('Y-m-d', strtotime($end. ' + 1 day'));
-   $end .=" 00:00:00";
-}
-if(empty($start)) {
-  $start = date('Y-m-d 00:00:00',strtotime($start. ' - 7 day'));
-}else{
-   $start .=" 00:00:00";
-}
+$start30 = date('Y-m-d 00:00:00',strtotime(' - 30 day'));
+$end30 = date('Y-m-d 00:00:00',strtotime(' + 1 day'));
 try{
-  $sql = 'select
-            sum(
-               if(order_status_id = 9,
-                   0,
-                   if(to_city = 1,
-                         if(client_dev_price.price is null,('.$config['dev_b'].' - discount),(client_dev_price.price - discount)),
-                         if(client_dev_price.price is null,('.$config['dev_o'].' - discount),(client_dev_price.price - discount))
-                    )
-                )
-             ) as dev_price,
-             sum(
-                 new_price -
-                 (
-                     if(order_status_id = 9,
-                         0,
-                         if(to_city = 1,
-                               if(client_dev_price.price is null,('.$config['dev_b'].' - discount),(client_dev_price.price - discount)),
-                               if(client_dev_price.price is null,('.$config['dev_o'].' - discount),(client_dev_price.price - discount))
-                          )
-                      )
-                )
-             ) as client_price,
-             sum(new_price) as new_price,
-             sum(discount) as discount,
-             count(orders.id) as orders,
-             max(DATE_FORMAT(date,"%Y-%m-%d")) as date
-            from orders
-            left join clients on clients.id = orders.client_id
-            left join branches on  branches.id = clients.branch_id
-            left JOIN client_dev_price
-            on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
-            where date between "'.$start.'" and "'.$end.'"
-            and orders.client_id ="'.$userid.'" and orders.confirm=1';
+    $sql30 = "select
+               sum(
+                     if(orders.order_status_id = 4 or orders.order_status_id = 6 or orders.order_status_id = 5,
 
+                      (orders.new_price -
+                           (
+                           if(to_city = 1,
+                                     if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
+                                     if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
+                               )
+                            )
+                        ),0)
+                    ) as client_price,
+                 count(*) as orders
+                 from orders
+                 left JOIN client_dev_price
+                on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
+                where (orders.confirm=1 or orders.confirm=4) and invoice_id=0 and orders.client_id=".$_SESSION['userid']." and
+                date between '".$start30."' and '".$end30."'";
+    $last30 =  getData($con,$sql30);
+    $last30[0]['client_price'] = number_format($last30[0]['client_price']);
 
-$sql1 = $sql."  GROUP BY DATE_FORMAT(date,'%Y-%m-%d')";
-$sql1 = $sql1." limit ".(($page-1 ) * $limit) .",".$limit;
-$data =  getData($con,$sql1);
-$total=getData($con,$sql);
+    $start7 = date('Y-m-d 00:00:00',strtotime(' - 7 day'));
+    $end7 = date('Y-m-d 00:00:00',strtotime(' + 1 day'));
+    $sql7 = "select
+               sum(
+                     if(orders.order_status_id = 4 or orders.order_status_id = 6 or orders.order_status_id = 5,
+                      (orders.new_price -
+                           (
+                           if(to_city = 1,
+                                     if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
+                                     if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
+                               )
+                            )
+                        ),0)
+                    ) as client_price,
+                 count(*) as orders
+                 from orders
+                 left JOIN client_dev_price
+                on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
+                where (orders.confirm=1 or orders.confirm=4) and invoice_id=0 and orders.client_id=".$_SESSION['userid']." and
+                date between '".$start7."' and '".$end7."'";
+    $last7 =  getData($con,$sql7);
+    $last7[0]['client_price'] = number_format( $last7[0]['client_price']);
 
-$total[0]['start'] = date('Y-m-d', strtotime($start));
-$total[0]['end'] = date('Y-m-d', strtotime($end." -1 day"));
+    $start1 = date('Y-m-d 00:00:00');
+    $end1 = date('Y-m-d 00:00:00',strtotime(' + 1 day'));
+    $sql1 = "select
+                sum(
+                     if(orders.order_status_id = 4 or orders.order_status_id = 6 or orders.order_status_id = 5,
+                     (orders.new_price -
+                           (
+                           if(to_city = 1,
+                                     if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
+                                     if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
+                               )
+                            )
+                      ),0)
+                 ) as client_price,
+                 count(*) as orders
+                 from orders
+                 left JOIN client_dev_price
+                on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
+                where (orders.confirm=1 or orders.confirm=4) and invoice_id=0 and orders.client_id=".$_SESSION['userid']." and
+                date between '".$start1."' and '".$end1."'";
+    $last1 =  getData($con,$sql1);
+    $last1[0]['client_price'] = number_format($last1[0]['client_price']);
+    if($_SESSION['user_details']['show_earnings'] != 1){
+        $last1[0]['client_price'] = "HIDDEN";
+        $last7[0]['client_price'] = "HIDDEN";
+        $last30[0]['client_price'] = "HIDDEN";
+    }
 } catch(PDOException $ex) {
    $data=["error"=>$ex];
    $success="0";
    $msg ="Query Error";
 }
-
-echo json_encode(['code'=>200,'message'=>$msg,'data'=>$data,"total"=>$total],JSON_PRETTY_PRINT);
+echo(json_encode(array('code'=>200,'message'=>$msg,"last1"=>$last1,"last7"=>$last7,"last30"=>$last30),JSON_PRETTY_PRINT));
 ?>
