@@ -1,10 +1,11 @@
 <?php
 session_start();
-error_reporting(0);
+header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
-require_once("_access.php");
+require_once("_apiAccess.php");
 access();
-require_once("dbconnection.php");
+error_reporting(0);
+require_once("../php/dbconnection.php");
 require_once("../config.php");
 $start = trim($_REQUEST['start']);
 $end = trim($_REQUEST['end']);
@@ -18,7 +19,7 @@ if(empty($page)){
  $page = 1;
 }
 
-
+$msg="";
 if(empty($end)) {
   $end = date('Y-m-d 00:00:00', strtotime($end. ' + 1 day'));
 }else{
@@ -30,7 +31,7 @@ if(empty($start)) {
 }else{
    $start .=" 00:00:00";
 }
-
+try{
   $sql = 'select
             sum(
                if(order_status_id = 9,
@@ -63,7 +64,7 @@ if(empty($start)) {
             left JOIN client_dev_price
             on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
             where date between "'.$start.'" and "'.$end.'"
-            and orders.client_id ="'.$_SESSION['userid'].'" and orders.confirm=1';
+            and orders.client_id ="'.$userid.'" and orders.confirm=1';
 
 
 $sql1 = $sql."  GROUP BY DATE_FORMAT(date,'%Y-%m-%d')";
@@ -73,6 +74,11 @@ $total=getData($con,$sql);
 
 $total[0]['start'] = date('Y-m-d', strtotime($start));
 $total[0]['end'] = date('Y-m-d', strtotime($end." -1 day"));
+} catch(PDOException $ex) {
+   $data=["error"=>$ex];
+   $success="0";
+   $msg ="Query Error";
+}
 
-echo json_encode([$_POST,'data'=>$data,"total"=>$total]);
+echo json_encode(['code'=>200,'message'=>$msg,'data'=>$data,"total"=>$total],JSON_PRETTY_PRINT);
 ?>
