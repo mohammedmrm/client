@@ -47,12 +47,12 @@ if($v->passes()) {
     $res =getData($con,$sql,[$order_id]);
     sendNotification([$res[0]['s_token'],$res[0]['c_token']],[$order_id],'رساله جديد ',$message,"../orderDetails.php?o=".$order_id);
     $success = 1;
-    }catch(PDOException $ex) {
+    }
+}catch(PDOException $ex) {
        $data=["error"=>$ex];
        $success="0";
        $msg ="Query Error";
-    }
-  }
+}
 }else{
   $error = [
            'message'=> implode($v->errors()->get('message')),
