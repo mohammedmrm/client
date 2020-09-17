@@ -60,10 +60,10 @@ try{
    $filter = "orders.invoice_id = 0 and orders.client_id =".$userid." and (order_status_id=4)  and (orders.confirm=1 or orders.confirm=4)";
   }
   else if ($status == "instorage"){
-   $filter = "client_id =".$userid." and orders.confirm=1 and storage_id = 1 and invoice_id=0";
+   $filter = "orders.client_id =".$userid." and orders.confirm=1 and storage_id = 1 and invoice_id=0";
   }
   else if ($status == "posponded"){
-   $filter = "client_id =".$userid." and order_status_id=7  and (orders.confirm=1)";
+   $filter = "orders.client_id =".$userid." and order_status_id=7  and (orders.confirm=1)";
  }
   else{
   $filter = "orders.client_id ='".$userid."'  and (orders.confirm=1 or orders.confirm=4) and (
