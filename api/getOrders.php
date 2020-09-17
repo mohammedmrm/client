@@ -6,7 +6,7 @@ require_once("_apiAccess.php");
 access();
 error_reporting(0);
 require_once("../php/dbconnection.php");
-$search = $_REQUEST['search-text'];
+$search = $_REQUEST['search'];
 $start = trim($_REQUEST['start']);
 $end = trim($_REQUEST['end']);
 $city = trim($_REQUEST['city']);
