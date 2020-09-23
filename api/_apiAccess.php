@@ -43,4 +43,5 @@ function access(){
      die(json_encode(['message'=>$GLOBALS['msg'],'code'=>$GLOBALS['code']]));
   }
 }
+ die(json_encode(['message'=>"Access Deny"]));
 ?>
