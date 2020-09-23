@@ -5,7 +5,7 @@ error_reporting(0);
 session_start();
 $username = $_REQUEST['username'];
 $password = $_REQUEST['password'];
-
+die(json_encode(['message'=>"Access Deny"])); 
 if(empty($username) || empty($password)){
   $msg = "جميع الحقول مطلوبة";
   $code = 300;
