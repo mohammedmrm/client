@@ -2,6 +2,7 @@
 if(!isset($_SESSION)){
  session_start();
 }
+die(json_encode(['message'=>"Access Deny"])); 
 error_reporting(0);
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
@@ -43,5 +44,4 @@ function access(){
      die(json_encode(['message'=>$GLOBALS['msg'],'code'=>$GLOBALS['code']]));
   }
 }
- die(json_encode(['message'=>"Access Deny"]));
 ?>
