@@ -19,7 +19,7 @@ if(empty($limit)){
 if(empty($page)){
  $page = 1;
 }
-
+$success=0;
 
 if(empty($end)) {
   $end = date('Y-m-d 00:00:00', strtotime($end. ' + 1 day'));
@@ -72,6 +72,7 @@ $sql1 = $sql."  GROUP BY DATE_FORMAT(date,'%Y-%m-%d')";
 $sql1 = $sql1." limit ".(($page-1 ) * $limit) .",".$limit;
 $data =  getData($con,$sql1);
 $total=getData($con,$sql);
+$success = 1;
 } catch(PDOException $ex) {
    $data=["error"=>$ex];
    $success="0";
@@ -80,5 +81,5 @@ $total=getData($con,$sql);
 $total[0]['start'] = date('Y-m-d', strtotime($start));
 $total[0]['end'] = date('Y-m-d', strtotime($end." -1 day"));
 
-echo json_encode(['code'=>$code,'message'=>$msg,,'data'=>$data,"total"=>$total]);
+echo json_encode(['code'=>$code,'message'=>$msg,'success'=>$success,'data'=>$data,"total"=>$total]);
 ?>
