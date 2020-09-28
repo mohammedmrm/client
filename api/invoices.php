@@ -33,44 +33,21 @@ if(empty($start)) {
    $start .=" 00:00:00";
 }
 try {
-  $sql = 'select
-            sum(
-               if(order_status_id = 9,
-                   0,
-                   if(to_city = 1,
-                         if(client_dev_price.price is null,('.$config['dev_b'].' - discount),(client_dev_price.price - discount)),
-                         if(client_dev_price.price is null,('.$config['dev_o'].' - discount),(client_dev_price.price - discount))
-                    )
-                )
-             ) as dev_price,
-             sum(
-                 new_price -
-                 (
-                     if(order_status_id = 9,
-                         0,
-                         if(to_city = 1,
-                               if(client_dev_price.price is null,('.$config['dev_b'].' - discount),(client_dev_price.price - discount)),
-                               if(client_dev_price.price is null,('.$config['dev_o'].' - discount),(client_dev_price.price - discount))
-                          )
-                      )
-                )
-             ) as client_price,
-             sum(new_price) as new_price,
-             sum(discount) as discount,
-             count(orders.id) as orders,
-             max(DATE_FORMAT(date,"%Y-%m-%d")) as date
-            from orders
-            left join clients on clients.id = orders.client_id
-            left join branches on  branches.id = clients.branch_id
-            left JOIN client_dev_price
-            on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
-            where date between "'.$start.'" and "'.$end.'"
-            and orders.client_id ="'.$userid.'" and orders.confirm=1';
-
-
-$sql1 = $sql."  GROUP BY DATE_FORMAT(date,'%Y-%m-%d')";
-$sql1 = $sql1." limit ".(($page-1 ) * $limit) .",".$limit;
-$data =  getData($con,$sql1);
+$sql2 = "select invoice.*,count(orders.id) as orders,date_format(invoice.date,'%Y-%m-%d') as in_date,clients.name as client_name,clients.phone as client_phone
+           ,stores.name as store_name
+           from invoice
+           inner join stores on stores.id = invoice.store_id
+           inner join orders on orders.invoice_id = invoice.id
+           inner join clients on stores.client_id = clients.id
+           where clients.id=?";
+          if(!empty($end) && !empty($start)){
+            $sql2 .=' and invoice.date between "'.$start.'" and "'.$end.'" ';
+          }
+          if($store > 0){
+            $sql2 .=' and invoice.store_id="'.$store.'"';
+          }
+           $sql2 .= " group by invoice.id";
+$data = getData($con,$sql2,[$userid]);
 $total=getData($con,$sql);
 $success = 1;
 } catch(PDOException $ex) {
