@@ -11,6 +11,7 @@ $start = trim($_REQUEST['start']);
 $end = trim($_REQUEST['end']);
 $city = trim($_REQUEST['city']);
 $store = trim($_REQUEST['store']);
+$status = trim($_REQUEST['status']);
 $limit = trim($_REQUEST['limit']);
 $page = trim($_REQUEST['page']);
 $orders = 0;
@@ -74,6 +75,9 @@ try{
   }
   if($store > 0){
    $filter .= " and store_id =".$store;
+  }
+  if($status > 0){
+   $filter .= " and order_status_id =".$status;
   }
   if($filter != ""){
     $filter = preg_replace('/^ and/', '', $filter);
