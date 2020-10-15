@@ -34,7 +34,7 @@ try{
             clients.name as client_name,clients.phone as client_phone,
             cites.name as city,towns.name as town,branches.name as branch_name,
             if(staff.phone is null,'07721397505',staff.phone) as driver_phone,
-            stores.name as store_name
+            stores.name as store_name ,order_status.name as status_name
             from orders left join
             clients on clients.id = orders.client_id
             left join cites on  cites.id = orders.to_city
@@ -42,6 +42,7 @@ try{
             left join towns on  towns.id = orders.to_town
             left join stores on  stores.id = orders.store_id
             left join branches on  branches.id = orders.to_branch
+            left join order_status on  order_status.id = orders.order_status_id
             ";
   $where = "where";
   if($status == "onway"){
