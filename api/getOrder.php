@@ -1,4 +1,5 @@
 <?php
+ob_start(); 
 session_start();
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
@@ -59,5 +60,6 @@ try{
    $msg ="Query Error";
 
 }
+ob_end_clean();
 echo json_encode(array('code'=>200,'message'=>$msg,"success"=>$success,"data"=>$data),JSON_PRETTY_PRINT);
 ?>

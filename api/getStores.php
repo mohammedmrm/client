@@ -1,4 +1,5 @@
 <?php
+ob_start(); 
 session_start();
 header('Content-Type: application/json');
 require_once("_apiAccess.php");
@@ -19,5 +20,6 @@ try{
    $msg = "Query Error";
    $code = 200;
 }
+ob_end_clean();
 echo (json_encode(['code'=>$code,'message'=>$msg,"success"=>$success,"data"=>$data],JSON_PRETTY_PRINT));
 ?>

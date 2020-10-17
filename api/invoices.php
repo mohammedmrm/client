@@ -1,4 +1,5 @@
 <?php
+ob_start(); 
 session_start();
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
@@ -57,6 +58,6 @@ $success = 1;
 }
 $total[0]['start'] = date('Y-m-d', strtotime($start));
 $total[0]['end'] = date('Y-m-d', strtotime($end." -1 day"));
-
+ob_end_clean();
 echo json_encode(['code'=>$code,'message'=>$msg,'success'=>$success,'data'=>$data,"total"=>$total]);
 ?>
