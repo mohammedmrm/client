@@ -29,7 +29,7 @@ if(empty($end)) {
    $end .=" 00:00:00";
 }
 if(empty($start)) {
-  $start = date('Y-m-d 00:00:00',strtotime($start. ' - 7 day'));
+  $start = date('Y-m-d 00:00:00',strtotime($start. ' - 92 day'));
 }else{
    $start .=" 00:00:00";
 }
@@ -97,8 +97,8 @@ $success = 1;
    $success="0";
    $msg = "Query Error";
 }
-$total[0]['start'] = date('Y-m-d', strtotime($start));
-$total[0]['end'] = date('Y-m-d', strtotime($end." -1 day"));
+$total['start'] = date('Y-m-d', strtotime($start));
+$total['end'] = date('Y-m-d', strtotime($end." -1 day"));
 ob_end_clean();
 echo json_encode(['code'=>$code,'message'=>$msg,'success'=>$success,'data'=>$data,"total"=>$total]);
 ?>
