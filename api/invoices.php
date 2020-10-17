@@ -52,7 +52,45 @@ $sql .= $sql2 ." group by invoice.id";
 
 $data = getData($con,$sql,[$userid]);
 
-$total=getData($con,$sql2);
+$sql = "select
+          sum(new_price) as income,
+
+          sum(
+                 if(order_status_id = 9,
+                     0,
+                     if(to_city = 1,
+                           if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
+                           if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
+                      )
+                  )
+          ) as dev,
+
+          sum(new_price -
+              (
+                 if(order_status_id = 6 or order_status_id = 5 or order_status_id = 4,
+                     if(to_city = 1,
+                           if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
+                           if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
+                      ),
+                      0
+                  )
+              )
+          ) as client_price,
+          sum(discount) as discount,
+          count(orders.id) as orders
+          from orders
+          left JOIN client_dev_price on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
+          where orders.client_id = ?  and invoice_id = 0 and (order_status_id = 4 or order_status_id = 5 or order_status_id = 6)  and orders.confirm=1
+          ";
+          if(!empty($end) && !empty($start)){
+            $sql .=' and orders.date between "'.$start.'" and "'.$end.'" ';
+          }
+          if($store > 0){
+            $sql .=' and orders.store_id="'.$store.'"';
+          }
+          $res4= getData($con,$sql,[$userid]);;
+
+$total=$res4[0];
 $success = 1;
 } catch(PDOException $ex) {
    $data=["error"=>$ex];
