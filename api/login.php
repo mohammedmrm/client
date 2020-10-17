@@ -1,4 +1,5 @@
 <?php
+session_start();
 header("Access-Control-Allow-Origin: *");
 header('Content-type:application/json');
 error_reporting(0);
@@ -35,5 +36,5 @@ if(empty($username) || empty($password)){
 
   }
 }
-echo json_encode(['data'=>$data,'token'=>$token,'code'=>$code,'message'=>$msg,"redirect"=>$_REQUEST['redirect']]);
+echo json_encode(['data'=>$data,'token'=>$token,'code'=>$code,'message'=>$msg]);
 ?>
