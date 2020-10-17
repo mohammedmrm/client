@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 header("Access-Control-Allow-Origin: *");
 header('Content-type:application/json');
@@ -36,5 +37,6 @@ if(empty($username) || empty($password)){
 
   }
 }
+ob_end_clean();
 echo json_encode(['data'=>$data,'token'=>$token,'code'=>$code,'message'=>$msg]);
 ?>
