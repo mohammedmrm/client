@@ -13,6 +13,7 @@ $start = trim($_REQUEST['start']);
 $end = trim($_REQUEST['end']);
 $limit = trim($_REQUEST['limit']);
 $page = trim($_REQUEST['currentPage']);
+$store = trim($_REQUEST['store']);
 $msg = "";
 if(empty($limit)){
  $limit = 10;
