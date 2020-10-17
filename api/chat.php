@@ -1,5 +1,5 @@
 <?php
-ob_start(); 
+ob_start();
 session_start();
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
@@ -19,7 +19,7 @@ if(empty($page)){
 }
 
 try {
-    $sql = "Select orders.order_no,orders.id,message.id as msg_id,message.message as message,message.date from orders
+    $sql = "select orders.order_no,orders.id,message.id as msg_id,message.message as message,message.date from orders
             inner join (
              select max(id) as msg_id ,max(order_id) as order_id from message where message.client_seen = 0
              GROUP by message.order_id
@@ -38,5 +38,5 @@ try {
     $msg ="Query Error";
 }
 ob_end_clean();
-echo json_encode(['code'=>200,'message'=>$msg,'success'=>$success,"data"=>$result,'unseen'=>$unseen]);
+echo json_encode(['code'=>200,'message'=>$msg,'success'=>$success,"data"=>$data,'unseen'=>$unseen]);
 ?>
