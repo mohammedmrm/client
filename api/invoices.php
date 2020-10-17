@@ -1,5 +1,5 @@
 <?php
-ob_start(); 
+ob_start();
 session_start();
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
@@ -47,9 +47,12 @@ $sql2 = "select invoice.*,count(orders.id) as orders,date_format(invoice.date,'%
           if($store > 0){
             $sql2 .=' and invoice.store_id="'.$store.'"';
           }
-           $sql2 .= " group by invoice.id";
-$data = getData($con,$sql2,[$userid]);
-$total=getData($con,$sql);
+
+$sql .= $sql2 ." group by invoice.id";
+
+$data = getData($con,$sql,[$userid]);
+
+$total=getData($con,$sql2);
 $success = 1;
 } catch(PDOException $ex) {
    $data=["error"=>$ex];
