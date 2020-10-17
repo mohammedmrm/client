@@ -48,9 +48,9 @@ $sql2 = "select invoice.*,count(orders.id) as orders,date_format(invoice.date,'%
             $sql2 .=' and invoice.store_id="'.$store.'"';
           }
 
-$sql .= $sql2 ." group by invoice.id";
+$sql2 .= " group by invoice.id";
 
-$data = getData($con,$sql,[$userid]);
+$data = getData($con,$sql2,[$userid]);
 
 $sql = "select
           sum(new_price) as income,
