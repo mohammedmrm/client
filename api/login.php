@@ -35,5 +35,5 @@ if(empty($username) || empty($password)){
 
   }
 }
-echo json_encode(['data'=>$data,'token'=>$token,'code'=>$code,'message'=>$msg,"redirect"=>$_REQUEST['redirect']],JSON_PRETTY_PRINT);
+echo json_encode(['data'=>$data,'token'=>$token,'code'=>$code,'message'=>$msg,"redirect"=>$_REQUEST['redirect']]);
 ?>
