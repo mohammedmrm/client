@@ -37,6 +37,21 @@
             'Content-Type: application/json'
         ];
 
+       require_once '../vendor/autoload.php';
+          $channelName = 'chat-messages';
+
+
+          // You can quickly bootup an expo instance
+          $expo = \ExponentPhpSDK\Expo::normalSetup();
+
+          // Subscribe the recipient to the server
+          foreach($token as $v){
+          $recipient= 'ExponentPushToken['.$v.']';
+          $expo->subscribe($channelName, $recipient);
+          }
+          // Notify an interest with a notification
+          var_dump($expo->notify([$channelName], $notification));
+
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$fcmUrl);
