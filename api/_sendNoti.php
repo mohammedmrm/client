@@ -1,4 +1,5 @@
 <?php
+ require_once '../vendor/autoload.php';
  function sendNotification($token,$orders=[],$title= "Title",$body = "Body",$link="", $icon = '../img/logos/logo.png',$data = []){
   global $con;
   foreach($orders as $order){
@@ -37,7 +38,7 @@
             'Content-Type: application/json'
         ];
 
-          require_once '../vendor/autoload.php';
+
           $channelName = 'chat-messages';
           // You can quickly bootup an expo instance
           $expo = \ExponentPhpSDK\Expo::normalSetup();
@@ -47,7 +48,7 @@
           $expo->subscribe($channelName, $recipient);
           }
           // Notify an interest with a notification
-          $expo->notify([$channelName], $notification);
+          $r = $expo->notify([$channelName], $notification);
 
 
         $ch = curl_init();
@@ -59,6 +60,6 @@
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
         $result = curl_exec($ch);
         curl_close($ch);
-        return $result;
+        return [$result,$token,$r];
  }
 ?>
