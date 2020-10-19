@@ -1,5 +1,5 @@
 <?php
-ob_start(); 
+ob_start();
 session_start();
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
@@ -63,7 +63,6 @@ try{
                      )
                     ";
   }
-  $filter .= " and invoice_id=0";
   function validateDate($date, $format = 'Y-m-d H:i:s')
     {
         $d = DateTime::createFromFormat($format, $date);
