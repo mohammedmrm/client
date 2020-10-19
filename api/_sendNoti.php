@@ -1,5 +1,5 @@
 <?php
- require_once '../vendor/autoload.php';
+
  function sendNotification($token,$orders=[],$title= "Title",$body = "Body",$link="", $icon = '../img/logos/logo.png',$data = []){
   global $con;
   foreach($orders as $order){
@@ -38,19 +38,6 @@
             'Content-Type: application/json'
         ];
 
-
-          $channelName = 'chat-messages';
-          // You can quickly bootup an expo instance
-          $expo = \ExponentPhpSDK\Expo::normalSetup();
-          // Subscribe the recipient to the server
-          foreach($token as $v){
-          $recipient= 'ExponentPushToken['.$v.']';
-          $expo->subscribe($channelName, $recipient);
-          }
-          // Notify an interest with a notification
-          $r = $expo->notify([$channelName], $notification);
-
-
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$fcmUrl);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -62,5 +49,22 @@
         curl_close($ch);
         $f = [$result,$token,$r];
         return $f;
+ }
+ function sendNotiyExpo($token,$orders=[],$title= "Title",$body = "Body",$link="", $icon = '../img/logos/logo.png',$data = []){
+         $notification = ['body' => $body];
+
+          require_once '../vendor/autoload.php';
+          $channelName = 'chat-messages';
+          // You can quickly bootup an expo instance
+          $expo = \ExponentPhpSDK\Expo::normalSetup();
+          // Subscribe the recipient to the server
+          foreach($token as $v){
+          $recipient= 'ExponentPushToken['.$v.']';
+          $expo->subscribe($channelName, $recipient);
+          }
+          // Notify an interest with a notification
+          $r = $expo->notify([$channelName], $notification);
+
+         return $r;
  }
 ?>
