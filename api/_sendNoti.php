@@ -47,12 +47,7 @@
         $result = curl_exec($ch);
         curl_close($ch);
 
-        $notification = ['body' => $body,
-                         'title' =>$title,
-                         'subtitle'=>$order_id,
-                         'sound'=>ture,
-                         "vibrate"=> true,
-                         'data'=>["_displayInForeground"=>true]];
+        $notification = ['body' => $body];
         require_once '../vendor/autoload.php';
         $channelName = 'chat-messages';
         // You can quickly bootup an expo instance
