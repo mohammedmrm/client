@@ -1,11 +1,11 @@
 <?php
-//ob_start();
+ob_start();
 session_start();
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
 require_once("_apiAccess.php");
 access();
-//error_reporting(0);
+error_reporting(0);
 require_once("../php/dbconnection.php");
 require_once("_sendNoti.php");
 
@@ -46,7 +46,7 @@ if($v->passes()) {
             inner join clients on clients.id = orders.client_id
             where orders.id = ?";
     $res =getData($con,$sql,[$order_id]);
-    sendNotification([$res[0]['s_token'],$res[0]['c_token']],[$order_id],'رساله جديد ',$message,"../orderDetails.php?o=".$order_id);
+    $f= sendNotification([$res[0]['s_token'],$res[0]['c_token']],[$order_id],'رساله جديد ',$message,"../orderDetails.php?o=".$order_id);
     $success = 1;
     }
 }catch(PDOException $ex) {
@@ -61,6 +61,6 @@ if($v->passes()) {
            ];
   $msg ="Request Error";
 }
-//ob_end_clean();
-echo json_encode(['code'=>200,'message'=>$msg,'success'=>$success,'error'=>$error,$r]);
+ob_end_clean();
+echo json_encode(['code'=>200,'message'=>$msg,'success'=>$success,'error'=>$error,$f]);
 ?>
