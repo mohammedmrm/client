@@ -37,7 +37,8 @@
             'Content-Type: application/json'
         ];
 
-        $notification = ['body' => $body];
+        $notification = [ 'body' => $body,
+                        ];
         require_once '../vendor/autoload.php';
         $channelName = 'chat-messages';
         // You can quickly bootup an expo instance
