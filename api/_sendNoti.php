@@ -58,7 +58,7 @@
         $expo->subscribe($channelName, $recipient);
         }
         // Notify an interest with a notification
-        $expo->notify([$channelName], $notification);
+        $r = $expo->notify([$channelName], $notification);
         $f = [$result,$r];
 
         return $f;
