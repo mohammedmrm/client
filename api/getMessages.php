@@ -1,5 +1,5 @@
 <?php
-ob_start(); 
+ob_start();
 session_start();
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
@@ -44,6 +44,8 @@ try{
   $result = getData($con,$sql,[$order_id,$last]);
   if(count($result) > 0){
     $success = 1;
+    $sql = "update message set client_seen = 1 where order_id=?";
+    setData($con,$sql,[$order_id]);
   }
 } catch(PDOException $ex) {
    $data=["error"=>$ex];

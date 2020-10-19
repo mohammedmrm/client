@@ -1,5 +1,5 @@
 <?php
-ob_start(); 
+ob_start();
 session_start();
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
@@ -9,6 +9,7 @@ error_reporting(0);
 require_once("../php/dbconnection.php");
 require_once("../config.php");
 $id = $_REQUEST['orderid'];
+$Nid = $_REQUEST['notification_id'];
 $msg="";
 try{
   $query = "select orders.*,
@@ -53,6 +54,10 @@ try{
       left join order_status on tracking.order_status_id = order_status.id
       where order_id=".$id." order by id DESC";
       $data[0]['tracking'] = getData($con,$query);
+  }
+  if($Nid > 0){
+    $sql = "update notification set client_seen = 1 where id=? and order_id=?";
+    setData($con,$sql,[$Nid,$id]);
   }
 } catch(PDOException $ex) {
    $data=["error"=>$ex];
