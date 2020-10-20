@@ -41,7 +41,7 @@
             require_once '../vendor/autoload.php';
             $channelName = 'chat-messages';
             // You can quickly bootup an expo instance
-            $expo = \ExponentPhpSDK\Expo::normalSetup();
+            $expo = ExponentPhpSDK\Expo::normalSetup();
             // Subscribe the recipient to the server
             foreach($token as $v){
               $recipient= 'ExponentPushToken['.$v.']';
