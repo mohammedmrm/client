@@ -36,21 +36,22 @@
             'Authorization: key=' . $apikey,
             'Content-Type: application/json'
         ];
-
-        $notification = [ 'body' => $body,
-                        ];
-        require_once '../vendor/autoload.php';
-        $channelName = 'chat-messages';
-        // You can quickly bootup an expo instance
-        $expo = \ExponentPhpSDK\Expo::normalSetup();
-        // Subscribe the recipient to the server
-        foreach($token as $v){
-        $recipient= 'ExponentPushToken['.$v.']';
-        $expo->subscribe($channelName, $recipient);
+        try{
+            $notification = ['body' => $body];
+            require_once '../vendor/autoload.php';
+            $channelName = 'chat-messages';
+            // You can quickly bootup an expo instance
+            $expo = \ExponentPhpSDK\Expo::normalSetup();
+            // Subscribe the recipient to the server
+            foreach($token as $v){
+            $recipient= 'ExponentPushToken['.$v.']';
+            $expo->subscribe($channelName, $recipient);
+            }
+            // Notify an interest with a notification
+            $r = $expo->notify([$channelName], $notification);
+        } catch (Exception $e) {
+            $r = $e;
         }
-        // Notify an interest with a notification
-        $r = $expo->notify([$channelName], $notification);
-
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$fcmUrl);
         curl_setopt($ch, CURLOPT_POST, true);
