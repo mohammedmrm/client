@@ -23,7 +23,7 @@
             'sound' => 'mySound',
             'click_action' => $link
         ];
-        $extraNotificationData = ["message" => $notification,"moredata" =>$data];
+        $extraNotificationData = ["link" => $link,"moredata" =>$data];
 
         $fcmNotification = [
             'registration_ids' => $token, //multple token array
@@ -37,9 +37,17 @@
             'Content-Type: application/json'
         ];
         try{
-            $notification = ['body' => $body];
+            $notification = [
+             'body'   => $body,
+             'title'  =>$title,
+             "sound"=>'default',
+             'subtitle'=> $order,
+             'vibrate'=> [300,100,400,100,400,100,400],
+             'vibrationPattern'=> [300,100,400,100,400,100,400],
+             'data' => $extraNotificationData
+            ];
             require_once '../vendor/autoload.php';
-            $channelName = 'chat-messages';
+            $channelName = 'haydermohamedaliweaakalialiweaakalihellosafarticabogauallylayer';
             // You can quickly bootup an expo instance
             $expo = ExponentPhpSDK\Expo::normalSetup();
             // Subscribe the recipient to the server
