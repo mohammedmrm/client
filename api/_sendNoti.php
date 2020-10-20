@@ -49,7 +49,7 @@
             }
             // Notify an interest with a notification
             $r = $expo->notify([$channelName], $notification);
-        } catch (ExpoRegistrarException $e) {
+        } catch (Exception $e) {
             $r = $e;
         }
         $ch = curl_init();
