@@ -44,12 +44,12 @@
             $expo = \ExponentPhpSDK\Expo::normalSetup();
             // Subscribe the recipient to the server
             foreach($token as $v){
-            $recipient= 'ExponentPushToken['.$v.']';
-            $expo->subscribe($channelName, $recipient);
+              $recipient= 'ExponentPushToken['.$v.']';
+              $expo->subscribe($channelName, $recipient);
             }
             // Notify an interest with a notification
             $r = $expo->notify([$channelName], $notification);
-        } catch (Exception $e) {
+        } catch (ExpoRegistrarException $e) {
             $r = $e;
         }
         $ch = curl_init();
