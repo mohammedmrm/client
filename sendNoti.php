@@ -1,5 +1,5 @@
 <?php
- require_once 'vendor/autoload.php';
+ require_once __DIR__.'/vendor/autoload.php';
  try{
   $channelName = 'chat-messages';
   $recipient= 'ExponentPushToken[bLxtxLPkcaF3IbjFeYAkUn]';
