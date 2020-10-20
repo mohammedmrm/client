@@ -49,7 +49,7 @@ $sql2 = "select invoice.*,count(orders.id) as orders,date_format(invoice.date,'%
             $sql2 .=' and invoice.store_id="'.$store.'"';
           }
 
-$sql2 .= " group by invoice.id order by invoice.date DESC";
+$sql2 .= " group by invoice.id order by invoice.date";
 
 $data = getData($con,$sql2,[$userid]);
 
