@@ -15,7 +15,7 @@ $v = new Violin;
 $success = 0;
 $error = [];
 $id        = $userid;
-$token = $_REQUEST['token'];
+$token = $_REQUEST['notify_token'];
 $msg = "";
 
 $v->addRuleMessage('isPhoneNumber', ' رقم هاتف غير صحيح  ');
@@ -44,7 +44,7 @@ try{
 }else{
   $error = [
            'id'=> implode($v->errors()->get('id')),
-           'token'=> implode($v->errors()->get('token')),
+           'notify_token'=> implode($v->errors()->get('token')),
            ];
   $msg ="Request Error";
 }
