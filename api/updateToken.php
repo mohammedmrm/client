@@ -14,7 +14,6 @@ require_once('../validator/autoload.php');
 $v = new Violin;
 $success = 0;
 $error = [];
-$id        = $userid;
 $token = $_REQUEST['notify_token'];
 $msg = "";
 
@@ -23,14 +22,14 @@ $v->addRuleMessage('isPhoneNumber', ' رقم هاتف غير صحيح  ');
 
 
 $v->validate([
-    'id'      => [$id,      'required|int'],
-    'token'    => [$token,    'required|min(3)|max(200)'],
+    'id'      => [$userid,      'required|int'],
+    'token'   => [$token,    'required|min(3)|max(200)'],
 ]);
 
 if($v->passes()) {
 try{
    $sql = 'update clients set token = ? where id=?';
-   $result = setData($con,$sql,[$token,$id]);
+   $result = setData($con,$sql,[$token,$userid]);
 
   if($result > 0){
     $success = 1;
