@@ -54,16 +54,16 @@
              'data' => $extraNotificationData*/
             ];
             require_once '../vendor/autoload.php';
-            $channelName = 'haydermohamedaliweaakalialiweaakalihellosafarticabogauallylayer';
+            $channelName = 'haydermohamedaliweaakalialiweaakalihellosafarticabogauallylaye';
+            // You can quickly bootup an expo instance
+            $expo = ExponentPhpSDK\Expo::normalSetup();
+            // Subscribe the recipient to the server
             foreach($token as $v){
-                // You can quickly bootup an expo instance
-                $expo = ExponentPhpSDK\Expo::normalSetup();
-                // Subscribe the recipient to the server
-                $recipient= $v;
-                $expo->subscribe($channelName, $recipient);
-                // Notify an interest with a notification
-                $r = $expo->notify([$channelName], $notification);
+              $recipient= $v;
+              $expo->subscribe($channelName, $recipient);
             }
+            // Notify an interest with a notification
+            $r = $expo->notify([$channelName], $notification);
         } catch (Exception $e) {
             $r = $e;
         }
