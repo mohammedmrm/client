@@ -21,7 +21,7 @@
    'data'=>["message" => '',"moredata" =>'']
   ];
   // Notify an interest with a notification
-  var_dump($expo->notify([$channelName], $notification));
+  print_r($expo->notify([$channelName], $notification));
   }catch (Exception $e) {
           var_dump($e);
    }
