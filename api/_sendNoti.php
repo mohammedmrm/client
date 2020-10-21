@@ -46,12 +46,12 @@
         try{
             $notification = [
              'body'   => $body,
-             'title'  =>$title,
+/*             'title'  =>$title,
              "sound"=>'default',
              'subtitle'=> $order,
              'vibrate'=> [300,100,400,100,400,100,400],
              'vibrationPattern'=> [300,100,400,100,400,100,400],
-             'data' => $extraNotificationData
+             'data' => $extraNotificationData*/
             ];
             require_once '../vendor/autoload.php';
             $channelName = 'haydermohamedaliweaakalialiweaakalihellosafarticabogauallylayer';
