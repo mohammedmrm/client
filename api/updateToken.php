@@ -14,7 +14,7 @@ require_once('../validator/autoload.php');
 $v = new Violin;
 $success = 0;
 $error = [];
-$token = $_REQUEST['notify_token'];
+$token = str_replace('"','',$_REQUEST['notify_token']);
 $msg = "";
 
 $v->addRuleMessage('isPhoneNumber', ' رقم هاتف غير صحيح  ');
