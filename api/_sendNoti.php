@@ -10,6 +10,12 @@
               setData($con,$sql,[$title,$body,0,$result[0]['manager_id'],0,$order]);
               setData($con,$sql,[$title,$body,0,$result[0]['driver_id'],0,$order]);
               setData($con,$sql,[$title,$body,1,0,$result[0]['client_id'],$order]);
+              $sql2 = "select * from callcenter_cities inner join staff on staff.id=callcenter_cities.callcenter_id where city_id=?";
+              $re = getData($con,$sql2,[$result[0]["to_city"]]);
+              foreach($re as $callcenter){
+                setData($con,$sql,[$title,$body,0,$callcenter['callcenter_id'],0,$order]);
+                $token[] =  $callcenter['token'];
+              }
             }
      }
  $apikey = 'AAAAX39_76o:APA91bEwobrGZyJSJYoNYPQPa-UgPXsM1kF-r-LiLMcMv8ja-bN4s3q4VRI9_zmpV2XgLwUrWekJa1l1rhOSLJBbdAZeGD2xS3gNiFJpTyWYBEw5Yhz-vDTVyqyxUXD9HrZohdX0oV1E';
@@ -36,12 +42,13 @@
             'Authorization: key=' . $apikey,
             'Content-Type: application/json'
         ];
+
         try{
             $notification = [
              'body'   => $body,
              'title'  =>$title,
              "sound"=>'default',
-             'subtitle'=> $order,
+             'subtitle'=> $orders[0],
              'vibrate'=> [300,100,400,100,400,100,400],
              'vibrationPattern'=> [300,100,400,100,400,100,400],
              'data' => $extraNotificationData
@@ -60,6 +67,7 @@
         } catch (Exception $e) {
             $r = $e;
         }
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$fcmUrl);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -69,9 +77,7 @@
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
         $result = curl_exec($ch);
         curl_close($ch);
-        $f = [$result,$r];
-
+         $f = [$result,$r];
         return $f;
  }
-
 ?>
