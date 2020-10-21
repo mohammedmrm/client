@@ -48,7 +48,7 @@
              'body'   => $body,
              'title'  =>$title,
              "sound"=>'default',
-             'subtitle'=> $orders[0],
+             'subtitle'=> $order,
              'vibrate'=> [300,100,400,100,400,100,400],
              'vibrationPattern'=> [300,100,400,100,400,100,400],
              'data' => $extraNotificationData
@@ -59,7 +59,7 @@
             $expo = ExponentPhpSDK\Expo::normalSetup();
             // Subscribe the recipient to the server
             foreach($token as $v){
-              $recipient= $v; 
+              $recipient= $v;
               $expo->subscribe($channelName, $recipient);
             }
             // Notify an interest with a notification
