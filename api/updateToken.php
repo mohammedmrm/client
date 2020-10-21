@@ -23,17 +23,16 @@ $v->addRuleMessage('isPhoneNumber', ' رقم هاتف غير صحيح  ');
 
 $v->validate([
     'id'      => [$userid,      'required|int'],
-    'token'   => [$token,    'required|min(3)|max(200)'],
+    'token'   => [$token,    'required|min(3)|max(250)'],
 ]);
 
 if($v->passes()) {
 try{
    $sql = 'update clients set token = ? where id=?';
    $result = setData($con,$sql,[$token,$userid]);
-
-  if($result > 0){
+   if($result > 0){
     $success = 1;
-  }
+   }
 }catch(PDOException $ex) {
    $data=["error"=>$ex];
    $success="0";
