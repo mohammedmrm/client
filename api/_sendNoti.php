@@ -46,12 +46,12 @@
         try{
             $notification = [
              'body'   => $body,
-/*             'title'  =>$title,
+             'title'  =>$title,
              "sound"=>'default',
              'subtitle'=> $order,
              'vibrate'=> [300,100,400,100,400,100,400],
              'vibrationPattern'=> [300,100,400,100,400,100,400],
-             'data' => $extraNotificationData*/
+             'data' => $extraNotificationData
             ];
             require_once '../vendor/autoload.php';
             $channelName = 'haydermohamedaliweaakalialiweaakalihellosafarticabogauallylaye';
@@ -59,8 +59,10 @@
             $expo = ExponentPhpSDK\Expo::normalSetup();
             // Subscribe the recipient to the server
             foreach($token as $v){
-              $recipient= $v;
-              $expo->subscribe($channelName, $recipient);
+              if (substr($v, 0, 17) == 'ExponentPushToken') {
+                $recipient= $v;
+                $expo->subscribe($channelName, $recipient);
+              }
             }
             // Notify an interest with a notification
             $r = $expo->notify([$channelName], $notification);
