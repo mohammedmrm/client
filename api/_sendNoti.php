@@ -62,7 +62,7 @@
             require_once '../vendor/autoload.php';
 
             // Subscribe the recipient to the server
-            $i=1;
+            $i=0;
             foreach($token as $v){
               if (substr($v, 0, 17) == 'ExponentPushToken') {
                 $channelName = 'alnahr_user_'.$ids[$i];
