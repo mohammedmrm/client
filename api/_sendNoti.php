@@ -79,7 +79,7 @@
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
         $result = curl_exec($ch);
         curl_close($ch);
-         $f = [$result,$r];
+         $f = [$result,$r,$recipient];
         return $f;
  }
 ?>
