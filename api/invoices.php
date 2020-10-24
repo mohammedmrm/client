@@ -12,7 +12,7 @@ require_once("../config.php");
 $start = trim($_REQUEST['start']);
 $end = trim($_REQUEST['end']);
 $limit = trim($_REQUEST['limit']);
-$page = trim($_REQUEST['currentPage']);
+$page = trim($_REQUEST['page']);
 $store = trim($_REQUEST['store']);
 $msg = "";
 if(empty($limit)){
@@ -49,7 +49,14 @@ $sql2 = "select invoice.*,count(orders.id) as orders,date_format(invoice.date,'%
             $sql2 .=' and invoice.store_id="'.$store.'"';
           }
 
-$sql2 .= " group by invoice.id order by invoice.date DESC";
+$sql2 .= " group by invoice.id order by invoice.date DESC ";
+$count = getData($con,$sql2,[$userid]);
+$count = count($count);
+$maxPage = ceil($count/$limit);
+if($page != 0){
+  $page = $page - 1;
+}
+$sql2 .= " limit ".($page * $limit).",".$limit;
 
 $data = getData($con,$sql2,[$userid]);
 
@@ -101,5 +108,5 @@ $success = 1;
 $total['start'] = date('Y-m-d', strtotime($start));
 $total['end'] = date('Y-m-d', strtotime($end." -1 day"));
 ob_end_clean();
-echo json_encode(['code'=>$code,'message'=>$msg,'success'=>$success,'data'=>$data,"total"=>$total]);
+echo json_encode(['code'=>$code,'message'=>$msg,'success'=>$success,'data'=>$data,"total"=>$total,'count'=>$count,'nextPage'=>($page+2),"maxPage"=>$maxPage]);
 ?>
