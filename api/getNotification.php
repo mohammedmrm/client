@@ -37,7 +37,7 @@ try {
 
     $result = getData($con,$sql,[$user_id]);
     $count = getData($con,$sql2,[$user_id]);
-    $count = $count['0'];
+    $count = $count['0']['count'];
     $maxPage = ceil($count/$limit); 
     $success = 1;
 }catch(PDOException $ex) {
