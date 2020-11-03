@@ -37,7 +37,8 @@ try{
             left join branches on  branches.id = orders.to_branch
             ";
   $where = "where";
-  $filter = "client_id =".$_SESSION['userid']." and orders.confirm=1 and storage_id = 1 and invoice_id=0";
+  $filter = "client_id =".$_SESSION['userid']." and orders.confirm=1 and storage_id = 1 and invoice_id=0
+               and (orders.order_status_id = 6 or orders.order_status_id = 5 or orders.order_status_id = 9)";
   if(!empty($search)){
    $filter .= " and (order_no like '%".$search."%'
                     or customer_name like '%".$search."%'
