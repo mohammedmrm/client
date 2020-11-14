@@ -84,11 +84,31 @@ try{
         $last7[0]['client_price'] = "HIDDEN";
         $last30[0]['client_price'] = "HIDDEN";
     }
+    $sql = "SELECT
+          SUM(IF (order_status_id = '1' or order_status_id = '2' or order_status_id = '3' or order_status_id = '13',1,0)) as  onway,
+          SUM(IF (order_status_id = '9',1,0)) as  inprocess,
+          SUM(IF ((order_status_id = '6' or order_status_id = '5' or order_status_id = '9') and storage_id=1,1,0)) as  instorage,
+          SUM(IF (order_status_id = '4',1,0)) as  recieved,
+          SUM(IF (order_status_id = '7',1,0)) as  posponded,
+          sum(new_price -
+              (
+                 if(order_status_id = 6 or order_status_id = 5 or order_status_id = 4,
+                     if(to_city = 1,
+                           if(client_dev_price.price is null,(".$config['dev_b']." - discount),(client_dev_price.price - discount)),
+                           if(client_dev_price.price is null,(".$config['dev_o']." - discount),(client_dev_price.price - discount))
+                      ),
+                      0
+                  )
+              )
+          ) as client_price
+          FROM orders
+          where orders.client_id=".$userid." and invoice_id=0";
+          $static =  getData($con,$sql);
 } catch(PDOException $ex) {
    $data=["error"=>$ex];
    $success="0";
    $msg ="Query Error";
 }
 ob_end_clean();
-echo(json_encode(array('code'=>200,'message'=>$msg,"last1"=>$last1,"last7"=>$last7,"last30"=>$last30),JSON_PRETTY_PRINT));
+echo(json_encode(array('code'=>200,'message'=>$msg,"last1"=>$last1,"last7"=>$last7,"last30"=>$last30,'static'=>$static),JSON_PRETTY_PRINT));
 ?>
