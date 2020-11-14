@@ -107,7 +107,7 @@ try{
           ) as client_price
           FROM orders
           left JOIN client_dev_price on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
-          where orders.client_id=".$userid." and invoice_id=0";
+          where orders.client_id=".$userid." and invoice_id=0  and confirm=1";
           $static =  getData($con,$sql);
 } catch(PDOException $ex) {
    $data=["error"=>$ex];
