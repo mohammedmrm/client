@@ -34,7 +34,7 @@ try{
             cites.name as city,towns.name as town,branches.name as branch_name,
             order_status.status as order_status,stores.name as store_name,
             if(staff.name is null,'غير معروف',staff.name) as driver_name,
-            if(staff.phone is null,'غير معروف',staff.phone) as driver_phone
+            if(orders.bar_code > 0 and orders.remote_driver_phone is not null,remote_driver_phone,staff.phone) as driver_phone
             from orders left join
             clients on clients.id = orders.client_id
             left join cites on  cites.id = orders.to_city
