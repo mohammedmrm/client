@@ -58,7 +58,7 @@
              '_displayInForeground'=>true,
              'vibrate'=> [300,100,400,100,400,100,400],
              'vibrationPattern'=> [300,100,400,100,400,100,400],
-             'data' => $extraNotificationData
+             'data'=>["message" => '',"moredata" =>'']
             ];
             require_once '../vendor/autoload.php';
 

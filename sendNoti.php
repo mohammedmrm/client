@@ -15,6 +15,7 @@
    'body'   => 'Hello World!',
    'title'  =>"Title",
    "sound"=>'default',
+   '_displayInForeground'=>true,
    'subtitle'=> '123456',
    'vibrate'=> [300,100,400,100,400,100,400],
    'vibrationPattern'=> [300,100,400,100,400,100,400],
@@ -24,5 +25,5 @@
   print_r($expo->notify([$channelName], $notification));
   }catch (Exception $e) {
           var_dump($e);
-   }
+  }
  ?>
