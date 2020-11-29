@@ -2,7 +2,7 @@
  require_once __DIR__.'/vendor/autoload.php';
  try{
   $channelName = 'alnahr_user_1';
-  $recipient= 'ExponentPushToken[bLxtxLPkcaF3IbjFeYAkUn]';
+  $recipient= 'ExponentPushToken[SR-HjmEYkgpYGEAiHscaUo]';
 
   // You can quickly bootup an expo instance
   $expo = \ExponentPhpSDK\Expo::normalSetup();
@@ -24,6 +24,6 @@
   // Notify an interest with a notification
   print_r($expo->notify([$channelName], $notification));
   }catch (Exception $e) {
-          var_dump($e);
+         // var_dump($e);
   }
  ?>
