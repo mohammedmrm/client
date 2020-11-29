@@ -24,6 +24,6 @@
   // Notify an interest with a notification
   print_r($expo->notify([$channelName], $notification));
   }catch (Exception $e) {
-         // var_dump($e);
+          var_dump($e);
   }
  ?>
