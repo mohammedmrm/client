@@ -1,7 +1,7 @@
 <?php
  require_once __DIR__.'/vendor/autoload.php';
  try{
-  $channelName = 'alnahr_user_1';
+  $channelName = 'alnahr_user_2';
   $recipient= 'ExponentPushToken[SR-HjmEYkgpYGEAiHscaUo]';
 
   // You can quickly bootup an expo instance
