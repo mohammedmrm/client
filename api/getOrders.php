@@ -88,6 +88,7 @@ try{
                     )
                     ";
   }
+   $filter .= " and money_status =0"; 
   if($city > 0){
    $filter .= " and to_city =".$city;
   }
