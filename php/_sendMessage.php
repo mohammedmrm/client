@@ -68,7 +68,7 @@ if($v->passes()) {
               ]);
            }else{
              $sql = "select
-                     companies.token as token,
+                     companies.sync_token as token,
                      companies.dns as dns, orders.id as id,
                      orders.bar_code as bar_code
                      from orders
@@ -81,7 +81,7 @@ if($v->passes()) {
                    'message'=>$message,
                    'remote_id'=>$order[0]['id'],
                    'id'=>$order[0]['bar_code'],
-              ]);
+                 ]);
            }
   }
 }else{
