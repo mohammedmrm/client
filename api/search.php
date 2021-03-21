@@ -89,7 +89,7 @@ try{
   if($page != 0){
     $page = $page - 1;
   }
-  $query .= " limit ".($page * $limit).",".$limit;
+  $query .= " order by orders.id DESC limit ".($page * $limit).",".$limit;
   $data = getData($con,$query);
   $ps = getData($con,$count);
   $orders = $ps[0]['count'];
