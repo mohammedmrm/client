@@ -13,6 +13,15 @@ $start30 = date('Y-m-d 00:00:00',strtotime(' - 30 day'));
 $end30 = date('Y-m-d 00:00:00',strtotime(' + 1 day'));
 try{
     $sql30 = "select
+                SUM(IF (order_status_id = '1' or order_status_id = '2' or order_status_id = '3' or order_status_id = '13',1,0)) as  onway,
+                SUM(IF (order_status_id = '9' and storage_id<>1,1,0)) as  inprocess,
+                SUM(IF (order_status_id = '6' and storage_id<>1,1,0)) as  partiallyReturnd,
+                SUM(IF (order_status_id = '5' and storage_id<>1,1,0)) as  `replace`,
+                SUM(IF ((order_status_id = '9') and storage_id=1,1,0)) as  instorageReturnd,
+                SUM(IF ((order_status_id = '6') and storage_id=1,1,0)) as  instoragepartiallyReturnd,
+                SUM(IF ((order_status_id = '5') and storage_id=1,1,0)) as  instoragereplace,
+                SUM(IF (order_status_id = '4',1,0)) as  recieved,
+                SUM(IF (order_status_id = '7',1,0)) as  posponded,    
                sum(
                      if(orders.order_status_id = 4 or orders.order_status_id = 6 or orders.order_status_id = 5,
 
@@ -37,6 +46,15 @@ try{
     $start7 = date('Y-m-d 00:00:00',strtotime(' - 7 day'));
     $end7 = date('Y-m-d 00:00:00',strtotime(' + 1 day'));
     $sql7 = "select
+                SUM(IF (order_status_id = '1' or order_status_id = '2' or order_status_id = '3' or order_status_id = '13',1,0)) as  onway,
+                SUM(IF (order_status_id = '9' and storage_id<>1,1,0)) as  inprocess,
+                SUM(IF (order_status_id = '6' and storage_id<>1,1,0)) as  partiallyReturnd,
+                SUM(IF (order_status_id = '5' and storage_id<>1,1,0)) as  `replace`,
+                SUM(IF ((order_status_id = '9') and storage_id=1,1,0)) as  instorageReturnd,
+                SUM(IF ((order_status_id = '6') and storage_id=1,1,0)) as  instoragepartiallyReturnd,
+                SUM(IF ((order_status_id = '5') and storage_id=1,1,0)) as  instoragereplace,
+                SUM(IF (order_status_id = '4',1,0)) as  recieved,
+                SUM(IF (order_status_id = '7',1,0)) as  posponded,
                sum(
                      if(orders.order_status_id = 4 or orders.order_status_id = 6 or orders.order_status_id = 5,
                       (orders.new_price -
@@ -71,6 +89,15 @@ try{
                             )
                       ),0)
                  ) as client_price,
+                SUM(IF (order_status_id = '1' or order_status_id = '2' or order_status_id = '3' or order_status_id = '13',1,0)) as  onway,
+                SUM(IF (order_status_id = '9' and storage_id<>1,1,0)) as  inprocess,
+                SUM(IF (order_status_id = '6' and storage_id<>1,1,0)) as  partiallyReturnd,
+                SUM(IF (order_status_id = '5' and storage_id<>1,1,0)) as  `replace`,
+                SUM(IF ((order_status_id = '9') and storage_id=1,1,0)) as  instorageReturnd,
+                SUM(IF ((order_status_id = '6') and storage_id=1,1,0)) as  instoragepartiallyReturnd,
+                SUM(IF ((order_status_id = '5') and storage_id=1,1,0)) as  instoragereplace,
+                SUM(IF (order_status_id = '4',1,0)) as  recieved,
+                SUM(IF (order_status_id = '7',1,0)) as  posponded,
                  count(*) as orders
                  from orders
                  left JOIN client_dev_price
