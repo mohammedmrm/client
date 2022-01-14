@@ -22,6 +22,9 @@ require_once("config.php");
     <link rel="stylesheet" type="text/css" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
     <link rel="apple-touch-icon" sizes="180x180" href="pwa/apple-touch-icon.png">
     <link rel="manifest" href="pwa/site.webmanifest">
+    <?php
+    echo $config['analytics'];
+    ?>
 </head><!--#FF6347;-->
 
 <body class="theme-light" data-background="none" data-highlight="orange">
