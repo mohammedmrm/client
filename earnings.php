@@ -165,7 +165,7 @@ require_once("config.php");
               bg = "bg-red1-light";
             }
             $("#earnings").append(
-              `<a href="invoiceVeiwer.php?invoice='+this.path+'">
+              `<a href="invoiceVeiwer.php?invoice=${this.path}">
                 <div class="clear text-right" >
                     <div  class="content-boxed  ${bg} bottom-20">
                         <div class=" content bottom-15">
