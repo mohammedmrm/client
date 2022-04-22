@@ -44,6 +44,20 @@ if ($_SESSION['user_details']['show_earnings'] == 1) {
                   )
               )
           ) as client_price,
+          sum(if((order_status_id = 6 or order_status_id = 5 or order_status_id = 4) and driver_invoice_id > 0,
+              new_price -
+                 (
+                      if(to_city = 1,
+                           if(client_dev_price.price is null,(" . $config['dev_b'] . " - discount),(client_dev_price.price - discount)),
+                           if(client_dev_price.price is null,(" . $config['dev_o'] . " - discount),(client_dev_price.price - discount))
+                      )
+                  ),
+                0
+              )
+          ) as ready_client_price,
+          sum(if((order_status_id = 6 or order_status_id = 5 or order_status_id = 4),1,0)) as deliverd,         
+          sum(if((order_status_id = 6 or order_status_id = 5 or order_status_id = 4) and driver_invoice_id > 0 ,1,0)) as readyOrders,         
+          sum(if((order_status_id = 6 or order_status_id = 5 or order_status_id = 9) and driver_invoice_id > 0 ,1,0)) as readyReturned,         
           sum(discount) as discount,
           count(orders.id) as orders
           from orders

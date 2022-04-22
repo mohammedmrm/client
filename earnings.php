@@ -93,6 +93,12 @@ require_once("config.php");
 
         </div>
         <div class="content bottom-0">
+          <h6 class="bolder text-right">الطلبات التي يمكن التحاسب عليها</h6>
+        </div>
+        <div id="ready">
+
+        </div>
+        <div class="content bottom-0">
           <h6 class="bolder text-right">الكشوفات</h6>
         </div>
         <div id="earnings">
@@ -136,6 +142,7 @@ require_once("config.php");
         success: function(res) {
           $("#earnings").html("");
           $("#inprocess").html("");
+          $("#ready").html("");
           $("#earnings").removeClass("loading");
           $("#inprocess").removeClass("loading");
           console.log(res);
@@ -148,12 +155,26 @@ require_once("config.php");
           if (res.data.client_price == null) {
             res.data.client_price = 0;
           }
+          if (res.data.ready_client_price == null) {
+            res.data.ready_client_price = 0;
+          }
           $("#inprocess").append(
             '<div class="clear text-right" >' +
             '<div  class="content-boxed bottom-20">' +
             '<div class="content bottom-15">' +
             '<div class="col-sm-12"><span class="tit col-sm-6">عدد الطلبات :   </span><span class="val col-6">' + res.data.orders + '</span></div>' +
             '<div class="col-sm-12"><span class="tit col-sm-6">المبلغ الصافي:  </span><span class="val col-6">' + formatMoney(res.data.client_price) + '</span></div>' +
+            '</div>' +
+            '</div>' +
+            '</div>'
+          );
+          $("#ready").append(
+            '<div class="clear text-right" >' +
+            '<div  class="content-boxed bottom-20">' +
+            '<div class="content bottom-15">' +
+            '<div class="col-sm-12"><span class="tit col-sm-6">عدد الواصل :   </span><span class="val col-6">' + res.data.readyOrders + '</span></div>' +
+            '<div class="col-sm-12"><span class="tit col-sm-6">عدد الراجع :   </span><span class="val col-6">' + res.data.readyReturned + '</span></div>' +
+            '<div class="col-sm-12"><span class="tit col-sm-6">المبلغ الصافي:  </span><span class="val col-6">' + formatMoney(res.data.ready_client_price) + '</span></div>' +
             '</div>' +
             '</div>' +
             '</div>'
