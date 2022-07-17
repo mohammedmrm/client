@@ -74,7 +74,7 @@ try {
     $data[0]['qty'] = 1;
   }
   if (empty($data[0]['bar_code'])) {
-    $data[0]['bar_code'] = 0;
+    $data[0]['bar_code'] = 01;
   }
   if ($Nid > 0) {
     $sql = "update notification set client_seen = 1 where id=? and order_id=?";
