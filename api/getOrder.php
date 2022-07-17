@@ -55,6 +55,9 @@ try {
       where order_id=" . $id . " order by id DESC";
     $data[0]['tracking'] = getData($con, $query);
   }
+  if (empty($data[0]['address'])) {
+    $data[0]['address'] = "_";
+  }
   if (empty($data[0]['t_note'])) {
     $data[0]['t_note'] = "_";
   }
