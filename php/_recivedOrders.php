@@ -48,8 +48,15 @@ if ($_SESSION['user_details']['show_earnings'] == 1) {
               new_price -
                  (
                       if(to_city = 1,
-                           if(client_dev_price.price is null,(" . $config['dev_b'] . " - discount),(client_dev_price.price - discount)),
-                           if(client_dev_price.price is null,(" . $config['dev_o'] . " - discount),(client_dev_price.price - discount))
+                           if(towns.center = 1,
+                                    if(client_dev_price.price is null,(" . $config['dev_b'] . " - discount),(client_dev_price.price - discount)),
+                                    if(client_dev_price.town_price is null,(" . ($config['dev_b'] + $config['countrysidePrice']) . " - discount),(client_dev_price.town_price - discount))
+                           ),
+                           if(towns.center = 1,
+                                    if(client_dev_price.price is null,(" . $config['dev_o'] . " - discount),(client_dev_price.price - discount)),
+                                    if(client_dev_price.town_price is null,(" . ($config['dev_o'] + $config['countrysidePrice']) . " - discount),(client_dev_price.town_price  - discount))
+                              )  
+                           )
                       )
                   ),
                 0
@@ -61,6 +68,7 @@ if ($_SESSION['user_details']['show_earnings'] == 1) {
           sum(discount) as discount,
           count(orders.id) as orders
           from orders
+          left join towns on  towns.id = orders.to_town
           left JOIN client_dev_price on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
           where orders.client_id = ?  and invoice_id = 0 and (order_status_id = 4 or order_status_id = 5 or order_status_id = 6)  and orders.confirm=1
           ";

@@ -32,32 +32,43 @@ if(empty($start)) {
 }
 
   $sql = 'select
-            sum(
-               if(order_status_id = 9,
-                   0,
-                   if(to_city = 1,
-                         if(client_dev_price.price is null,('.$config['dev_b'].' - discount),(client_dev_price.price - discount)),
-                         if(client_dev_price.price is null,('.$config['dev_o'].' - discount),(client_dev_price.price - discount))
-                    )
-                )
-             ) as dev_price,
-             sum(
-                 new_price -
-                 (
-                     if(order_status_id = 9,
-                         0,
-                         if(to_city = 1,
-                               if(client_dev_price.price is null,('.$config['dev_b'].' - discount),(client_dev_price.price - discount)),
-                               if(client_dev_price.price is null,('.$config['dev_o'].' - discount),(client_dev_price.price - discount))
-                          )
+              sum(
+                  if(to_city = 1,
+                      if(towns.center = 1,
+                        if(client_dev_price.price is null,(' . $config['dev_b'] . ' - discount),(client_dev_price.price - discount)),
+                        if(client_dev_price.price is null,(' . ($config['dev_b'] + $config['countrysidePrice']) .  ' - discount),(client_dev_price.town_price - discount))
+                      ),
+                      if(towns.center = 1,
+                        if(client_dev_price.price is null,(' . $config['dev_o'] . ' - discount),(client_dev_price.price - discount)),
+                        if(client_dev_price.price is null,(' . ($config['dev_o'] + $config['countrysidePrice']) . '- discount),(client_dev_price.town_price - discount))
                       )
-                )
-             ) as client_price,
+                  )
+                  + if(new_price > 500000 ,( (ceil(new_price/500000)-1) * ' . $config['addOnOver500'] . ' ),0)
+                  + if(weight > 1 ,( (weight-1) * ' . $config['weightPrice'] . ' ),0)
+                ) as dev_price,
+               sum(new_price -
+                  (
+                     if(order_status_id = 9,
+                           0,
+                           if(to_city = 1,
+                           if(towns.center = 1,
+                                    if(client_dev_price.price is null,(' . $config['dev_b'] . ' - discount),(client_dev_price.price - discount)),
+                                    if(client_dev_price.town_price is null,(' . ($config['dev_b'] + $config['countrysidePrice']) . ' - discount),(client_dev_price.town_price - discount))
+                           ),
+                           if(towns.center = 1,
+                                    if(client_dev_price.price is null,(' . $config['dev_o'] . ' - discount),(client_dev_price.price - discount)),
+                                    if(client_dev_price.town_price is null,(' . ($config['dev_o'] + $config['countrysidePrice']) . ' - discount),(client_dev_price.town_price  - discount))
+                              )  
+                           )
+                        )
+                  )
+               ) as client_price,
              sum(new_price) as new_price,
              sum(discount) as discount,
              count(orders.id) as orders,
              max(DATE_FORMAT(date,"%Y-%m-%d")) as date
             from orders
+            left join towns on  towns.id = orders.to_town
             left join clients on clients.id = orders.client_id
             left join branches on  branches.id = clients.branch_id
             left JOIN client_dev_price
@@ -75,4 +86,3 @@ $total[0]['start'] = date('Y-m-d', strtotime($start));
 $total[0]['end'] = date('Y-m-d', strtotime($end." -1 day"));
 
 echo json_encode([$_POST,'data'=>$data,"total"=>$total]);
-?>
