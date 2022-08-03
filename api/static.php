@@ -135,8 +135,6 @@ try {
           left JOIN client_dev_price on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
           where orders.client_id=" . $userid . " and invoice_id=0  and confirm=1";
     $static =  getData($con, $sql);
-    $static[0]['c_ad1'] = strip_tags($static[0]['c_ad1']);
-    $static[0]['c_ad2'] = strip_tags($static[0]['c_ad2']);
 } catch (PDOException $ex) {
     $data = ["error" => $ex];
     $success = "0";
