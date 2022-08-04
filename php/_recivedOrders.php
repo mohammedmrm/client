@@ -19,8 +19,9 @@ if (!empty($start)) {
 }
 $data = [];
 $success = 0;
-if ($_SESSION['user_details']['show_earnings'] == 1) {
-  $sql = "select
+try {
+  if ($_SESSION['user_details']['show_earnings'] == 1) {
+    $sql = "select
           sum(new_price) as income,
 
           sum(
@@ -72,32 +73,35 @@ if ($_SESSION['user_details']['show_earnings'] == 1) {
           left JOIN client_dev_price on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
           where orders.client_id = ?  and invoice_id = 0 and (order_status_id = 4 or order_status_id = 5 or order_status_id = 6)  and orders.confirm=1
           ";
-  if (!empty($end) && !empty($start)) {
-    $sql .= ' and orders.date between "' . $start . '" and "' . $end . '" ';
-  }
-  if ($store > 0) {
-    $sql .= ' and orders.store_id="' . $store . '"';
-  }
-  $res4 = getData($con, $sql, [$id]);
-  $res4 = $res4[0];
+    if (!empty($end) && !empty($start)) {
+      $sql .= ' and orders.date between "' . $start . '" and "' . $end . '" ';
+    }
+    if ($store > 0) {
+      $sql .= ' and orders.store_id="' . $store . '"';
+    }
+    $res4 = getData($con, $sql, [$id]);
+    $res4 = $res4[0];
 
-  $sql2 = "select invoice.*,count(orders.id) as orders,date_format(invoice.date,'%Y-%m-%d') as in_date,clients.name as client_name,clients.phone as client_phone
+    $sql2 = "select invoice.*,count(orders.id) as orders,date_format(invoice.date,'%Y-%m-%d') as in_date,clients.name as client_name,clients.phone as client_phone
            ,stores.name as store_name
            from invoice
            left join stores on stores.id = invoice.store_id
            left join orders on orders.invoice_id = invoice.id
            left join clients on stores.client_id = clients.id
            where clients.id=?";
-  if (!empty($end) && !empty($start)) {
-    $sql2 .= ' and invoice.date between "' . $start . '" and "' . $end . '" ';
+    if (!empty($end) && !empty($start)) {
+      $sql2 .= ' and invoice.date between "' . $start . '" and "' . $end . '" ';
+    }
+    if ($store > 0) {
+      $sql2 .= ' and invoice.store_id="' . $store . '"';
+    }
+    if ($invoice > 0) {
+      $sql2 .= ' and invoice.id="' . $invoice . '"';
+    }
+    $sql2 .= " group by invoice.id";
+    $res2 = getData($con, $sql2, [$id]);
   }
-  if ($store > 0) {
-    $sql2 .= ' and invoice.store_id="' . $store . '"';
-  }
-  if ($invoice > 0) {
-    $sql2 .= ' and invoice.id="' . $invoice . '"';
-  }
-  $sql2 .= " group by invoice.id";
-  $res2 = getData($con, $sql2, [$id]);
+} catch (PDOException $e) {
+  $success = $e;
 }
 echo json_encode(array("success" => $success, "data" => $res4, "invoice" => $res2));
