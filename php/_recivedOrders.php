@@ -56,8 +56,7 @@ try {
                            if(towns.center = 1,
                                     if(client_dev_price.price is null,(" . $config['dev_o'] . " - discount),(client_dev_price.price - discount)),
                                     if(client_dev_price.town_price is null,(" . ($config['dev_o'] + $config['countrysidePrice']) . " - discount),(client_dev_price.town_price  - discount))
-                              )  
-                           )
+                              )                         
                       )
                   ),
                 0
@@ -104,4 +103,4 @@ try {
 } catch (PDOException $e) {
   $success = $e;
 }
-echo json_encode(array("success" => $success, "data" => $res4, "invoice" => $res2));
+echo json_encode(array($sql, "success" => $success, "data" => $res4, "invoice" => $res2));
