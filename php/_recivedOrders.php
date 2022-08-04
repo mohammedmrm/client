@@ -103,4 +103,4 @@ try {
 } catch (PDOException $e) {
   $success = $e;
 }
-echo json_encode(array($sql, "success" => $success, "data" => $res4, "invoice" => $res2));
+echo json_encode(array("success" => $success, "data" => $res4, "invoice" => $res2));
