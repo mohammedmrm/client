@@ -40,7 +40,7 @@ try {
                  from orders
                  left JOIN client_dev_price
                 on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
-                where (orders.confirm=1 or orders.confirm=4) and invoice_id=0 and orders.client_id=" . $userid . " ";
+                where (orders.confirm=1 or orders.confirm=4)  and orders.client_id=" . $userid . " ";
     $last30 =  getData($con, $sql30);
     $last30[0]['client_price'] = number_format($last30[0]['client_price']);
 
@@ -73,7 +73,7 @@ try {
                  from orders
                  left JOIN client_dev_price
                 on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
-                where (orders.confirm=1 or orders.confirm=4) and invoice_id=0 and orders.client_id=" . $userid . " and
+                where (orders.confirm=1 or orders.confirm=4) and orders.client_id=" . $userid . " and
                 date between '" . $start7 . "' and '" . $end7 . "'";
     $last7 =  getData($con, $sql7);
     $last7[0]['client_price'] = number_format($last7[0]['client_price']);
