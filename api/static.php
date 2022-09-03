@@ -105,7 +105,7 @@ try {
                  from orders
                  left JOIN client_dev_price
                 on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
-                where (orders.confirm=1 or orders.confirm=4) and invoice_id=0 and orders.client_id=" . $userid . " and
+                where (orders.confirm=1 or orders.confirm=4) and orders.client_id=" . $userid . " and
                 date between '" . $start1 . "' and '" . $end1 . "'";
     $last1 =  getData($con, $sql1);
     $last1[0]['client_price'] = number_format($last1[0]['client_price']);
