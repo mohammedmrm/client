@@ -65,7 +65,7 @@ try {
   } else if ($status == "instorage") {
     $filter = "orders.client_id =" . $userid . " and orders.confirm=1 and orders.storage_id = 1 and invoice_id=0";
   } else if ($status == "posponded") {
-    $filter = "orders.client_id =" . $userid . " and orders.order_status_id=5 and (orders.confirm=1)";
+    $filter = "orders.client_id =" . $userid . " and orders.order_status_id=7 and (orders.confirm=1)";
   } else if ($status == "replace") {
     $filter = "orders.client_id =" . $userid . " and orders.order_status_id=5 and (orders.confirm=1)";
   } else if ($status == "change") {
