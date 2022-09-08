@@ -91,7 +91,11 @@ try {
                     )
                     ";
   }
-  $filter .= " and money_status =0";
+  $filter .= " and  
+              ((orders.order_status_id = 6 or orders.order_status_id = 5) and (invoice_id=0 or invoice_id2=0)) 
+              or
+              ((orders.order_status_id <> 6 or orders.order_status_id <> 5) and (invoice_id=0))
+              ";
   if ($city > 0) {
     $filter .= " and to_city =" . $city;
   }
