@@ -57,7 +57,7 @@ try {
             orders.order_status_id = 3 or
             orders.order_status_id = 8 or
             orders.order_status_id = 13
-            )";
+            )  and invoice_id = 0";
   } else if ($status == "returned") {
     $filter = "orders.invoice_id= 0 and orders.client_id =" . $userid . " and (orders.order_status_id=9 or orders.order_status_id=6 or orders.order_status_id=5)  and (orders.confirm=1 or orders.confirm=4) and orders.storage_id <> 1 and orders.storage_id <> -1";
   } else if ($status == "recived") {
@@ -65,15 +65,15 @@ try {
   } else if ($status == "instorage") {
     $filter = "orders.client_id =" . $userid . " and orders.confirm=1 and orders.storage_id = 1 and invoice_id=0";
   } else if ($status == "posponded") {
-    $filter = "orders.client_id =" . $userid . " and orders.order_status_id=7 and (orders.confirm=1)";
+    $filter = "orders.client_id =" . $userid . " and orders.order_status_id=7 and (orders.confirm=1) and (invoice_id = 0)";
   } else if ($status == "replace") {
-    $filter = "orders.client_id =" . $userid . " and orders.order_status_id=5 and (orders.confirm=1)";
+    $filter = "orders.client_id =" . $userid . " and orders.order_status_id=5 and (orders.confirm=1) and (invoice_id = 0 or invoice_id2 = 0)";
   } else if ($status == "change") {
-    $filter = "orders.client_id =" . $userid . " and orders.order_status_id=8  and (orders.confirm=1)";
+    $filter = "orders.client_id =" . $userid . " and orders.order_status_id=8  and (orders.confirm=1) and (invoice_id = 0)";
   } else if ($status == "partialy") {
-    $filter = "orders.client_id =" . $userid . " and orders.order_status_id=6  and (orders.confirm=1)";
+    $filter = "orders.client_id =" . $userid . " and orders.order_status_id=6  and (orders.confirm=1) and (invoice_id = 0 or invoice_id2 = 0)";
   } else if ($status == "resend") {
-    $filter = "orders.client_id =" . $userid . " and orders.order_status_id=13  and (orders.confirm=1)";
+    $filter = "orders.client_id =" . $userid . " and orders.order_status_id=13  and (orders.confirm=1) and (invoice_id = 0)";
   } else {
     $filter = "orders.client_id ='" . $userid . "'  and (orders.confirm=1 or orders.confirm=4) and (
                 orders.order_status_id = 1 or
@@ -81,7 +81,7 @@ try {
                 orders.order_status_id = 3 or
                 orders.order_status_id = 8 or
                 orders.order_status_id = 13
-            )";
+            ) and invoice_id = 0";
   }
   if (!empty($search)) {
     $filter .= " and (order_no like '%" . $search . "%'
@@ -91,11 +91,6 @@ try {
                     )
                     ";
   }
-  $filter .= " and  
-              ((orders.order_status_id = 6 or orders.order_status_id = 5) and (invoice_id=0 or invoice_id2=0)) 
-              or
-              ((orders.order_status_id <> 6 or orders.order_status_id <> 5) and (invoice_id=0))
-              ";
   if ($city > 0) {
     $filter .= " and to_city =" . $city;
   }
