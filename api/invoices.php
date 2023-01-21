@@ -37,7 +37,7 @@ if (empty($start)) {
 try {
   $sql = "select * from clients where id=" . $userid;
   $show = getData($con, $sql, [$userid]);
-  if ($show[0]["show_earnings"] == 1) {
+  if ($showearnings == 1) {
     $sql2 = "select invoice.*,count(orders.id) as orders,date_format(invoice.date,'%Y-%m-%d') as in_date,clients.name as client_name,clients.phone as client_phone
            ,stores.name as store_name
            from invoice
