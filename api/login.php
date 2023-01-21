@@ -26,6 +26,7 @@ if(empty($username) || empty($password)){
     $data['phone']=$result[0]['phone'];
     $data['userid']=$result[0]['id'];
     $data['name']=$result[0]['name'];
+    $data['token']=$result[0]['api_token'];
     $token=$result[0]['api_token'];
     if($result[0]['api_token'] == "" || $result[0]['api_token'] == 0 || empty($result[0]['api_token']) || $result[0]['api_token'] = null){
         $token = uniqid().uniqid().uniqid().uniqid();
@@ -40,4 +41,3 @@ if(empty($username) || empty($password)){
 }
 ob_end_clean();
 echo json_encode(['data'=>$data,'token'=>$token,'code'=>$code,'message'=>$msg]);
-?>
