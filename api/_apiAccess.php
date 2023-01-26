@@ -16,7 +16,7 @@ if (!empty($token)) {
    if (count($loginres) == 1) {
       $msg = 1;
       $code = 200;
-      $userid = $loginres[0]['type'] != 1 ? $loginres[0]['client_id']: $loginres[0]['id'] ;
+      $userid = $loginres[0]['type'] != 1 ? $loginres[0]['client_id'] : $loginres[0]['id'];
       $showearnings = $loginres[0]['type'] != 1 ? 0 : $loginres[0]['show_earnings'];
    } else {
       $msg = "incorrect username or password";
@@ -28,9 +28,9 @@ if (!empty($token)) {
    if (count($loginres) == 1 && password_verify($password, $loginres[0]['password'])) {
       $msg = 1;
       $code = 200;
-      $userid = $loginres[0]['type'] != 1 ?: $loginres[0]['client_id']: $loginres[0]['id'] ;
+      $userid = $loginres[0]['type'] != 1 ? $loginres[0]['client_id'] : $loginres[0]['id'];
       $head_company_id = $loginres[0]['company_id'];
-      $showearnings = $loginres[0]['type'] != 1 ? 0 : $loginres[0]['show_earnings'] ;
+      $showearnings = $loginres[0]['type'] != 1 ? 0 : $loginres[0]['show_earnings'];
       $userrole = $loginres[0]['role_id'];
    } else {
       $msg = "incorrect username or password";
