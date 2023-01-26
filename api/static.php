@@ -12,7 +12,9 @@ require_once("../config.php");
 $msg = "";
 $start30 = date('Y-m-d 00:00:00', strtotime(' - 30 day'));
 $end30 = date('Y-m-d 00:00:00', strtotime(' + 1 day'));
-
+$last1 = 0;
+$last7 = 0;
+$last30 = 0;
 try {
     $sql30 = "select
                 SUM(IF (order_status_id = '1' or order_status_id = '2' or order_status_id = '3' or order_status_id = '13',1,0)) as  onway,
