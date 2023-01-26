@@ -144,7 +144,7 @@ try {
           where orders.client_id=" . $userid . " and invoice_id=0  and confirm=1";
     $static =  getData($con, $sql);
 } catch (PDOException $ex) {
-    $$static = ["error" => $ex];
+    $static = ["error" => $ex];
     $success = "0";
     $msg = "Query Error";
 }
