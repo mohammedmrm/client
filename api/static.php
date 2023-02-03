@@ -40,7 +40,8 @@ try {
                         ),0)
                     ) as client_price,
                  count(*) as orders
-                 from orders
+                 from orders                 
+                 left JOIN towns on orders.to_town = towns.id
                  left JOIN client_dev_price
                 on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
                 where (orders.confirm=1 or orders.confirm=4) and invoice_id=0 and orders.client_id=" . $userid . " ";
@@ -77,6 +78,7 @@ try {
                     ) as client_price,
                  count(*) as orders
                  from orders
+                 left JOIN towns on orders.to_town = towns.id               
                  left JOIN client_dev_price
                 on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
                 where (orders.confirm=1 or orders.confirm=4) and invoice_id=0 and orders.client_id=" . $userid . " and
@@ -112,6 +114,7 @@ try {
                 SUM(IF (order_status_id = '7',1,0)) as  posponded,
                  count(*) as orders
                  from orders
+                 left JOIN towns on orders.to_town = towns.id
                  left JOIN client_dev_price
                 on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
                 where (orders.confirm=1 or orders.confirm=4) and invoice_id=0 and orders.client_id=" . $userid . " and
@@ -151,6 +154,7 @@ try {
               )
           ) as client_price
           FROM orders
+          left JOIN towns on orders.to_town = towns.id
           left JOIN client_dev_price on client_dev_price.client_id = orders.client_id AND client_dev_price.city_id = orders.to_city
           where orders.client_id=" . $userid . " and invoice_id=0  and confirm=1";
     $static =  getData($con, $sql);
