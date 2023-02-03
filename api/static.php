@@ -32,7 +32,10 @@ try {
                            if(to_city = 1,
                                      if(client_dev_price.price is null,(" . $config['dev_b'] . " - discount),(client_dev_price.price - discount)),
                                      if(client_dev_price.price is null,(" . $config['dev_o'] . " - discount),(client_dev_price.price - discount))
-                               )
+                            )
+                            + if(new_price > 500000 ,( (ceil(new_price/500000)-1) * " . $config['addOnOver500'] . " ),0)
+                            + if(weight > 1 ,( (weight-1) * " . $config['weightPrice'] . " ),0)
+                            + if(towns.center = 0 ," . $config['countrysidePrice'] . ",0)
                             )
                         ),0)
                     ) as client_price,
@@ -65,7 +68,10 @@ try {
                            if(to_city = 1,
                                      if(client_dev_price.price is null,(" . $config['dev_b'] . " - discount),(client_dev_price.price - discount)),
                                      if(client_dev_price.price is null,(" . $config['dev_o'] . " - discount),(client_dev_price.price - discount))
-                               )
+                            )
+                            + if(new_price > 500000 ,( (ceil(new_price/500000)-1) * " . $config['addOnOver500'] . " ),0)
+                            + if(weight > 1 ,( (weight-1) * " . $config['weightPrice'] . " ),0)
+                            + if(towns.center = 0 ," . $config['countrysidePrice'] . ",0)
                             )
                         ),0)
                     ) as client_price,
@@ -88,7 +94,10 @@ try {
                            if(to_city = 1,
                                      if(client_dev_price.price is null,(" . $config['dev_b'] . " - discount),(client_dev_price.price - discount)),
                                      if(client_dev_price.price is null,(" . $config['dev_o'] . " - discount),(client_dev_price.price - discount))
-                               )
+                            )
+                            + if(new_price > 500000 ,( (ceil(new_price/500000)-1) * " . $config['addOnOver500'] . " ),0)
+                            + if(weight > 1 ,( (weight-1) * " . $config['weightPrice'] . " ),0)
+                            + if(towns.center = 0 ," . $config['countrysidePrice'] . ",0)
                             )
                       ),0)
                  ) as client_price,
@@ -132,7 +141,11 @@ try {
                      if(to_city = 1,
                            if(client_dev_price.price is null,(" . $config['dev_b'] . " - discount),(client_dev_price.price - discount)),
                            if(client_dev_price.price is null,(" . $config['dev_o'] . " - discount),(client_dev_price.price - discount))
-                      ),
+                      )
+                      + if(new_price > 500000 ,( (ceil(new_price/500000)-1) * " . $config['addOnOver500'] . " ),0)
+                      + if(weight > 1 ,( (weight-1) * " . $config['weightPrice'] . " ),0)
+                      + if(towns.center = 0 ," . $config['countrysidePrice'] . ",0)
+                      ,
                       0
                   )
               )
