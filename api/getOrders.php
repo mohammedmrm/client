@@ -34,7 +34,7 @@ try {
             clients.name as client_name,clients.phone as client_phone,
             cites.name as city,towns.name as town,branches.name as branch_name,
             if(orders.bar_code > 0 and orders.remote_driver_phone is not null,remote_driver_phone,staff.phone) as driver_phone,
-            stores.name as store_name ,order_status.status as status_name,tracking.note as t_note
+            stores.name as store_name ,order_status.status as status_name,'' as t_note
             from orders left join
             clients on clients.id = orders.client_id
             left join cites on  cites.id = orders.to_city
@@ -43,9 +43,6 @@ try {
             left join stores on  stores.id = orders.store_id
             left join branches on  branches.id = orders.to_branch
             left join order_status on  order_status.id = orders.order_status_id
-            left join (
-              select max(id) as last_id,order_id from tracking group by order_id
-            ) a on a.order_id = orders.id
             left join tracking on a.last_id = tracking.id
             ";
   $where = "where";
@@ -140,4 +137,4 @@ if ($success == '1') {
 }
 $code = 200;
 ob_end_clean();
-echo (json_encode(array('code' => $code, 'message' => $msg, 'orders' => $orders, "success" => $success, "data" => $data, 'pages' => $pages, 'nextPage' => $page + 2), JSON_PRETTY_PRINT));
+echo (json_encode(array($query, 'code' => $code, 'message' => $msg, 'orders' => $orders, "success" => $success, "data" => $data, 'pages' => $pages, 'nextPage' => $page + 2), JSON_PRETTY_PRINT));
