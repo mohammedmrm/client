@@ -30,10 +30,7 @@ if (empty($end)) {
 $start .= " 00:00:00";
 try {
   $count = "select count(*) as count from orders
-            left join (
-              select max(id) as last_id,order_id from tracking group by order_id
-            ) a on a.order_id = orders.id
-            left join tracking on a.last_id = tracking.id";
+            ";
   $query = "select orders.*,
             clients.name as client_name,clients.phone as client_phone,
             cites.name as city,towns.name as town,branches.name as branch_name,
@@ -46,16 +43,13 @@ try {
             left join staff on  orders.driver_id = staff.id
             left join stores on  stores.id = orders.store_id
             left join branches on  branches.id = orders.to_branch
-            left join order_status on  order_status.id = orders.order_status_id
-            left join tracking on a.last_id = tracking.id
-            ";
+            left join order_status on  order_status.id = orders.order_status_id            ";
   $where = "where";
   $filter = "orders.client_id =" . $userid . " and (orders.confirm=1) ";
   if (!empty($search)) {
     $filter .= " and (order_no like '%" . $search . "%'
                      or customer_name like  '%" . $search . "%'
                      or customer_phone like '%" . $search . "%'
-                     or tracking.note like  '%" . $search . "%'
                      )
                     ";
   }

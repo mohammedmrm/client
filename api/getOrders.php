@@ -43,7 +43,6 @@ try {
             left join stores on  stores.id = orders.store_id
             left join branches on  branches.id = orders.to_branch
             left join order_status on  order_status.id = orders.order_status_id
-            left join tracking on a.last_id = tracking.id
             ";
   $where = "where";
   if ($status == "onway") {
@@ -83,7 +82,6 @@ try {
     $filter .= " and (order_no like '%" . $search . "%'
                     or customer_name like '%" . $search . "%'
                     or customer_phone like '%" . $search . "%'
-                    or tracking.note like '%" . $search . "%'
                     )
                     ";
   }
