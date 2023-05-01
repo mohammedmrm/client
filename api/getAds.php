@@ -9,13 +9,13 @@ require_once("../php/dbconnection.php");
 $data = [
     [
         "id" => 1,
-        "img" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJmJUa-wolJvSqU4yaO4uy-EMmrWK_ULAX7Q&usqp=CAU",
+        "img" => "https://alzaimexpress.com/dash/img/logos/logo5.png",
         "text" => "",
         "link" => "alzaimexpress.com"
     ],
     [
         "id" => 2,
-        "img" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJmJUa-wolJvSqU4yaO4uy-EMmrWK_ULAX7Q&usqp=CAU",
+        "img" => "https://alzaimexpress.com/dash/img/logos/logo5.png",
         "text" => "",
         "link" => "alzaimexpress.com"
     ]
