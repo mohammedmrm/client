@@ -28,6 +28,7 @@ if (empty($end)) {
 } else {
   $end = date('Y-m-d', strtotime($end . ' + 1 day'));
   $end .= " 00:00:00";
+  $end .= " 00:00:00";
 }
 if (empty($start)) {
   $start = date('Y-m-d 00:00:00', strtotime($start . ' - 92 day'));
