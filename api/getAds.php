@@ -11,13 +11,13 @@ $data = [
         "id" => 1,
         "img" => "https://alzaimexpress.com/dash/img/logos/logo5.png",
         "text" => "",
-        "link" => "alzaimexpress.com"
+        "link" => "https://alzaimexpress.com"
     ],
     [
         "id" => 2,
         "img" => "https://alzaimexpress.com/dash/img/logos/logo5.png",
         "text" => "",
-        "link" => "alzaimexpress.com"
+        "link" => "https://alzaimexpress.com"
     ]
 ];
 ob_end_clean();
