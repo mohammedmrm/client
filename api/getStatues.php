@@ -2,7 +2,6 @@
 ob_start(); 
 session_start();
 error_reporting(0);
-header('Content-Type: application/json');
 require_once("_apiAccess.php");
 access();
 $msg="";

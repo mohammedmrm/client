@@ -1,8 +1,6 @@
 <?php
 ob_start();
 session_start();
-header("Access-Control-Allow-Origin: *");
-header('Content-Type: application/json');
 require_once("_apiAccess.php");
 access();
 error_reporting(0);
@@ -116,4 +114,3 @@ $total[0]['dev_price']= $devprice[0]['dev_price'];
 $code = 200;
 ob_end_clean();
 echo (json_encode(array('code'=>$code,'message'=>$msg,'orders'=>$orders,"success"=>$success,"data"=>$data,'pages'=>$pages,'nextPage'=>$page+2),JSON_PRETTY_PRINT));
-?>

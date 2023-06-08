@@ -2,9 +2,9 @@
 if (!isset($_SESSION)) {
    session_start();
 }
-error_reporting(0);
-//header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
+error_reporting(0);
 $username = $_REQUEST['username'];
 $password = $_REQUEST['password'];
 $token = $_REQUEST['token'];
