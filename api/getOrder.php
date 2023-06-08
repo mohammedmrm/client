@@ -1,7 +1,7 @@
 <?php
-ob_start();
 session_start();
 require_once("_apiAccess.php");
+ob_start();
 access();
 error_reporting(0);
 require_once("../php/dbconnection.php");
