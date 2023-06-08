@@ -56,7 +56,7 @@ try {
   } else if ($status == "returned") {
     $filter = "orders.invoice_id= 0 and orders.client_id =" . $userid . " and (orders.order_status_id=9 or orders.order_status_id=6 or orders.order_status_id=5)  and (orders.confirm=1 or orders.confirm=4) and orders.storage_id <> 1 and orders.storage_id <> -1";
   } else if ($status == "recived") {
-    $filter = "orders.invoice_id = 0 and orders.client_id =" . $userid . " and (orders.order_status_id=4)  and (orders.confirm=1 or orders.confirm=4)";
+    $filter = "orders.invoice_id = 0 and orders.client_id =" . $userid . " and (orders.order_status_id=4 or orders.order_status_id=6 or orders.order_status_id=5)  and (orders.confirm=1 or orders.confirm=4)";
   } else if ($status == "instorage") {
     $filter = "orders.client_id =" . $userid . " and orders.confirm=1 and orders.storage_id = 1 and invoice_id=0";
   } else if ($status == "posponded") {
