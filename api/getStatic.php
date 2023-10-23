@@ -64,7 +64,7 @@ try {
           inner join branches on branches.id = orders.from_branch
           left join towns on  towns.id = orders.to_town
           where orders.confirm = 1 and date between '" . $start2 . "' and '" . $end . "'";
-    } else {;
+    } else {
         $sql = "SELECT
           count(*) as  total
           FROM orders
