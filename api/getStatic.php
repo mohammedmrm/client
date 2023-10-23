@@ -10,20 +10,20 @@ access();
 require_once("../php/dbconnection.php");
 $msg = "";
 $end = date('Y-m-d');
-$end  .= " 23:59:59";
+$end .= " 23:59:59";
 $start = date('Y-m-d');
 $start2 = date('Y-m-d', strtotime("-7 day"));
-$start  .= " 00:00:00";
-$start2  .= " 00:00:00";
+$start .= " 00:00:00";
+$start2 .= " 00:00:00";
 try {
-    if ($_SESSION['user_details']['role_id'] == 1) {
+  if ($_SESSION['user_details']['role_id'] == 1) {
 
-        $sql = "SELECT
+    $sql = "SELECT
           count(*) as  total
           FROM orders
           where orders.confirm = 1 and date between '" . $start . "' and '" . $end . "'";
 
-        $prices = "SELECT  count(*) as  orders,
+    $prices = "SELECT  count(*) as  orders,
           sum( if((order_status_id=4 or order_status_id=6 or order_status_id=5) and (invoice_id = 0 or invoice_id is null),
                    orders.new_price,0)
              ) as price,
@@ -48,12 +48,18 @@ try {
           left join towns on  towns.id = orders.to_town
           inner join branches on branches.id = orders.from_branch
           where orders.confirm = 1";
-        $dev = "SELECT
+    $dev = "SELECT
            sum(
-            if(to_city = 1,
-                 if(orders.order_status_id=9,0,if(client_dev_price.price is null,(" . $config['dev_b'] . " - discount),(client_dev_price.price - discount))),
-                 if(orders.order_status_id=9,0,if(client_dev_price.price is null,(" . $config['dev_o'] . " - discount),(client_dev_price.price - discount)))
-              )
+              if(to_city = 1,
+                if(towns.center = 1,
+                    if(client_dev_price.price is null,(" . $config['dev_b'] . " - discount),(client_dev_price.price - discount)),
+                    if(client_dev_price.price is null,(" . ($config['dev_b'] + $config['countrysidePrice']) . " - discount),(client_dev_price.town_price - discount))
+                ),
+                if(towns.center = 1,
+                    if(client_dev_price.price is null,(" . $config['dev_o'] . " - discount),(client_dev_price.price - discount)),
+                    if(client_dev_price.price is null,(" . ($config['dev_o'] + $config['countrysidePrice']) . "- discount),(client_dev_price.town_price - discount))
+                )
+            )
             + if(new_price > 500000 ,( (ceil(new_price/500000)-1) * " . $config['addOnOver500'] . " ),0)
             + if(weight > 1 ,( (weight-1) * " . $config['weightPrice'] . " ),0)
             + if(towns.center = 0 ," . $config['countrysidePrice'] . ",0)
@@ -64,13 +70,13 @@ try {
           inner join branches on branches.id = orders.from_branch
           left join towns on  towns.id = orders.to_town
           where orders.confirm = 1 and date between '" . $start2 . "' and '" . $end . "'";
-    } else {
-        $sql = "SELECT
+  } else {
+    $sql = "SELECT
           count(*) as  total
           FROM orders
           where orders.confirm = 1 and (date between '" . $start . "' and '" . $end . "') and from_branch = '" . $_SESSION['user_details']['branch_id'] . "'
           ";
-        $prices =  "SELECT
+    $prices = "SELECT
           sum( if((order_status_id=4 or order_status_id=6 or order_status_id=5) and (driver_invoice_id = 0 or driver_invoice_id is null),
                    orders.new_price,0)
              ) as withdriver,
@@ -78,12 +84,19 @@ try {
               if((order_status_id = 4 or order_status_id = 5 or order_status_id = 6) and invoice_id = 0,
                new_price -
                (
-                   if(to_city = 1,
-                         if(client_dev_price.price is null,(" . $config['dev_b'] . " - discount),(client_dev_price.price - discount)),
-                         if(client_dev_price.price is null,(" . $config['dev_o'] . " - discount),(client_dev_price.price - discount))
-                    )
+                  if(to_city = 1,
+                      if(towns.center = 1,
+                          if(client_dev_price.price is null,(" . $config['dev_b'] . " - discount),(client_dev_price.price - discount)),
+                          if(client_dev_price.price is null,(" . ($config['dev_b'] + $config['countrysidePrice']) . " - discount),(client_dev_price.town_price - discount))
+                      ),
+                      if(towns.center = 1,
+                          if(client_dev_price.price is null,(" . $config['dev_o'] . " - discount),(client_dev_price.price - discount)),
+                          if(client_dev_price.price is null,(" . ($config['dev_o'] + $config['countrysidePrice']) . "- discount),(client_dev_price.town_price - discount))
+                      )
+                  )
                  + if(new_price > 500000 ,( (ceil(new_price/500000)-1) * " . $config['addOnOver500'] . " ),0)
                  + if(weight > 1 ,( (weight-1) * " . $config['weightPrice'] . " ),0)
+                 + if(towns.center = 0 ," . $config['countrysidePrice'] . ",0)
               ),0)
            ) as withcompany
           FROM orders
@@ -93,11 +106,18 @@ try {
 
           where orders.confirm = 1 and from_branch = '" . $_SESSION['user_details']['branch_id'] . "'
           ";
-        $dev = "SELECT
-          sum(if(to_city = 1,
-                 if(orders.order_status_id=9,0,if(client_dev_price.price is null,(" . $config['dev_b'] . " - discount),(client_dev_price.price - discount))),
-                 if(orders.order_status_id=9,0,if(client_dev_price.price is null,(" . $config['dev_o'] . " - discount),(client_dev_price.price - discount)))
-              )
+    $dev = "SELECT
+          sum(                            
+            if(to_city = 1,
+                if(towns.center = 1,
+                    if(client_dev_price.price is null,(" . $config['dev_b'] . " - discount),(client_dev_price.price - discount)),
+                    if(client_dev_price.price is null,(" . ($config['dev_b'] + $config['countrysidePrice']) . " - discount),(client_dev_price.town_price - discount))
+                ),
+                if(towns.center = 1,
+                    if(client_dev_price.price is null,(" . $config['dev_o'] . " - discount),(client_dev_price.price - discount)),
+                    if(client_dev_price.price is null,(" . ($config['dev_o'] + $config['countrysidePrice']) . "- discount),(client_dev_price.town_price - discount))
+                )
+            )
             + if(new_price > 500000 ,( (ceil(new_price/500000)-1) * " . $config['addOnOver500'] . " ),0)
             + if(weight > 1 ,( (weight-1) * " . $config['weightPrice'] . " ),0)
             + if(towns.center = 0 ," . $config['countrysidePrice'] . ",0)
@@ -107,9 +127,9 @@ try {
           left join towns on  towns.id = orders.to_town
           inner join branches on branches.id = orders.from_branch
           where orders.confirm = 1 and date between '" . $start2 . "' and '" . $end . "'  and from_branch = '" . $_SESSION['user_details']['branch_id'] . "'";
-    }
+  }
 } catch (PDOException $e) {
-    $data = $e;
+  $data = $e;
 }
 $total = getData($con, $sql);
 $price = getData($con, $prices);
