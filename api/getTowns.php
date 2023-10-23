@@ -1,8 +1,6 @@
 <?php
 ob_start(); 
 session_start();
-header("Access-Control-Allow-Origin: *");
-header('Content-Type: application/json');
 require("_apiAccess.php");
 access();
 require_once("../php/dbconnection.php");
